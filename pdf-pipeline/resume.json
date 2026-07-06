@@ -96,7 +96,8 @@
       "items": [
         "PostgreSQL",
         "MySQL",
-        "JSONB"
+        "JSONB",
+        "MongoDB"
       ]
     },
     {
