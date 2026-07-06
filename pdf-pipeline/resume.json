@@ -1,0 +1,378 @@
+{
+  "profile": {
+    "name": "Aditya Bidappa M V",
+    "heroName": "Aditya\nBidappa",
+    "heroAccentWord": "Bidappa",
+    "roles": [
+      "cybersecurity researcher",
+      "full-stack security builder",
+      "zero-trust systems",
+      "ML for defensive security"
+    ],
+    "tagline": "B.Tech Cybersecurity · Dayananda Sagar University",
+    "summary": "I build and study security systems end to end — from <strong>zero-trust maturity frameworks</strong> and <strong>prompt-injection detection</strong> to IoMT threat modelling, deepfake analysis, and deployed apps. Research depth paired with shipping real tools.",
+    "focus": "security-research",
+    "trustModel": "zero",
+    "location": "Bengaluru, IN",
+    "lastUpdated": "Jul 2026"
+  },
+  "contact": [
+    {
+      "label": "email",
+      "value": "adityabidappa@gmail.com",
+      "href": "mailto:adityabidappa@gmail.com",
+      "icon": "mail"
+    },
+    {
+      "label": "github",
+      "value": "BrownJesus69",
+      "href": "https://github.com/BrownJesus69",
+      "icon": "github"
+    },
+    {
+      "label": "linkedin",
+      "value": "aditya-bidappa",
+      "href": "https://www.linkedin.com/in/aditya-bidappa-513291287",
+      "icon": "linkedin"
+    },
+    {
+      "label": "phone",
+      "value": "+91 86182 20160",
+      "href": "tel:+918618220160",
+      "icon": "phone"
+    }
+  ],
+  "aboutParagraphs": [
+    "I'm a second-year Cybersecurity undergrad who treats research and engineering as the same discipline. My work moves between reading standards (NIST SP 800-207, CISA ZTMM v2) and turning them into things that run — CLI tools, deployed web apps, mobile auditors.",
+    "The through-line is <strong>measurable trust</strong>: scoring how exposed a network is, grading an organisation's zero-trust maturity, quantifying how likely a prompt is to be an injection. I care about correctness over shine, and about being honest when a metric is too good to be true."
+  ],
+  "facts": [
+    {
+      "lab": "Focus",
+      "val": "Zero Trust · IoMT · LLM security"
+    },
+    {
+      "lab": "Based in",
+      "val": "Bengaluru, India"
+    },
+    {
+      "lab": "Studying",
+      "val": "B.Tech Cybersecurity, DSU"
+    },
+    {
+      "lab": "Writing",
+      "val": "Research papers in LaTeX"
+    },
+    {
+      "lab": "Status",
+      "val": "Open to research & security roles"
+    }
+  ],
+  "skills": [
+    {
+      "group": "Languages",
+      "items": [
+        "Python",
+        "C",
+        "SQL",
+        "Bash",
+        "TypeScript",
+        "HTML",
+        "LaTeX"
+      ]
+    },
+    {
+      "group": "Frameworks",
+      "items": [
+        "FastAPI",
+        "Express",
+        "React",
+        "React Native",
+        "Expo"
+      ]
+    },
+    {
+      "group": "Data",
+      "items": [
+        "PostgreSQL",
+        "MySQL",
+        "JSONB"
+      ]
+    },
+    {
+      "group": "Security & Standards",
+      "items": [
+        "Zero Trust",
+        "NIST SP 800-207",
+        "CISA ZTMM v2",
+        "nmap",
+        "Wireshark",
+        "SpiderFoot",
+        "Autopsy"
+      ]
+    },
+    {
+      "group": "Machine Learning",
+      "items": [
+        "XGBoost",
+        "scikit-learn"
+      ]
+    },
+    {
+      "group": "Tooling",
+      "items": [
+        "Git",
+        "GitHub"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "PromptGuard",
+      "tagline": "Prompt-injection risk scorer for LLM apps",
+      "stack": [
+        "FastAPI",
+        "React",
+        "TypeScript",
+        "XGBoost",
+        "scikit-learn"
+      ],
+      "highlights": [
+        "FastAPI risk-scoring service with a React + TypeScript frontend and an XGBoost / scikit-learn backend.",
+        "Trained on Hugging Face prompt-injection data plus synthetic adversarial prompts generated locally with DeepSeek-R1 1.5B on Ollama."
+      ],
+      "metrics": [
+        {
+          "value": "87.08%",
+          "label": "accuracy"
+        },
+        {
+          "value": "85%",
+          "label": "injection recall"
+        },
+        {
+          "value": "95%",
+          "label": "precision"
+        }
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/BrownJesus69/promptguard",
+          "icon": "github"
+        }
+      ]
+    },
+    {
+      "name": "SME-ZT CLI",
+      "tagline": "Zero-trust maturity assessment for small & medium enterprises",
+      "stack": [
+        "Python CLI",
+        "CISA ZTMM v2",
+        "NIST SP 800-207",
+        "CSA SMB"
+      ],
+      "highlights": [
+        "A five-pillar, five-level maturity model aligned to CISA ZTMM v2, NIST SP 800-207 and CSA SMB guidance.",
+        "Weighted scoring with Level-1 capping logic to stop over-scoring, plus detailed textual self-assessment reports.",
+        "Validated against three documented SME breach case studies and folded into the published manuscript."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/BrownJesus69/zt-maturity-sme",
+          "icon": "github"
+        }
+      ]
+    },
+    {
+      "name": "MUN Argument Builder",
+      "tagline": "Deployed argument engine for Model UN delegates",
+      "stack": [
+        "FastAPI",
+        "Groq API",
+        "Llama 3.1 70B",
+        "Render"
+      ],
+      "status": {
+        "text": "Live",
+        "live": true,
+        "href": "https://quantumpandits.com"
+      },
+      "highlights": [
+        "Generates structured arguments, counter-arguments, evidence prompts and fallacy checks on demand.",
+        "FastAPI backend on Groq's Llama 3.1 70B, with GitHub-triggered auto-deploy on Render.",
+        "Custom domain via GoDaddy and TLS via Let's Encrypt."
+      ],
+      "links": [
+        {
+          "label": "quantumpandits.com",
+          "href": "https://quantumpandits.com",
+          "icon": "globe"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/BrownJesus69/mun-argument-builder",
+          "icon": "github"
+        }
+      ]
+    },
+    {
+      "name": "NetworkAudit",
+      "tagline": "Real-time Wi-Fi & hotspot security auditor for Android",
+      "stack": [
+        "React Native",
+        "Expo SDK 54",
+        "TypeScript",
+        "Express",
+        "Zod",
+        "Neon PostgreSQL"
+      ],
+      "highlights": [
+        "Scans the connected network live and computes a 0–100 security score with an A–F grade.",
+        "Flags CVE-based findings: default gateway IPs, single DNS server, external-DNS logging risk and SSID identity leakage.",
+        "Full-stack: RN + Expo client, Express + Zod API, Neon PostgreSQL, EAS Build on Render."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/BrownJesus69/networkaudit",
+          "icon": "github"
+        }
+      ]
+    },
+    {
+      "name": "NutriLog",
+      "tagline": "Relational dietary-logging system",
+      "stack": [
+        "PostgreSQL",
+        "BCNF schema",
+        "Frontend",
+        "Docs"
+      ],
+      "highlights": [
+        "Owned the frontend, documentation and application logic for a PostgreSQL nutrition tracker.",
+        "Correctness-oriented design grounded in a BCNF-normalised schema."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/sampratigaurav/nutrilog",
+          "icon": "github"
+        }
+      ]
+    }
+  ],
+  "research": [
+    {
+      "title": "Zero Trust Maturity Assessment Framework for Small and Medium Enterprises (SME-ZT)",
+      "role": "Co-author",
+      "note": "A five-pillar, five-level maturity framework with SME-specific weighting and Level-1 capping to prevent over-scoring, validated across three breach case studies."
+    },
+    {
+      "title": "Security Threats and Countermeasures in IoMT ML-driven Healthcare Systems",
+      "role": "Co-author",
+      "note": "Survey of ML-based IoMT intrusion detection, federated learning, privacy preservation and layered defences against malware, DoS and adversarial attacks."
+    },
+    {
+      "title": "Deepfake Media Analysis: A Survey on Detection Techniques and Open Issues",
+      "role": "Co-author",
+      "note": "Review of deepfake generation methods, benchmark datasets, detection techniques and the surrounding ethical and legal frameworks."
+    },
+    {
+      "title": "A Baseline Simulation Framework for DDoS Attack Detection in IoMT Networks",
+      "role": "Lead author",
+      "note": "Wrote and formatted the full manuscript; showed that 'perfect' metrics on synthetic data arise from trivial one-dimensional separability in the SYN ratio."
+    }
+  ],
+  "leadership": [
+    {
+      "role": "President",
+      "org": "DSU MUN Society"
+    },
+    {
+      "role": "Joint Treasurer",
+      "org": "Cybersecurity Club"
+    },
+    {
+      "role": "Special Advisor",
+      "org": "Debate Society"
+    },
+    {
+      "role": "Secretary General",
+      "org": "TNT MUN"
+    },
+    {
+      "role": "Director General",
+      "org": "COPE II"
+    },
+    {
+      "role": "Rapporteur",
+      "org": "DSUMUN II"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best Delegate",
+      "detail": "Next Debate MUN'25 · UNSC, Australia"
+    },
+    {
+      "title": "High Commendation",
+      "detail": "Avent · UNSC, USA"
+    },
+    {
+      "title": "High Commendation",
+      "detail": "BITS Goa MUN'26 · UNSC, France"
+    },
+    {
+      "title": "Special Mention",
+      "detail": "MAHE MUN'25 · UNSC, United Kingdom"
+    },
+    {
+      "title": "Verbal Mention",
+      "detail": "DSBAMUN2 · UNSC, Russia"
+    },
+    {
+      "title": "Honorable Mention",
+      "detail": "DSU MUN Conference"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Cybersecurity",
+      "org": "Dayananda Sagar University, Bengaluru",
+      "period": "Aug 2024 – Jun 2028 (Expected)",
+      "cgpa": "CGPA 7.5 / 10.0",
+      "coursework": [
+        "Introduction to Cybersecurity",
+        "AI in Cybersecurity",
+        "DBMS",
+        "Computer Networks"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Introduction to Cybersecurity",
+      "issuer": "Cisco Networking Academy",
+      "date": "Feb 2026"
+    },
+    {
+      "name": "Ethical Hacker",
+      "issuer": "Cisco Networking Academy",
+      "date": "Apr 2026"
+    }
+  ],
+  "interests": [
+    "Zero Trust security models",
+    "Advanced ML & graph neural networks",
+    "Quantum computing protocols",
+    "Cybersecurity research",
+    "Database design & correctness"
+  ],
+  "contactCopy": {
+    "lead": "Let's talk security.",
+    "emailLine": "adityabidappa@gmail.com",
+    "sub": "Whether it's research collaboration, a security build, or a hard problem worth arguing about — my inbox is open."
+  }
+}

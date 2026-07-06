@@ -1,0 +1,45 @@
+name: Build résumé PDF
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "index.html"
+      - "pdf-pipeline/**"
+      - ".github/workflows/build-resume-pdf.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Typst
+        run: |
+          curl -fsSL https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz \
+            | tar -xJ --strip-components=1 -C /usr/local/bin typst-x86_64-unknown-linux-musl/typst
+          typst --version
+
+      - name: Extract RESUME data to JSON
+        run: node pdf-pipeline/extract-resume-json.cjs index.html pdf-pipeline/resume.json
+
+      - name: Compile PDF
+        run: typst compile pdf-pipeline/resume.typ resume.pdf --font-path pdf-pipeline/fonts
+
+      - name: Commit resume.pdf back to repo
+        run: |
+          git config user.name "Aditya Bidappa M V"
+          git config user.email "adityabidappa@gmail.com"
+          git add resume.pdf pdf-pipeline/resume.json
+          git diff --staged --quiet || git commit -m "Update resume.pdf from RESUME data"
+          git push
