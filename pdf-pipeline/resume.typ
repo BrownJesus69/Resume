@@ -187,6 +187,31 @@
       v(0.38em)
     }
 
+    // Experience / Internships
+    #if "experience" in data and data.experience.len() > 0 {
+      sec("Experience")
+      for exp in data.experience {
+        grid(
+          columns: (1fr, auto),
+          {
+            text(weight: "bold", size: 8pt, exp.role)
+            linebreak()
+            text(size: 7pt, fill: c-muted, exp.org)
+          },
+          {
+            let period = if exp.current { exp.start + " — Present" }
+                         else { exp.start + " — " + exp.end }
+            text(size: 7pt, fill: if exp.current { c-blue } else { c-muted }, period)
+          },
+        )
+        v(0.12em)
+        if "highlights" in exp {
+          bul(exp.highlights)
+        }
+        v(0.4em)
+      }
+    }
+
     // Research
     #sec("Research & Publications")
     #for paper in data.research {

@@ -596,6 +596,15 @@ a{ color:inherit; text-decoration:none; }
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <p class="eyebrow reveal">experience <span class="idx">/ internships</span></p>
+      <h2 class="h2 reveal" style="margin-bottom:1.2rem">Where I've worked</h2>
+      <div class="projects" id="experienceList"></div>
+    </div>
+  </section>
+
   <!-- RESEARCH -->
   <section class="section" id="research">
     <div class="wrap">
@@ -731,7 +740,12 @@ const RESUME = {
     { group: "Data",             items: ["PostgreSQL", "MySQL", "JSONB"] },
     { group: "Security & Standards", items: ["Zero Trust", "NIST SP 800-207", "CISA ZTMM v2", "nmap", "Wireshark", "SpiderFoot", "Autopsy"] },
     { group: "Machine Learning", items: ["XGBoost", "scikit-learn"] },
-    { group: "Tooling",          items: ["Git", "GitHub"] }
+    { group: "Tooling",          items: ["Git", "GitHub"] },
+    { group: "AI — LLM Assistants",       items: ["Claude", "ChatGPT", "Gemini", "DeepSeek", "Perplexity"] },
+    { group: "AI — Voice / Audio",        items: ["Whisper"] },
+    { group: "AI — Agentic / Automation", items: ["n8n", "OpenRouter"] },
+    { group: "AI — Security Research",    items: ["HexStrike AI"] },
+    { group: "AI — Agent Frameworks",     items: ["Z.AI", "Hermes AI", "OpenClaw"] }
   ],
 
   /* ── PROJECTS ─────────────────────────────────────────────────────────
@@ -805,6 +819,24 @@ const RESUME = {
         "Correctness-oriented design grounded in a BCNF-normalised schema."
       ],
       links: [ { label: "GitHub", href: "https://github.com/sampratigaurav/nutrilog", icon: "github" } ]
+    }
+  ],
+
+  /* ── EXPERIENCE / INTERNSHIPS ────────────────────────────────────────
+     { role, org, start, end(null if current), current(bool), highlights[] } */
+  experience: [
+    {
+      role: "Cybersecurity Intern",
+      org: "Arova Fitness",
+      start: "Jun 2026",
+      end: null,
+      current: true,
+      highlights: [
+        "Conducted authorized pentest on arovafitness.com and REST API (api.arovafitness.com) using Kali Linux and Burp Suite Community Edition — DNS/WHOIS recon, TLS review, HTTP header analysis, gobuster directory enumeration, and JavaScript bundle reverse-engineering to uncover an Express.js backend behind Cloudflare and map CORS preflight exposure on authentication-gated endpoints.",
+        "Parsed OpenAPI specification to catalog 86+ production endpoints across External API, Gym Panel API, and Fitness API services (73 JWT-authenticated, 18 unauthenticated, 22 AI-backed); produced a 352-route API surface map and structured findings reports covering open ports, service versions, and endpoint-level vulnerabilities.",
+        "Completed two assessment phases yielding 16 total findings (5 Phase 1 unauthenticated, 11 Phase 2 authenticated), including two Critical-severity vulnerabilities — premium plan escalation via PUT /api/user/plan and OTP invalidation flaws — validated via IDOR-style token-swapping and Hoppscotch functional test cases.",
+        "Architected 192-row exercise library (100 Warmup + 92 Cardio, 12-column schema); built Python/openpyxl data pipeline and Google Apps Script automation to bulk-rename and organize image assets in Drive with lowercase-underscore-numbered convention, validating the platform's live admin category system."
+      ]
     }
   ],
 
@@ -981,6 +1013,24 @@ const RESUME = {
     </article>`;
   }).join("");
 
+  /* ---- EXPERIENCE ---- */
+  $("#experienceList").innerHTML = (RESUME.experience || []).map((exp, i) => {
+    const period = exp.current
+      ? `${esc(exp.start)} — <span style="color:var(--signal);font-weight:600">Present</span>`
+      : `${esc(exp.start)} — ${esc(exp.end)}`;
+    return `<article class="project reveal">
+      <div class="project-head">
+        <div class="num">EXP/${String(i+1).padStart(2,"0")}</div>
+        <h3>${esc(exp.role)}</h3>
+        <p class="tagline">${esc(exp.org)}</p>
+        <div class="num" style="margin-top:.35rem;letter-spacing:.03em">${period}</div>
+      </div>
+      <div class="project-body">
+        ${exp.highlights?`<ul class="hl">${exp.highlights.map(h=>`<li>${esc(h)}</li>`).join("")}</ul>`:""}
+      </div>
+    </article>`;
+  }).join("");
+
   /* ---- RESEARCH ---- */
   $("#papers").innerHTML = RESUME.research.map(r =>
     `<article class="paper reveal"><div class="meta"><span class="role">${esc(r.role)}</span></div>
@@ -1014,7 +1064,7 @@ const RESUME = {
   /* ---- RIGHT-RAIL NAV (built from sections present in DOM) ---- */
   const SECTIONS = [
     ["intro","index"],["about","about"],["skills","skills"],["work","work"],
-    ["research","research"],["recognition","awards"],["education","education"],["contact","contact"]
+    ["experience","experience"],["research","research"],["recognition","awards"],["education","education"],["contact","contact"]
   ].filter(([id]) => document.getElementById(id));
   $("#rail").innerHTML = SECTIONS.map(([id,label]) =>
     `<a href="#${id}" data-sec="${id}"><span class="txt">${label}</span><span class="tick"></span></a>`

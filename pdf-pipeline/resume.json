@@ -124,6 +124,43 @@
         "Git",
         "GitHub"
       ]
+    },
+    {
+      "group": "AI — LLM Assistants",
+      "items": [
+        "Claude",
+        "ChatGPT",
+        "Gemini",
+        "DeepSeek",
+        "Perplexity"
+      ]
+    },
+    {
+      "group": "AI — Voice / Audio",
+      "items": [
+        "Whisper"
+      ]
+    },
+    {
+      "group": "AI — Agentic / Automation",
+      "items": [
+        "n8n",
+        "OpenRouter"
+      ]
+    },
+    {
+      "group": "AI — Security Research",
+      "items": [
+        "HexStrike AI"
+      ]
+    },
+    {
+      "group": "AI — Agent Frameworks",
+      "items": [
+        "Z.AI",
+        "Hermes AI",
+        "OpenClaw"
+      ]
     }
   ],
   "projects": [
@@ -260,6 +297,21 @@
           "href": "https://github.com/sampratigaurav/nutrilog",
           "icon": "github"
         }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Cybersecurity Intern",
+      "org": "Arova Fitness",
+      "start": "Jun 2026",
+      "end": null,
+      "current": true,
+      "highlights": [
+        "Conducted authorized pentest on arovafitness.com and REST API (api.arovafitness.com) using Kali Linux and Burp Suite Community Edition — DNS/WHOIS recon, TLS review, HTTP header analysis, gobuster directory enumeration, and JavaScript bundle reverse-engineering to uncover an Express.js backend behind Cloudflare and map CORS preflight exposure on authentication-gated endpoints.",
+        "Parsed OpenAPI specification to catalog 86+ production endpoints across External API, Gym Panel API, and Fitness API services (73 JWT-authenticated, 18 unauthenticated, 22 AI-backed); produced a 352-route API surface map and structured findings reports covering open ports, service versions, and endpoint-level vulnerabilities.",
+        "Completed two assessment phases yielding 16 total findings (5 Phase 1 unauthenticated, 11 Phase 2 authenticated), including two Critical-severity vulnerabilities — premium plan escalation via PUT /api/user/plan and OTP invalidation flaws — validated via IDOR-style token-swapping and Hoppscotch functional test cases.",
+        "Architected 192-row exercise library (100 Warmup + 92 Cardio, 12-column schema); built Python/openpyxl data pipeline and Google Apps Script automation to bulk-rename and organize image assets in Drive with lowercase-underscore-numbered convention, validating the platform's live admin category system."
       ]
     }
   ],
