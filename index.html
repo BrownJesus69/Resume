@@ -40,25 +40,25 @@
    Accent B (flag):   warm ochre  = recognition / notable (used rarely)
    ============================================================ */
 :root{
-  --bg:        #0b1315;
-  --bg-soft:   #0e181a;
-  --surface:   #101b1e;
-  --surface-2: #142320;
-  --line:      rgba(150,205,196,0.10);
-  --line-2:    rgba(150,205,196,0.22);
-  --line-3:    rgba(150,205,196,0.40);
+  --bg:        #060d1a;
+  --bg-soft:   #091221;
+  --surface:   #0d1829;
+  --surface-2: #102035;
+  --line:      rgba(56,189,248,0.10);
+  --line-2:    rgba(56,189,248,0.22);
+  --line-3:    rgba(56,189,248,0.42);
 
-  --text:      #e2e9e6;
-  --text-dim:  #8b9a96;
-  --text-faint:#586865;
+  --text:      #e8f0fe;
+  --text-dim:  #8ba4c8;
+  --text-faint:#4d6489;
 
-  --signal:      #58d9ba;   /* cool accent */
-  --signal-deep: #35b598;
-  --signal-soft: rgba(88,217,186,0.12);
-  --signal-line: rgba(88,217,186,0.34);
+  --signal:      #22d3ee;   /* electric cyan */
+  --signal-deep: #0891b2;
+  --signal-soft: rgba(34,211,238,0.12);
+  --signal-line: rgba(34,211,238,0.36);
 
-  --flag:      #e3a94b;     /* warm accent — recognition only */
-  --flag-soft: rgba(227,169,75,0.12);
+  --flag:      #fb923c;     /* vivid orange — recognition only */
+  --flag-soft: rgba(251,146,60,0.14);
 
   --rail-w: 3.6rem;
 
@@ -92,8 +92,8 @@ body{
 /* thin custom scrollbar */
 ::-webkit-scrollbar{ width:10px; height:10px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:#1c2b2d; border-radius:20px; border:2px solid var(--bg); }
-::-webkit-scrollbar-thumb:hover{ background:#2a3d3f; }
+::-webkit-scrollbar-thumb{ background:#1a2840; border-radius:20px; border:2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover{ background:#253654; }
 
 a{ color:inherit; text-decoration:none; }
 
@@ -107,14 +107,15 @@ a{ color:inherit; text-decoration:none; }
 .backdrop{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(1100px 620px at var(--mx,78%) var(--my,-8%), rgba(88,217,186,0.07), transparent 60%),
-    radial-gradient(900px 700px at 8% 108%, rgba(227,169,75,0.035), transparent 60%);
+    radial-gradient(1100px 620px at var(--mx,78%) var(--my,-8%), rgba(34,211,238,0.09), transparent 60%),
+    radial-gradient(900px 700px at 8% 108%, rgba(251,146,60,0.05), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(99,102,241,0.06), transparent 55%);
 }
 .backdrop::before{ /* faint console grid */
   content:""; position:absolute; inset:0;
   background-image:
-    linear-gradient(rgba(150,205,196,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(150,205,196,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(56,189,248,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.06) 1px, transparent 1px);
   background-size:56px 56px;
   mask-image:radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
   -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
@@ -124,7 +125,7 @@ a{ color:inherit; text-decoration:none; }
 .progress{
   position:fixed; top:0; left:0; height:2px; width:0%;
   background:linear-gradient(90deg, var(--signal-deep), var(--signal));
-  z-index:120; box-shadow:0 0 12px rgba(88,217,186,0.5);
+  z-index:120; box-shadow:0 0 12px rgba(34,211,238,0.5);
 }
 
 /* ---------- top identity bar ---------- */
@@ -149,10 +150,10 @@ a{ color:inherit; text-decoration:none; }
 .brand b{ color:var(--text); font-weight:500; }
 .brand .live-dot{
   width:6px; height:6px; border-radius:50%; background:var(--signal);
-  box-shadow:0 0 0 0 rgba(88,217,186,.6); animation:pulse 2.6s var(--ease) infinite;
+  box-shadow:0 0 0 0 rgba(34,211,238,.6); animation:pulse 2.6s var(--ease) infinite;
 }
 @keyframes pulse{
-  0%{ box-shadow:0 0 0 0 rgba(88,217,186,.55);} 70%{ box-shadow:0 0 0 7px rgba(88,217,186,0);} 100%{ box-shadow:0 0 0 0 rgba(88,217,186,0);}
+  0%{ box-shadow:0 0 0 0 rgba(34,211,238,.55);} 70%{ box-shadow:0 0 0 7px rgba(34,211,238,0);} 100%{ box-shadow:0 0 0 0 rgba(34,211,238,0);}
 }
 
 .menu-btn{
@@ -722,7 +723,7 @@ const RESUME = {
   /* ── SKILLS (grouped) ─────────────────────────────────────────────────
      Add a group: { group: "Name", items: ["a","b","c"] } */
   skills: [
-    { group: "Languages",        items: ["Python", "C", "SQL", "Bash", "TypeScript", "LaTeX"] },
+    { group: "Languages",        items: ["Python", "C", "SQL", "Bash", "TypeScript", "HTML", "LaTeX"] },
     { group: "Frameworks",       items: ["FastAPI", "Express", "React", "React Native", "Expo"] },
     { group: "Data",             items: ["PostgreSQL", "MySQL", "JSONB"] },
     { group: "Security & Standards", items: ["Zero Trust", "NIST SP 800-207", "CISA ZTMM v2", "nmap", "Wireshark", "SpiderFoot", "Autopsy"] },
@@ -1098,12 +1099,12 @@ const RESUME = {
         x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
       }
       const grad = ctx.createLinearGradient(0,0,W,0);
-      grad.addColorStop(0,"rgba(88,217,186,0)"); grad.addColorStop(0.5,"rgba(88,217,186,0.45)"); grad.addColorStop(1,"rgba(88,217,186,0)");
+      grad.addColorStop(0,"rgba(34,211,238,0)"); grad.addColorStop(0.5,"rgba(34,211,238,0.45)"); grad.addColorStop(1,"rgba(34,211,238,0)");
       ctx.strokeStyle=grad; ctx.lineWidth=1.4; ctx.stroke();
       // moving read-head
       const hx = (W*0.5) + Math.sin(t*0.6)*(W*0.42);
       ctx.beginPath(); ctx.arc(hx, midY + Math.sin((hx*0.010)+t*0.9)*10, 2.5, 0, Math.PI*2);
-      ctx.fillStyle="rgba(88,217,186,0.9)"; ctx.fill();
+      ctx.fillStyle="rgba(34,211,238,0.9)"; ctx.fill();
       t += 0.02; if(visible) raf=requestAnimationFrame(draw);
     };
     resize(); window.addEventListener("resize", resize);
