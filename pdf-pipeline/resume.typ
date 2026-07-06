@@ -20,25 +20,26 @@
   margin: (top: 1.1cm, bottom: 1.1cm, left: 1.5cm, right: 1.5cm),
   fill: white,
 )
-#set text(font: ("JetBrains Mono", "Courier New"), size: 8pt, fill: c-body, lang: "en")
+#set text(font: ("PT Sans", "Helvetica Neue", "Liberation Sans", "DejaVu Sans", "Arial"), size: 8pt, fill: c-body, lang: "en")
 #set par(leading: 0.55em, justify: false)
 
 // ── Section heading ─────────────────────────────────────────────────────────
+// v(weak: false) survives page-break fragment boundaries; fixes smushing.
 #let sec(title) = {
-  v(0.5em)
+  v(0.5em, weak: false)
   text(weight: "bold", size: 7.5pt, fill: c-blue, upper(title))
   v(0.08em)
   line(length: 100%, stroke: 1pt + c-blue)
   v(0.25em)
 }
 
-// ── Skill chip (green pill) ─────────────────────────────────────────────────
+// ── Skill chip (green pill) — JetBrains Mono for tech aesthetic ─────────────
 #let chip(label) = box(
   fill: c-chip-bg,
   stroke: 0.5pt + c-green,
   radius: 2.5pt,
   inset: (x: 3.5pt, y: 1.8pt),
-  text(fill: c-green, size: 7pt, weight: "medium", label),
+  text(font: ("JetBrains Mono", "Courier New"), fill: c-green, size: 7pt, weight: "medium", label),
 )
 
 // ── Bullet row ──────────────────────────────────────────────────────────────
@@ -60,6 +61,8 @@
 // ══════════════════════════════════════════════════════════════════════════════
 #align(center)[
   #text(size: 19pt, weight: "bold", fill: c-blue, P.name)
+  #v(0.1em)
+  #text(size: 7pt, style: "italic", fill: c-muted, P.roles.join("  ·  "))
   #v(0.12em)
   #let cp = data.contact.map(c => {
     if c.icon == "mail"     { c.value }
@@ -67,7 +70,7 @@
     else if c.icon == "linkedin" { "linkedin.com/in/" + c.value }
     else if c.icon == "phone"    { c.value }
     else { c.value }
-  })
+  }) + ("adityabidappa.netlify.app",)
   #text(size: 7.5pt, fill: c-muted, cp.join("   |   "))
   #v(0.08em)
   #text(size: 7pt, fill: c-muted, P.tagline)
@@ -77,15 +80,18 @@
 #v(0.35em)
 
 // ══════════════════════════════════════════════════════════════════════════════
-//  TWO-COLUMN BODY  (left: reference data  |  right: narrative data)
+//  TWO-COLUMN BODY
+//  Left column background is applied via grid fill — avoids the monolithic
+//  block() wrapper that caused section headings to smush at page breaks.
 // ══════════════════════════════════════════════════════════════════════════════
 #grid(
   columns: (1fr, 2fr),
   column-gutter: 14pt,
+  fill: (x, _) => if x == 0 { c-left-bg } else { none },
+  inset: (x, _) => if x == 0 { 8pt } else { 0pt },
 
   // ── LEFT COLUMN ────────────────────────────────────────────────────────────
-  block(fill: c-left-bg, radius: 4pt, inset: 8pt, width: 100%)[
-
+  [
     // Contact
     #sec("Contact")
     #for c in data.contact {
@@ -95,6 +101,7 @@
         else { c.value }
       text(size: 7pt, fill: c-muted, d); linebreak()
     }
+    #text(size: 7pt, fill: c-muted, "adityabidappa.netlify.app")
 
     // Skills
     #sec("Skills")
@@ -148,42 +155,44 @@
       v(0.18em)
     }
 
-    // Projects
+    // Projects — each entry wrapped in breakable: false to avoid mid-entry breaks
     #sec("Projects")
     #for pr in data.projects {
-      grid(
-        columns: (1fr, auto),
-        {
-          text(weight: "bold", size: 8pt, pr.name)
-          if "status" in pr and pr.status.live {
-            h(4pt)
-            box(fill: c-chip-bg, stroke: 0.5pt + c-green, radius: 2.5pt,
-              inset: (x: 3pt, y: 1.2pt),
-              text(fill: c-green, size: 6.5pt, weight: "bold", "LIVE"))
-          }
-          linebreak()
-          text(size: 7pt, fill: c-muted, pr.tagline)
-        },
-        if "stack" in pr {
-          align(right, text(size: 6.5pt, fill: c-muted, pr.stack.join(" · ")))
-        },
-      )
-      v(0.1em)
-      if "highlights" in pr { bul(pr.highlights) }
-      if "metrics" in pr {
-        v(0.08em)
-        box(fill: rgb("#fffbeb"), stroke: 0.5pt + c-amber, radius: 2.5pt,
-          inset: (x: 4pt, y: 2.5pt),
-          pr.metrics.map(m =>
-            text(weight: "bold", fill: c-amber, size: 7.5pt, m.value) +
-            text(fill: c-muted, size: 7pt, " " + m.label)
-          ).join(text(fill: c-muted, "   "))
+      block(breakable: false)[
+        #grid(
+          columns: (1fr, auto),
+          {
+            text(weight: "bold", size: 8pt, pr.name)
+            if "status" in pr and pr.status.live {
+              h(4pt)
+              box(fill: c-chip-bg, stroke: 0.5pt + c-green, radius: 2.5pt,
+                inset: (x: 3pt, y: 1.2pt),
+                text(fill: c-green, size: 6.5pt, weight: "bold", "LIVE"))
+            }
+            linebreak()
+            text(size: 7pt, fill: c-muted, pr.tagline)
+          },
+          if "stack" in pr {
+            align(right, text(size: 6.5pt, fill: c-muted, pr.stack.join(" · ")))
+          },
         )
-        v(0.1em)
-      }
-      if "links" in pr {
-        text(size: 6.5pt, fill: c-muted, pr.links.map(l => l.href).join("   "))
-      }
+        #v(0.1em)
+        #if "highlights" in pr { bul(pr.highlights) }
+        #if "metrics" in pr {
+          v(0.08em)
+          box(fill: rgb("#fffbeb"), stroke: 0.5pt + c-amber, radius: 2.5pt,
+            inset: (x: 4pt, y: 2.5pt),
+            pr.metrics.map(m =>
+              text(weight: "bold", fill: c-amber, size: 7.5pt, m.value) +
+              text(fill: c-muted, size: 7pt, " " + m.label)
+            ).join(text(fill: c-muted, "   "))
+          )
+          v(0.1em)
+        }
+        #if "links" in pr {
+          text(size: 6.5pt, fill: c-muted, pr.links.map(l => l.href).join("   "))
+        }
+      ]
       v(0.38em)
     }
 
@@ -191,23 +200,23 @@
     #if "experience" in data and data.experience.len() > 0 {
       sec("Experience")
       for exp in data.experience {
-        grid(
-          columns: (1fr, auto),
-          {
-            text(weight: "bold", size: 8pt, exp.role)
-            linebreak()
-            text(size: 7pt, fill: c-muted, exp.org)
-          },
-          {
-            let period = if exp.current { exp.start + " — Present" }
-                         else { exp.start + " — " + exp.end }
-            text(size: 7pt, fill: if exp.current { c-blue } else { c-muted }, period)
-          },
-        )
-        v(0.12em)
-        if "highlights" in exp {
-          bul(exp.highlights)
-        }
+        block(breakable: false)[
+          #grid(
+            columns: (1fr, auto),
+            {
+              text(weight: "bold", size: 8pt, exp.role)
+              linebreak()
+              text(size: 7pt, fill: c-muted, exp.org)
+            },
+            {
+              let period = if exp.current { exp.start + " — Present" }
+                           else { exp.start + " — " + exp.end }
+              text(size: 7pt, fill: if exp.current { c-blue } else { c-muted }, period)
+            },
+          )
+          #v(0.12em)
+          #if "highlights" in exp { bul(exp.highlights) }
+        ]
         v(0.4em)
       }
     }
@@ -215,16 +224,18 @@
     // Research
     #sec("Research & Publications")
     #for paper in data.research {
-      grid(
-        columns: (1fr, auto),
-        gutter: 4pt,
-        text(weight: "bold", size: 7.5pt, paper.title),
-        box(fill: c-chip-bg, stroke: 0.5pt + c-green, radius: 2.5pt,
-          inset: (x: 3pt, y: 1.2pt),
-          text(fill: c-green, size: 6.5pt, paper.role)),
-      )
-      v(0.08em)
-      par(leading: 0.48em, text(size: 7pt, fill: c-muted, paper.note))
+      block(breakable: false)[
+        #grid(
+          columns: (1fr, auto),
+          gutter: 4pt,
+          text(weight: "bold", size: 7.5pt, paper.title),
+          box(fill: c-chip-bg, stroke: 0.5pt + c-green, radius: 2.5pt,
+            inset: (x: 3pt, y: 1.2pt),
+            text(fill: c-green, size: 6.5pt, paper.role)),
+        )
+        #v(0.08em)
+        #par(leading: 0.48em, text(size: 7pt, fill: c-muted, paper.note))
+      ]
       v(0.3em)
     }
 
