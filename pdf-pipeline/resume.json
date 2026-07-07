@@ -106,17 +106,44 @@
         "Zero Trust",
         "NIST SP 800-207",
         "CISA ZTMM v2",
+        "OWASP Testing Guide v4",
+        "IDOR & Auth-Bypass Testing",
+        "Blind & Error-Based SQLi"
+      ]
+    },
+    {
+      "group": "Pentesting Toolkit",
+      "items": [
+        "Burp Suite CE",
+        "OWASP ZAP",
+        "Hoppscotch",
+        "gobuster",
+        "nuclei",
+        "subfinder",
         "nmap",
         "Wireshark",
         "SpiderFoot",
-        "Autopsy"
+        "Autopsy",
+        "Kali Linux"
       ]
     },
     {
       "group": "Machine Learning",
       "items": [
         "XGBoost",
-        "scikit-learn"
+        "scikit-learn",
+        "Random Forest",
+        "Isolation Forest",
+        "Multi-Transformer Ensembles"
+      ]
+    },
+    {
+      "group": "Automation & Reporting",
+      "items": [
+        "openpyxl",
+        "Google Apps Script",
+        "GitHub Actions",
+        "Typst"
       ]
     },
     {
@@ -152,7 +179,8 @@
     {
       "group": "AI — Security Research",
       "items": [
-        "HexStrike AI"
+        "HexStrike AI",
+        "MCP Server Orchestration"
       ]
     },
     {
