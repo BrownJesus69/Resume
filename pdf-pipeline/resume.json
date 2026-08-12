@@ -332,10 +332,10 @@
   "experience": [
     {
       "role": "Cybersecurity Intern",
-      "org": "Arova Fitness",
+      "org": "TabNet Security — Arova Fitness",
       "start": "Jun 2026",
-      "end": null,
-      "current": true,
+      "end": "Aug 2026",
+      "current": false,
       "highlights": [
         "Conducted authorized pentest on arovafitness.com and REST API (api.arovafitness.com) using Kali Linux and Burp Suite Community Edition — DNS/WHOIS recon, TLS review, HTTP header analysis, gobuster directory enumeration, and JavaScript bundle reverse-engineering to uncover an Express.js backend behind Cloudflare and map CORS preflight exposure on authentication-gated endpoints.",
         "Parsed OpenAPI specification to catalog 86+ production endpoints across External API, Gym Panel API, and Fitness API services (73 JWT-authenticated, 18 unauthenticated, 22 AI-backed); produced a 352-route API surface map and structured findings reports covering open ports, service versions, and endpoint-level vulnerabilities.",
