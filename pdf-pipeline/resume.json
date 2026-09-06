@@ -12,9 +12,9 @@
     "tagline": "B.Tech Cybersecurity · Dayananda Sagar University",
     "summary": "I build and study security systems end to end — from <strong>zero-trust maturity frameworks</strong> and <strong>prompt-injection detection</strong> to IoMT threat modelling, deepfake analysis, and deployed apps. Research depth paired with shipping real tools.",
     "focus": "security-research",
-    "trustModel": "zero",
     "location": "Bengaluru, IN",
-    "lastUpdated": "Jul 2026"
+    "lastUpdated": "Jul 2026",
+    "website": "adityabidappa.netlify.app"
   },
   "contact": [
     {
@@ -450,6 +450,472 @@
     "Quantum computing protocols",
     "Cybersecurity research",
     "Database design & correctness"
+  ],
+  "roleProfiles": [
+    {
+      "id": "software-developer",
+      "title": "Software Developer",
+      "aliases": [
+        "software engineer",
+        "sde",
+        "swe",
+        "developer",
+        "programmer",
+        "software development engineer",
+        "application developer"
+      ],
+      "domains": [
+        "software",
+        "backend",
+        "frontend"
+      ],
+      "secondary": [
+        "automation",
+        "data"
+      ],
+      "keywords": [
+        "full-stack",
+        "deployed",
+        "typescript",
+        "python"
+      ],
+      "summary": "Software developer who ships end to end: FastAPI and Express services, React and React Native clients, PostgreSQL schemas, and CI-driven deploys. Security research background means I build with threat models in mind and test what I ship.",
+      "pin": {
+        "projects": [
+          "PromptGuard",
+          "NetworkAudit"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "front-end-developer",
+      "title": "Front End Developer",
+      "aliases": [
+        "frontend developer",
+        "front-end developer",
+        "frontend engineer",
+        "ui developer",
+        "web developer",
+        "react developer",
+        "ui engineer"
+      ],
+      "domains": [
+        "frontend"
+      ],
+      "secondary": [
+        "software",
+        "mobile"
+      ],
+      "keywords": [
+        "react",
+        "typescript",
+        "frontend",
+        "ui",
+        "expo",
+        "react native",
+        "web app"
+      ],
+      "summary": "Front-end developer with React, TypeScript and React Native (Expo) experience across deployed web and Android apps. I own the client from component structure to production deploy, and I bring a security researcher's habit of testing how an interface can be abused.",
+      "skills": {
+        "include": [
+          "Git",
+          "GitHub"
+        ]
+      },
+      "pin": {
+        "projects": [
+          "PromptGuard",
+          "NetworkAudit",
+          "NutriLog"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "back-end-developer",
+      "title": "Back End Developer",
+      "aliases": [
+        "backend developer",
+        "back-end developer",
+        "backend engineer",
+        "api developer",
+        "server-side developer",
+        "python developer"
+      ],
+      "domains": [
+        "backend"
+      ],
+      "secondary": [
+        "software",
+        "data",
+        "automation"
+      ],
+      "keywords": [
+        "fastapi",
+        "express",
+        "postgresql",
+        "api",
+        "schema",
+        "jwt",
+        "openapi"
+      ],
+      "summary": "Back-end developer building FastAPI and Express services on PostgreSQL, with BCNF schema design, typed validation (Zod), JWT-authenticated APIs and automated deploys. Pentesting experience on a production REST API taught me how back ends actually fail.",
+      "pin": {
+        "projects": [
+          "PromptGuard",
+          "NetworkAudit",
+          "MUN Argument Builder"
+        ]
+      }
+    },
+    {
+      "id": "full-stack-developer",
+      "title": "Full Stack Developer",
+      "aliases": [
+        "fullstack developer",
+        "full-stack developer",
+        "full stack engineer",
+        "web engineer"
+      ],
+      "domains": [
+        "frontend",
+        "backend"
+      ],
+      "secondary": [
+        "software",
+        "automation",
+        "mobile"
+      ],
+      "keywords": [
+        "full-stack",
+        "react",
+        "fastapi",
+        "express",
+        "postgresql",
+        "deployed"
+      ],
+      "summary": "Full-stack developer: React / React Native front ends, FastAPI and Express back ends, PostgreSQL data layers, and GitHub-triggered deploys with custom domains and TLS. Several projects are live in production.",
+      "pin": {
+        "projects": [
+          "PromptGuard",
+          "NetworkAudit",
+          "MUN Argument Builder"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "security-engineer",
+      "title": "Security Engineer",
+      "aliases": [
+        "cybersecurity analyst",
+        "security analyst",
+        "soc analyst",
+        "cybersecurity engineer",
+        "information security analyst",
+        "appsec engineer",
+        "application security engineer",
+        "cyber security"
+      ],
+      "domains": [
+        "security"
+      ],
+      "secondary": [
+        "pentest",
+        "software",
+        "ml"
+      ],
+      "keywords": [
+        "zero trust",
+        "nist",
+        "cisa",
+        "owasp",
+        "threat",
+        "maturity",
+        "risk"
+      ],
+      "summary": "Security engineer who turns standards (NIST SP 800-207, CISA ZTMM v2, OWASP) into running tools: a zero-trust maturity scorer, a prompt-injection classifier, a live network auditor. Authorised web and API pentesting experience with Critical findings validated end to end."
+    },
+    {
+      "id": "penetration-tester",
+      "title": "Penetration Tester",
+      "aliases": [
+        "pentester",
+        "ethical hacker",
+        "red team",
+        "offensive security",
+        "vapt analyst",
+        "security tester",
+        "bug bounty hunter",
+        "web application pentester"
+      ],
+      "domains": [
+        "pentest"
+      ],
+      "secondary": [
+        "security",
+        "automation"
+      ],
+      "keywords": [
+        "burp",
+        "kali",
+        "idor",
+        "owasp",
+        "recon",
+        "enumeration",
+        "findings",
+        "critical"
+      ],
+      "summary": "Penetration tester with hands-on authorised assessments of a production web app and REST API: recon, enumeration, JavaScript bundle reverse-engineering, IDOR and auth-bypass testing, and structured reporting. 16 findings including two Critical-severity vulnerabilities.",
+      "skills": {
+        "include": [
+          "Python",
+          "Bash",
+          "SQL"
+        ]
+      },
+      "pin": {
+        "projects": [
+          "NetworkAudit"
+        ]
+      }
+    },
+    {
+      "id": "security-researcher",
+      "title": "Security Researcher",
+      "aliases": [
+        "cybersecurity researcher",
+        "research intern",
+        "research assistant",
+        "security research intern",
+        "academic researcher",
+        "phd applicant"
+      ],
+      "domains": [
+        "security",
+        "research"
+      ],
+      "secondary": [
+        "ml",
+        "software"
+      ],
+      "keywords": [
+        "framework",
+        "paper",
+        "manuscript",
+        "validated",
+        "case study",
+        "survey",
+        "latex"
+      ],
+      "summary": "Security researcher and co-author of four papers spanning zero-trust maturity, IoMT threat modelling, deepfake detection and DDoS simulation. I write in LaTeX, validate against real breach case studies, and turn frameworks into runnable tools."
+    },
+    {
+      "id": "machine-learning-engineer",
+      "title": "Machine Learning Engineer",
+      "aliases": [
+        "ml engineer",
+        "data scientist",
+        "ai engineer",
+        "ml developer",
+        "applied ml",
+        "machine learning intern",
+        "ai/ml engineer",
+        "deep learning engineer"
+      ],
+      "domains": [
+        "ml"
+      ],
+      "secondary": [
+        "software",
+        "data",
+        "llm"
+      ],
+      "keywords": [
+        "xgboost",
+        "scikit-learn",
+        "classifier",
+        "dataset",
+        "accuracy",
+        "recall",
+        "precision",
+        "synthetic",
+        "adversarial"
+      ],
+      "summary": "ML engineer focused on defensive security: an XGBoost prompt-injection classifier (87% accuracy, 95% precision) trained on Hugging Face data plus locally generated adversarial prompts, and published work on ML-driven intrusion detection and why 'perfect' metrics on synthetic data are a warning sign.",
+      "skills": {
+        "include": [
+          "Python",
+          "SQL",
+          "FastAPI"
+        ]
+      },
+      "pin": {
+        "projects": [
+          "PromptGuard"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "data-engineer",
+      "title": "Data Engineer",
+      "aliases": [
+        "database developer",
+        "data analyst",
+        "sql developer",
+        "database engineer",
+        "data engineering intern",
+        "analytics engineer"
+      ],
+      "domains": [
+        "data"
+      ],
+      "secondary": [
+        "backend",
+        "automation",
+        "ml"
+      ],
+      "keywords": [
+        "postgresql",
+        "schema",
+        "bcnf",
+        "pipeline",
+        "openpyxl",
+        "jsonb",
+        "sql"
+      ],
+      "summary": "Data-minded engineer with PostgreSQL, MySQL and MongoDB experience, BCNF schema design, JSONB modelling and Python (openpyxl) data pipelines, plus classifier training on real and synthetic datasets.",
+      "pin": {
+        "projects": [
+          "NutriLog",
+          "NetworkAudit"
+        ]
+      }
+    },
+    {
+      "id": "mobile-developer",
+      "title": "Mobile Developer",
+      "aliases": [
+        "android developer",
+        "react native developer",
+        "app developer",
+        "mobile engineer",
+        "mobile app developer"
+      ],
+      "domains": [
+        "mobile"
+      ],
+      "secondary": [
+        "frontend",
+        "software",
+        "backend"
+      ],
+      "keywords": [
+        "react native",
+        "expo",
+        "android",
+        "eas build",
+        "mobile"
+      ],
+      "summary": "Mobile developer building with React Native and Expo: a live Android network-security auditor with an Express + PostgreSQL back end, shipped through EAS Build. TypeScript throughout, with a security background that shows up in how the app handles data.",
+      "pin": {
+        "projects": [
+          "NetworkAudit"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "ai-application-engineer",
+      "title": "AI Application Engineer",
+      "aliases": [
+        "llm engineer",
+        "ai developer",
+        "genai engineer",
+        "prompt engineer",
+        "ai product engineer",
+        "llm application developer",
+        "agentic ai engineer"
+      ],
+      "domains": [
+        "llm",
+        "ml"
+      ],
+      "secondary": [
+        "software",
+        "security"
+      ],
+      "keywords": [
+        "llm",
+        "groq",
+        "llama",
+        "prompt",
+        "agent",
+        "mcp",
+        "ollama",
+        "deepseek",
+        "injection"
+      ],
+      "summary": "AI application engineer shipping LLM products: a live argument engine on Groq's Llama 3.1 70B, a prompt-injection risk scorer for LLM apps, and agentic tooling with MCP servers and n8n. I build the guardrails as well as the features.",
+      "pin": {
+        "projects": [
+          "MUN Argument Builder",
+          "PromptGuard"
+        ]
+      },
+      "maxHighlights": {
+        "experience": 3
+      }
+    },
+    {
+      "id": "devops-engineer",
+      "title": "DevOps / Automation Engineer",
+      "aliases": [
+        "devops",
+        "automation engineer",
+        "platform engineer",
+        "site reliability engineer",
+        "sre",
+        "ci/cd engineer",
+        "cloud engineer"
+      ],
+      "domains": [
+        "automation"
+      ],
+      "secondary": [
+        "backend",
+        "software",
+        "security"
+      ],
+      "keywords": [
+        "github actions",
+        "deploy",
+        "render",
+        "cloudflare",
+        "tls",
+        "pipeline",
+        "automation",
+        "workflow"
+      ],
+      "summary": "Automation-focused engineer: GitHub Actions pipelines, Render auto-deploys with custom domains and Let's Encrypt TLS, Google Apps Script and Python automation, and n8n / MCP orchestration. I automate the boring parts and audit what's left.",
+      "pin": {
+        "projects": [
+          "MUN Argument Builder"
+        ]
+      }
+    }
   ],
   "contactCopy": {
     "lead": "Let's talk security.",
