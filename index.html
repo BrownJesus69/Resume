@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="color-scheme" content="light" />
+<meta name="color-scheme" content="light dark" />
 <title>Aditya Bidappa M V — Cybersecurity Researcher</title>
 <meta name="description" content="Aditya Bidappa M V — B.Tech Cybersecurity student and researcher. Zero-trust frameworks, prompt-injection detection, IoMT security, and deployed security-oriented applications. Tailor the résumé to a role and download it as a PDF." />
 
@@ -43,28 +43,28 @@
 
 <style>
 /* ============================================================
-   TOKENS — a typeset document, not a dashboard.
-   Paper, ink, one blue (the same blue the PDF uses), a little
-   green for "live", amber for awards. Nothing glows.
+   TOKENS — "blueprint": a powder-blue sheet, navy ink, one
+   international-orange accent. Same tokens re-set for dark.
    ============================================================ */
 :root{
-  --paper:      #fbfbf9;
-  --paper-2:    #f3f3ef;
-  --paper-3:    #ebebe6;
-  --ink:        #16191d;
-  --ink-2:      #454b53;
-  --ink-3:      #6b727c;
-  --rule:       #e1e2dd;
-  --rule-2:     #c9cbc4;
+  color-scheme: light;
+  --paper:      #dbe4ee;
+  --paper-2:    #e9eff5;
+  --paper-3:    #ccd8e4;
+  --ink:        #0c1a2b;
+  --ink-2:      #2f4459;
+  --ink-3:      #587089;
+  --rule:       #b6c6d7;
+  --rule-2:     #91a7be;
 
-  --accent:     #1d4ed8;
-  --accent-ink: #163ea8;
-  --accent-soft:#e9effc;
-  --accent-line:#b9c8f2;
-  --green:      #15803d;
-  --green-soft: #eaf6ee;
-  --amber:      #92400e;
-  --amber-soft: #fbf3e4;
+  --accent:     #c2440a;
+  --accent-ink: #983507;
+  --accent-soft:rgba(194,68,10,.10);
+  --accent-line:#e2a483;
+  --on-accent:  #ffffff;
+  --green:      #1c6b3e;
+  --green-soft: rgba(28,107,62,.12);
+  --shadow:     rgba(12,26,43,.16);
 
   --f-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --f-body:    "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -74,6 +74,48 @@
   --radius: 4px;
   --ease: cubic-bezier(.2,.7,.2,1);
   --masthead-h: 3.5rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+  --paper:      #0f1b2a;
+  --paper-2:    #172637;
+  --paper-3:    #213348;
+  --ink:        #e8eff7;
+  --ink-2:      #b9c8d9;
+  --ink-3:      #8ea3ba;
+  --rule:       #27394f;
+  --rule-2:     #3d546f;
+
+  --accent:     #ef6a1f;
+  --accent-ink: #ff9556;
+  --accent-soft:rgba(239,106,31,.16);
+  --accent-line:#8a4a25;
+  --on-accent:  #0f1b2a;
+  --green:      #5fd394;
+  --green-soft: rgba(95,211,148,.14);
+  --shadow:     rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:      #0f1b2a;
+  --paper-2:    #172637;
+  --paper-3:    #213348;
+  --ink:        #e8eff7;
+  --ink-2:      #b9c8d9;
+  --ink-3:      #8ea3ba;
+  --rule:       #27394f;
+  --rule-2:     #3d546f;
+
+  --accent:     #ef6a1f;
+  --accent-ink: #ff9556;
+  --accent-soft:rgba(239,106,31,.16);
+  --accent-line:#8a4a25;
+  --on-accent:  #0f1b2a;
+  --green:      #5fd394;
+  --green-soft: rgba(95,211,148,.14);
+  --shadow:     rgba(0,0,0,.45);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -91,8 +133,8 @@ a{ color:inherit; text-decoration:none; }
 p{ margin:0; }
 button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
 :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
-::selection{ background:var(--accent); color:#fff; }
-.skip{ position:absolute; left:-999px; top:0; background:var(--ink); color:#fff; padding:.5rem .8rem; z-index:200; }
+::selection{ background:var(--accent); color:var(--on-accent); }
+.skip{ position:absolute; left:-999px; top:0; background:var(--ink); color:var(--paper); padding:.5rem .8rem; z-index:200; }
 .skip:focus{ left:1rem; top:1rem; }
 .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 [hidden]{ display:none !important; }
@@ -102,7 +144,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
    ============================================================ */
 .masthead{
   position:sticky; top:0; z-index:50; height:var(--masthead-h);
-  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  background:color-mix(in srgb, var(--paper) 90%, transparent);
   backdrop-filter:saturate(1.2) blur(8px); -webkit-backdrop-filter:saturate(1.2) blur(8px);
   border-bottom:1px solid var(--rule);
 }
@@ -122,8 +164,8 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   border:1px solid var(--rule-2); border-radius:var(--radius); padding:.38rem .6rem; background:var(--paper);
   transition:border-color .15s, background .15s;
 }
-.kbtn:hover{ border-color:var(--ink-3); background:#fff; }
-.kbtn:active{ background:var(--paper-2); }
+.kbtn:hover{ border-color:var(--ink-3); background:var(--paper-2); }
+.kbtn:active{ background:var(--paper-3); }
 .kbtn kbd{ font-family:var(--f-mono); font-size:.68rem; color:var(--ink-3); }
 @media (min-width:1024px){ .kbtn{ margin-left:var(--s4); } }
 
@@ -142,7 +184,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 @media (min-width:1024px){ .side{ padding-top:0; margin-top:3.6rem; } }
 
 /* ---------- tailor panel ---------- */
-.panel{ border:1px solid var(--rule); border-radius:6px; background:#fff; padding:var(--s4) var(--s4) var(--s4); }
+.panel{ border:1px solid var(--rule); border-radius:6px; background:var(--paper-2); padding:var(--s4) var(--s4) var(--s4); }
 .panel-lab{ display:block; font-family:var(--f-display); font-weight:600; font-size:.95rem; margin-bottom:.2rem; }
 .panel-sub{ font-family:var(--f-display); font-size:.8rem; color:var(--ink-3); margin-bottom:var(--s3); line-height:1.4; }
 
@@ -150,7 +192,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .combo input{
   width:100%; font-family:var(--f-display); font-size:.92rem; color:var(--ink);
   background:var(--paper); border:1px solid var(--rule-2); border-radius:var(--radius);
-  padding:.55rem 2.2rem .55rem .7rem; outline:none; transition:border-color .15s, box-shadow .15s;
+  padding:.55rem 2.2rem .55rem 2.1rem; outline:none; transition:border-color .15s, box-shadow .15s;
 }
 .combo input::placeholder{ color:var(--ink-3); }
 .combo input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
@@ -158,21 +200,23 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   position:absolute; right:.25rem; top:.25rem; bottom:.25rem; width:1.8rem; display:grid; place-items:center;
   color:var(--ink-3); border-radius:3px;
 }
-.combo-toggle:hover{ color:var(--ink); background:var(--paper-2); }
+.combo-toggle:hover{ color:var(--ink); background:var(--paper-3); }
 .combo-toggle svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .combo-list{
   position:absolute; left:0; right:0; top:calc(100% + 4px); z-index:40; margin:0; padding:.3rem; list-style:none;
-  background:#fff; border:1px solid var(--rule-2); border-radius:6px; box-shadow:0 12px 32px rgba(22,25,29,.12);
+  background:var(--paper-2); border:1px solid var(--rule-2); border-radius:6px; box-shadow:0 12px 32px var(--shadow);
   max-height:min(50vh, 340px); overflow:auto;
 }
 .combo-list[hidden]{ display:none; }
 .combo-opt{
-  display:flex; align-items:baseline; justify-content:space-between; gap:.6rem;
-  padding:.45rem .6rem; border-radius:4px; cursor:pointer;
-  font-family:var(--f-display); font-size:.9rem; color:var(--ink);
+  display:block; padding:.42rem .6rem; border-radius:4px; cursor:pointer;
+  font-family:var(--f-display); font-size:.9rem; color:var(--ink); line-height:1.3;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.combo-opt small{ font-size:.72rem; color:var(--ink-3); white-space:nowrap; }
+.combo-opt > span{ display:block; overflow:hidden; text-overflow:ellipsis; }
+.combo-opt small{ display:block; font-size:.72rem; color:var(--ink-3); overflow:hidden; text-overflow:ellipsis; margin-top:.05rem; }
 .combo-opt[aria-selected="true"], .combo-opt:hover{ background:var(--accent-soft); color:var(--accent-ink); }
+.combo-opt[aria-selected="true"] small, .combo-opt:hover small{ color:var(--accent-ink); opacity:.8; }
 .combo-opt.free{ color:var(--accent-ink); border-top:1px solid var(--rule); margin-top:.25rem; padding-top:.55rem; }
 .combo-opt.free em{ font-style:normal; font-weight:600; }
 .combo-empty{ padding:.6rem; font-family:var(--f-display); font-size:.82rem; color:var(--ink-3); }
@@ -181,7 +225,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .state b{ color:var(--ink); font-weight:600; }
 .state .reset{ color:var(--accent-ink); margin-left:.4rem; }
 .state .reset:hover{ text-decoration:underline; }
-.notice{ margin-top:var(--s2); font-family:var(--f-display); font-size:.8rem; color:var(--amber); background:var(--amber-soft); border-radius:var(--radius); padding:.45rem .6rem; line-height:1.4; }
+.notice{ margin-top:var(--s2); font-family:var(--f-display); font-size:.8rem; color:var(--accent-ink); background:var(--accent-soft); border-radius:var(--radius); padding:.45rem .6rem; line-height:1.4; }
 
 .counts{ margin:var(--s3) 0 0; padding:0; display:grid; grid-template-columns:1fr auto; row-gap:.15rem; column-gap:.75rem; font-family:var(--f-display); font-size:.82rem; }
 .counts dt{ color:var(--ink-3); }
@@ -192,15 +236,15 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
   font-family:var(--f-display); font-weight:500; font-size:.9rem; line-height:1;
-  padding:.7rem .9rem; border-radius:var(--radius); border:1px solid var(--rule-2); background:#fff; color:var(--ink);
+  padding:.7rem .9rem; border-radius:var(--radius); border:1px solid var(--rule-2); background:var(--paper-2); color:var(--ink);
   transition:background .15s, border-color .15s, transform .05s;
 }
 .btn svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
-.btn:hover{ background:var(--paper-2); border-color:var(--ink-3); }
+.btn:hover{ background:var(--paper-3); border-color:var(--ink-3); }
 .btn:active{ transform:translateY(1px); }
 .btn:disabled{ opacity:.55; cursor:progress; }
-.btn-primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
-.btn-primary:hover{ background:var(--accent-ink); border-color:var(--accent-ink); }
+.btn-primary{ background:var(--accent); border-color:var(--accent); color:var(--on-accent); }
+.btn-primary:hover{ filter:brightness(.92); }
 .btn .sub{ display:block; font-weight:400; font-size:.78rem; opacity:.85; margin-top:.15rem; }
 #dlLabel{ text-align:center; }
 .edits{ margin-top:var(--s3); font-family:var(--f-display); font-size:.8rem; color:var(--ink-3); line-height:1.5; }
@@ -266,7 +310,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .tags{ display:flex; flex-wrap:wrap; gap:.4rem; }
 .tag{
   font-family:var(--f-display); font-size:.82rem; line-height:1; color:var(--ink);
-  border:1px solid var(--rule-2); border-radius:var(--radius); padding:.4rem .55rem; background:#fff;
+  border:1px solid var(--rule-2); border-radius:var(--radius); padding:.4rem .55rem; background:var(--paper-2);
   display:inline-flex; align-items:center; gap:.35rem;
 }
 .tag.ghost{ color:var(--ink-3); border-style:dashed; background:transparent; }
@@ -274,7 +318,7 @@ button.tag{ cursor:pointer; transition:border-color .12s, background .12s, color
 button.tag:hover{ border-color:var(--ink-3); }
 button.tag.ghost:hover{ color:var(--accent-ink); border-color:var(--accent); background:var(--accent-soft); }
 .tag .x, .tag .plus{ font-family:var(--f-display); font-size:.9em; color:var(--ink-3); line-height:1; }
-button.tag:not(.ghost):hover .x{ color:var(--amber); }
+button.tag:not(.ghost):hover .x{ color:var(--accent-ink); }
 .tag.ghost .plus{ color:var(--accent-ink); }
 .tag.plain{ cursor:default; }
 
@@ -300,7 +344,7 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 .more button{ color:var(--accent-ink); }
 .more button:hover{ text-decoration:underline; }
 .stack{ display:flex; flex-wrap:wrap; gap:.3rem .35rem; margin-bottom:.75rem; }
-.stack .t{ font-family:var(--f-mono); font-size:.72rem; color:var(--ink-2); background:var(--paper-2); border-radius:3px; padding:.22rem .42rem; }
+.stack .t{ font-family:var(--f-mono); font-size:.72rem; color:var(--ink-2); background:var(--paper-3); border-radius:3px; padding:.22rem .42rem; }
 .stats{ display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; margin-bottom:.75rem; }
 .stat{ display:flex; flex-direction:column; }
 .stat b{ font-family:var(--f-mono); font-weight:500; font-size:1.05rem; color:var(--ink); }
@@ -318,7 +362,7 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 .entry:first-child .hide-btn{ top:0; }
 .entry:hover .hide-btn, .hide-btn:focus-visible, .paper:hover .hide-btn, .row:hover .hide-btn{ opacity:1; }
 @media (hover:none){ .hide-btn{ opacity:1; } }
-.hide-btn:hover{ color:var(--amber); border-color:var(--rule-2); background:#fff; }
+.hide-btn:hover{ color:var(--accent-ink); border-color:var(--rule-2); background:var(--paper-2); }
 .has-controls .entry-head, .has-controls .paper-head{ padding-right:3.4rem; }
 
 .hidden-box{ margin-top:var(--s4); border:1px dashed var(--rule-2); border-radius:6px; background:transparent; }
@@ -334,7 +378,7 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 .hidden-list li{ display:flex; align-items:baseline; justify-content:space-between; gap:.8rem; padding:.35rem 0; border-top:1px solid var(--rule); font-family:var(--f-display); font-size:.86rem; color:var(--ink-2); }
 .hidden-list li span{ min-width:0; }
 .hidden-list li small{ display:block; color:var(--ink-3); font-size:.76rem; }
-.add-btn{ flex:none; font-family:var(--f-display); font-size:.78rem; font-weight:500; color:var(--accent-ink); border:1px solid var(--accent-line); border-radius:3px; padding:.25rem .5rem; background:#fff; }
+.add-btn{ flex:none; font-family:var(--f-display); font-size:.78rem; font-weight:500; color:var(--accent-ink); border:1px solid var(--accent-line); border-radius:3px; padding:.25rem .5rem; background:var(--paper-2); }
 .add-btn:hover{ background:var(--accent-soft); }
 .hidden-tags{ padding:0 .8rem .8rem; }
 
@@ -347,7 +391,7 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 .paper-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .7rem; margin-bottom:.25rem; }
 .paper h3{ font-family:var(--f-display); font-weight:600; font-size:1.05rem; margin:0; line-height:1.3; letter-spacing:-.005em; }
 .paper h3 a:hover{ text-decoration:underline; }
-.paper .role{ font-family:var(--f-display); font-size:.74rem; font-weight:500; color:var(--amber); background:var(--amber-soft); border-radius:3px; padding:.15rem .4rem; white-space:nowrap; }
+.paper .role{ font-family:var(--f-display); font-size:.74rem; font-weight:500; color:var(--ink-2); background:var(--paper-3); border-radius:3px; padding:.15rem .4rem; white-space:nowrap; }
 .paper p{ color:var(--ink-2); max-width:70ch; }
 
 /* ---------- recognition ---------- */
@@ -360,7 +404,7 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 .row .k{ color:var(--ink); }
 .row .v{ color:var(--ink-3); font-size:.84rem; text-align:right; }
 .row.award{ grid-template-columns:auto minmax(0,1fr); }
-.row.award .mark{ color:var(--amber); font-weight:500; }
+.row.award .mark{ color:var(--accent-ink); font-weight:500; }
 .row.award .v{ text-align:left; }
 .row .hide-btn{ top:.25rem; right:0; }
 .has-controls .row{ padding-right:3rem; }
@@ -397,12 +441,12 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 /* ============================================================
    COMMAND PALETTE (⌘K)
    ============================================================ */
-.cmdk-scrim{ position:fixed; inset:0; z-index:110; background:rgba(22,25,29,.35); opacity:0; pointer-events:none; transition:opacity .15s; }
+.cmdk-scrim{ position:fixed; inset:0; z-index:110; background:var(--shadow); opacity:0; pointer-events:none; transition:opacity .15s; }
 .cmdk-scrim.open{ opacity:1; pointer-events:auto; }
 .cmdk{
   position:fixed; z-index:111; left:50%; top:14vh; transform:translateX(-50%) scale(.98);
-  width:min(560px, 92vw); background:#fff; border:1px solid var(--rule-2); border-radius:8px;
-  box-shadow:0 24px 60px rgba(22,25,29,.18); overflow:hidden; opacity:0; pointer-events:none; transition:opacity .15s var(--ease), transform .15s var(--ease);
+  width:min(560px, 92vw); background:var(--paper-2); border:1px solid var(--rule-2); border-radius:8px;
+  box-shadow:0 24px 60px var(--shadow); overflow:hidden; opacity:0; pointer-events:none; transition:opacity .15s var(--ease), transform .15s var(--ease);
 }
 .cmdk.open{ opacity:1; pointer-events:auto; transform:translateX(-50%) scale(1); }
 .cmdk-in{ display:flex; align-items:center; gap:.7rem; padding:.8rem 1rem; border-bottom:1px solid var(--rule); }
@@ -420,13 +464,47 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
 /* ---------- toast ---------- */
 .toast{
   position:fixed; left:50%; bottom:1.5rem; transform:translateX(-50%) translateY(8px); z-index:120;
-  background:var(--ink); color:#fff; font-family:var(--f-display); font-size:.86rem; padding:.6rem .9rem; border-radius:6px;
+  background:var(--ink); color:var(--paper); font-family:var(--f-display); font-size:.86rem; padding:.6rem .9rem; border-radius:6px;
   opacity:0; pointer-events:none; transition:opacity .18s var(--ease), transform .18s var(--ease); max-width:min(92vw, 520px); text-align:center;
 }
 .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
 /* ---------- re-render fade ---------- */
 .doc.updating{ opacity:.6; transition:opacity .12s; }
+
+/* ---------- search groups / reveal flash / job description / theme ---------- */
+.combo-search{ position:absolute; left:.6rem; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-3); pointer-events:none; }
+.combo-search svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; }
+.combo-group{ font-family:var(--f-display); font-size:.7rem; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-3); padding:.55rem .6rem .2rem; }
+.combo-group:first-child{ padding-top:.35rem; }
+.combo-opt .kind{ font-size:.7rem; color:var(--ink-3); white-space:nowrap; }
+.combo-opt.free{ border-top:0; margin-top:0; padding-top:.45rem; }
+.combo-hint{ font-family:var(--f-display); font-size:.72rem; color:var(--ink-3); padding:.5rem .6rem .4rem; border-top:1px solid var(--rule); margin-top:.25rem; white-space:normal; line-height:1.5; }
+.combo-hint kbd{ font-family:var(--f-mono); font-size:.66rem; border:1px solid var(--rule-2); border-radius:3px; padding:0 .3rem; }
+@keyframes flash{ 0%{ box-shadow:0 0 0 0 var(--accent-soft); background:var(--accent-soft); } 60%{ box-shadow:0 0 0 8px var(--accent-soft); background:var(--accent-soft); } 100%{ box-shadow:0 0 0 0 transparent; background:transparent; } }
+.flash{ animation:flash 1.8s var(--ease) 1; border-radius:4px; }
+.tag.flash{ outline:2px solid var(--accent); outline-offset:1px; }
+.jd-toggle{ margin-top:.5rem; font-family:var(--f-display); font-size:.8rem; color:var(--accent-ink); }
+.jd-toggle:hover{ text-decoration:underline; }
+.jd-box{ margin-top:.6rem; }
+.jd-box textarea{
+  width:100%; min-height:7.5rem; resize:vertical; font-family:var(--f-display); font-size:.86rem; line-height:1.45; color:var(--ink);
+  background:var(--paper); border:1px solid var(--rule-2); border-radius:var(--radius); padding:.55rem .7rem; outline:none;
+}
+.jd-box textarea:focus{ border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+.jd-box .jd-actions{ display:flex; gap:.5rem; margin-top:.5rem; }
+.jd-box .btn{ padding:.5rem .8rem; font-size:.84rem; }
+.jd-box .hint{ font-family:var(--f-display); font-size:.74rem; color:var(--ink-3); margin-top:.4rem; line-height:1.4; }
+.theme-btn{ display:inline-grid; place-items:center; width:2.1rem; height:2.1rem; border:1px solid var(--rule-2); border-radius:var(--radius); color:var(--ink-2); background:var(--paper); margin-left:.5rem; }
+.theme-btn:hover{ background:var(--paper-2); border-color:var(--ink-3); }
+.theme-btn svg{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.theme-btn .moon{ display:none; }
+:root[data-theme="dark"] .theme-btn .sun{ display:none; }
+:root[data-theme="dark"] .theme-btn .moon{ display:block; }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-btn .sun{ display:none; }
+  :root:not([data-theme="light"]) .theme-btn .moon{ display:block; }
+}
 
 /* ---------- print ---------- */
 @media print{
@@ -446,6 +524,10 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
     <a class="wordmark" href="#top" id="brandName">Aditya Bidappa</a>
     <nav class="topnav" id="topnav" aria-label="Sections"></nav>
     <button class="kbtn" id="menuBtn" aria-label="Open navigation">Menu <kbd>⌘K</kbd></button>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
 </header>
 
@@ -453,14 +535,25 @@ button.tag:not(.ghost):hover .x{ color:var(--amber); }
   <!-- MARGIN COLUMN: tailor panel + contact -->
   <aside class="side" aria-label="Tailor this résumé">
     <div class="panel">
-      <label class="panel-lab" for="roleInput">Tailor for a role</label>
-      <p class="panel-sub">Pick or type a role. Skills, projects, experience and research are filtered to match; add anything back, then download the PDF.</p>
+      <label class="panel-lab" for="roleInput">Search, or curate for a role</label>
+      <p class="panel-sub">Type any job title to curate the résumé for it, or search for a skill, project or paper. Add anything back, then download the PDF.</p>
       <div class="combo">
-        <input id="roleInput" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="roleList" aria-haspopup="listbox" placeholder="e.g. Front End Developer" autocomplete="off" spellcheck="false" />
+        <span class="combo-search" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <input id="roleInput" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="roleList" aria-haspopup="listbox" placeholder="Job title, skill, project or paper…" autocomplete="off" spellcheck="false" />
         <button class="combo-toggle" id="roleToggle" type="button" aria-label="Show all roles" tabindex="-1">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <ul class="combo-list" id="roleList" role="listbox" aria-label="Roles" hidden></ul>
+      </div>
+      <button class="jd-toggle" id="jdToggle" type="button" aria-expanded="false" aria-controls="jdBox">Paste a job description instead</button>
+      <div class="jd-box" id="jdBox" hidden>
+        <label class="sr" for="jdText">Job description</label>
+        <textarea id="jdText" placeholder="Paste the posting here. The first line is used as the role title."></textarea>
+        <div class="jd-actions">
+          <button class="btn btn-primary" id="jdCurate" type="button">Curate from description</button>
+          <button class="btn" id="jdClose" type="button">Close</button>
+        </div>
+        <p class="hint">The description never leaves your browser. Its terms are matched against the résumé's own vocabulary.</p>
       </div>
       <div class="state" id="tailorState" aria-live="polite"></div>
       <div class="notice" id="tailorNotice" hidden></div>
@@ -1021,6 +1114,19 @@ const RESUME = {
     } catch (e) { /* storage unavailable: edits still work for this page view */ }
   }
 
+  /* ---- colour theme (system default; toggle stored per browser) ---- */
+  (function theme(){
+    const root = document.documentElement, btn = $("#themeBtn");
+    let saved = null; try { saved = localStorage.getItem("theme"); } catch (e) {}
+    if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+    const current = () => root.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    btn.addEventListener("click", () => {
+      const next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  })();
+
   /* ---- static bits ---- */
   $("#brandName").textContent = P.name.split(" ").slice(0, 2).join(" ");
   $("#footName").textContent = P.name;
@@ -1083,7 +1189,7 @@ const RESUME = {
     $("#lede").innerHTML = tailoring && sel.role.summary ? esc(sel.role.summary) : P.summary;
     $("#heroMeta").innerHTML = [
       `<span>${esc(P.location)}</span>`,
-      tailoring ? `<span>Tailored view · <b>${esc(sel.role.title)}</b></span>` : `<span>Focus · <b>${esc(P.focus.replace(/-/g, " "))}</b></span>`,
+      tailoring ? `<span>Curated for <b>${esc(sel.role.title)}</b></span>` : `<span>Focus · <b>${esc(P.focus.replace(/-/g, " "))}</b></span>`,
       `<span>Updated ${esc(P.lastUpdated)}</span>`
     ].join("");
     $("#heroLinks").innerHTML = RESUME.contact.map(chip).join("");
@@ -1100,7 +1206,7 @@ const RESUME = {
       if (!shown.length && !ghosts.length) return "";
       const tagHTML = (i) => tailoring
         ? `<button type="button" class="tag${i.included ? "" : " ghost"}" data-name="${esc(i.name)}" data-act="${i.included ? "hide" : "add"}" data-key="${esc(i.key)}" title="${i.included ? "Hide from this résumé" : esc(i.reason ? "Add · " + i.reason : "Add")}">${i.included ? "" : '<span class="plus" aria-hidden="true">+</span>'}<span>${esc(i.name)}</span>${i.included ? '<span class="x" aria-hidden="true">×</span>' : ""}<span class="sr">${i.included ? " (hide)" : " (add)"}</span></button>`
-        : `<span class="tag plain">${esc(i.name)}</span>`;
+        : `<span class="tag plain" data-key="${esc(i.key)}" data-name="${esc(i.name)}">${esc(i.name)}</span>`;
       return `<div class="skillgroup${shown.length ? "" : " all-hidden"}"><h3>${esc(g.group)}<span>${tailoring ? `${shown.length} of ${g.total}` : g.total}</span></h3>
         <div class="tags">${shown.map(tagHTML).join("")}${ghosts.map(tagHTML).join("")}</div></div>`;
     }).join("");
@@ -1195,7 +1301,8 @@ const RESUME = {
     if (!tailoring) {
       st.innerHTML = `Showing the <b>full résumé</b>.`;
     } else {
-      st.innerHTML = `Tailored for <b>${esc(sel.role.title)}</b>${sel.role.synthetic && !sel.fallback ? ` <span title="Built from your query">(custom)</span>` : ""}<button type="button" class="reset" data-act="reset">Reset</button>`;
+      const src = sel.role.jd ? " (from a job description)" : (sel.role.synthetic && !sel.fallback ? " (custom)" : "");
+      st.innerHTML = `Curated for <b>${esc(sel.role.title)}</b>${src}<button type="button" class="reset" data-act="reset">Reset</button>`;
     }
     const notice = $("#tailorNotice");
     if (tailoring && sel.fallback) {
@@ -1203,7 +1310,10 @@ const RESUME = {
       notice.textContent = `No role profile matches “${sel.role.query || sel.role.title}”, so everything is shown with the closest matches first. Hide what you don't need, or try a role from the list.`;
     } else if (tailoring && sel.role.synthetic) {
       notice.hidden = false;
-      notice.textContent = `Custom role built from “${sel.role.query || sel.role.title}” (${sel.role.domains.map(d => T.DOMAINS[d].label).join(", ")}). Check the hidden lists below each section.`;
+      const doms = sel.role.domains.map(d => T.DOMAINS[d] ? T.DOMAINS[d].label : d);
+      notice.textContent = sel.role.jd
+        ? `Curated from the pasted description${doms.length ? " (" + doms.join(", ") + ")" : ""}. Everything it names that the résumé has is kept; check the hidden lists below each section.`
+        : `Custom role built from “${sel.role.query || sel.role.title}”${doms.length ? " (" + doms.join(", ") + ")" : ""}. Check the hidden lists below each section.`;
     } else notice.hidden = true;
 
     const c = sel.counts;
@@ -1224,13 +1334,15 @@ const RESUME = {
     $("#roleInput").value = tailoring ? sel.role.title : "";
   }
 
-  /* ---- apply a role ---- */
+  /* ---- apply a role (a profile id, any job title, or {jd: "pasted description"}) ---- */
   function applyRole(query, opts) {
     opts = opts || {};
     const profile = query ? T.resolveRole(RESUME, query) : null;
     const id = profile ? profile.id : null;
     if (!state.sel || !state.sel.role || state.sel.role.id !== id) state.overrides = id ? loadOverrides(id) : { include: new Set(), exclude: new Set(), fullHighlights: new Set() };
-    state.query = profile ? (profile.synthetic ? (profile.query || query) : profile.id) : null;
+    if (!profile) state.query = null;
+    else if (profile.jd) { state.query = { jd: profile.text }; try { sessionStorage.setItem("tailor-jd", profile.text); } catch (e) {} }
+    else state.query = profile.synthetic ? (profile.query || query) : profile.id;
     recompute(opts);
     if (opts.announce !== false) {
       const s = state.sel;
@@ -1246,7 +1358,8 @@ const RESUME = {
     saveOverrides();
     if (opts.pushUrl !== false) {
       const url = new URL(location.href);
-      if (state.query) url.searchParams.set("role", state.query); else url.searchParams.delete("role");
+      const param = !state.query ? null : (typeof state.query === "object" ? state.sel.role.id : state.query);
+      if (param) url.searchParams.set("role", param); else url.searchParams.delete("role");
       history.replaceState(null, "", url.pathname + (url.search || "") + url.hash);
     }
   }
@@ -1294,21 +1407,69 @@ const RESUME = {
   }
   $("#dlBtn").addEventListener("click", download);
 
-  /* ---- combobox ---- */
+  /* ---- reveal an item found by search: add it back if hidden, scroll to it, flash it ---- */
+  function reveal(hit) {
+    const o = state.overrides;
+    if (state.sel.role) {
+      const isShown = document.querySelector(`[data-key="${CSS.escape(hit.key)}"]:not(.ghost)`);
+      if (!isShown) { o.exclude.delete(hit.key); o.include.add(hit.key); recompute(); }
+    }
+    const el = document.querySelector(`[data-key="${CSS.escape(hit.key)}"]`);
+    if (!el) { toast(`Couldn't find “${hit.name}” on the page`); return; }
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    setTimeout(() => el.classList.remove("flash"), 2000);
+    toast(`${hit.name}${hit.sub ? " · " + hit.sub : ""}`);
+  }
+
+  /* ---- search / curate box: roles + content in one dropdown ---- */
+  const KIND_LABEL = { skills: "Skill", projects: "Project", research: "Paper", experience: "Experience", certifications: "Certification", interests: "Interest" };
+  function buildSearchItems(q) {
+    const items = [];
+    const res = T.searchRoles(RESUME, q);
+    const exact = q && res.length && T.norm(res[0].profile.title) === T.norm(q);
+    if (!q && state.sel && state.sel.role) items.push({ group: "Curate for a role", label: "Full résumé (no curation)", hint: "reset", query: null });
+    const roles = q ? res.slice(0, 5) : res;
+    const roleItem = (r) => ({ group: "Curate for a role", label: r.profile.title, hint: (r.profile.domains || []).map(d => T.DOMAINS[d] ? T.DOMAINS[d].label : d).join(" · "), query: r.profile.id });
+    const freeItem = { group: "Curate for a role", free: true, label: q, hint: "any job title", query: q };
+    // ordering: an item whose name starts with the query wins (you typed a skill or project name);
+    // else a strong preset-role match (title/alias prefix); else what was typed, as a job title
+    const content = [];
+    let best = 0;
+    if (q) {
+      const c = T.searchContent(RESUME, q, 4);
+      for (const sec of ["skills", "projects", "research", "experience", "certifications", "interests"]) {
+        for (const hit of c[sec]) { best = Math.max(best, hit.score); content.push({ group: "On the résumé", label: hit.name, hint: hit.sub, kind: KIND_LABEL[sec], hit }); }
+      }
+    }
+    const strong = q && res.length && res[0].score >= 60;
+    const contentFirst = q && !exact && !strong && best >= 80;
+    if (contentFirst) items.push(...content);
+    if (q && !exact && !strong) items.push(freeItem);
+    roles.forEach(r => items.push(roleItem(r)));
+    if (q && !exact && strong) items.push(freeItem);
+    if (!contentFirst) items.push(...content);
+    return items;
+  }
+
   (function combo(){
     const input = $("#roleInput"), list = $("#roleList"), toggle = $("#roleToggle");
     let items = [], sel = -1, open = false;
     const build = () => {
       const q = input.value.trim();
-      const res = T.searchRoles(RESUME, q);
-      items = res.map(r => ({ label: r.profile.title, hint: (r.profile.domains || []).map(d => T.DOMAINS[d] ? T.DOMAINS[d].label : d).join(" · "), query: r.profile.id }));
-      const exact = q && res.length && T.norm(res[0].profile.title) === T.norm(q);
-      if (q && !exact) items.push({ free: true, label: q, query: q });
-      if (!q && state.sel && state.sel.role) items.unshift({ label: "Full résumé (no tailoring)", hint: "reset", query: null });
+      items = buildSearchItems(q);
       sel = items.length ? 0 : -1;
-      list.innerHTML = items.length ? items.map((it, i) =>
-        `<li class="combo-opt${it.free ? " free" : ""}" role="option" id="role-opt-${i}" aria-selected="${i === sel}" data-i="${i}">${it.free ? `Tailor for <em>“${esc(it.label)}”</em>` : `<span>${esc(it.label)}</span>`}${it.hint ? `<small>${esc(it.hint)}</small>` : ""}</li>`
-      ).join("") : `<li class="combo-empty">No roles match.</li>`;
+      let html = "", lastGroup = "";
+      items.forEach((it, i) => {
+        if (it.group !== lastGroup) { html += `<li class="combo-group" role="presentation">${esc(it.group)}</li>`; lastGroup = it.group; }
+        html += `<li class="combo-opt${it.free ? " free" : ""}" role="option" id="role-opt-${i}" aria-selected="${i === sel}" data-i="${i}">` +
+          (it.free ? `Curate for <em>“${esc(it.label)}”</em>` : `<span>${esc(it.label)}</span>`) +
+          (it.kind ? `<small><span class="kind">${esc(it.kind)}</span>${it.hint ? " · " + esc(it.hint) : ""}</small>` : (it.hint ? `<small>${esc(it.hint)}</small>` : "")) +
+          `</li>`;
+      });
+      if (!items.length) html = `<li class="combo-empty">Nothing matches. Try a job title or a skill name.</li>`;
+      html += `<li class="combo-hint" role="presentation"><kbd>↑</kbd> <kbd>↓</kbd> move · <kbd>↵</kbd> choose. Roles curate the résumé; items scroll into view.</li>`;
+      list.innerHTML = html;
       input.setAttribute("aria-activedescendant", sel >= 0 ? "role-opt-" + sel : "");
     };
     const show = () => { open = true; build(); list.hidden = false; input.setAttribute("aria-expanded", "true"); };
@@ -1316,13 +1477,14 @@ const RESUME = {
     const choose = (i) => {
       const it = items[i]; if (!it) return;
       hide();
-      applyRole(it.query);
+      if (it.hit) { reveal(it.hit); input.value = state.sel && state.sel.role ? state.sel.role.title : ""; }
+      else applyRole(it.query);
       input.blur();
     };
     const move = (d) => {
       if (!items.length) return;
       sel = (sel + d + items.length) % items.length;
-      list.querySelectorAll(".combo-opt").forEach((el, i) => el.setAttribute("aria-selected", String(i === sel)));
+      list.querySelectorAll(".combo-opt").forEach((el) => el.setAttribute("aria-selected", String(+el.dataset.i === sel)));
       input.setAttribute("aria-activedescendant", "role-opt-" + sel);
       const el = list.querySelector(`[data-i="${sel}"]`); if (el && el.scrollIntoView) el.scrollIntoView({ block: "nearest" });
     };
@@ -1348,6 +1510,22 @@ const RESUME = {
     toggle.addEventListener("click", () => { if (open) hide(); else { input.value = ""; input.focus(); } });
   })();
 
+  /* ---- job description box ---- */
+  (function jd(){
+    const tgl = $("#jdToggle"), box = $("#jdBox"), ta = $("#jdText"), go = $("#jdCurate"), close = $("#jdClose");
+    try { const saved = sessionStorage.getItem("tailor-jd"); if (saved) ta.value = saved; } catch (e) {}
+    const setOpen = (v) => { box.hidden = !v; tgl.setAttribute("aria-expanded", String(v)); if (v) ta.focus(); };
+    tgl.addEventListener("click", () => setOpen(box.hidden));
+    close.addEventListener("click", () => setOpen(false));
+    go.addEventListener("click", () => {
+      const text = ta.value.trim();
+      if (text.split(/\s+/).length < 5) { toast("Paste a fuller description (at least a few lines)."); ta.focus(); return; }
+      applyRole({ jd: text });
+      setOpen(false);
+    });
+    ta.addEventListener("keydown", (e) => { if ((e.metaKey || e.ctrlKey) && e.key === "Enter") go.click(); });
+  })();
+
   /* ---- scroll-spy for the masthead nav ---- */
   const navLinks = Array.from(document.querySelectorAll("#topnav a"));
   const spy = new IntersectionObserver((entries) => {
@@ -1359,7 +1537,7 @@ const RESUME = {
   (function cmdk(){
     const scrim = $("#scrim"), panel = $("#cmdk"), input = $("#cmdkInput"), list = $("#cmdkList"), btn = $("#menuBtn");
     const secItems = SECTIONS.map(([id, label]) => ({ type: "Navigate", label, hint: "section", icon: "arrow", act: () => document.getElementById(id).scrollIntoView({ behavior: reduce ? "auto" : "smooth" }) }));
-    const roleItems = (RESUME.roleProfiles || []).map(p => ({ type: "Tailor for a role", label: p.title, hint: (p.aliases || []).slice(0, 3).join(", "), icon: "tailor", act: () => applyRole(p.id) }));
+    const roleItems = (RESUME.roleProfiles || []).map(p => ({ type: "Curate for a role", label: p.title, hint: (p.aliases || []).slice(0, 3).join(", "), icon: "tailor", act: () => applyRole(p.id) }));
     const actionItems = [
       { type: "Actions", label: "Download PDF", hint: "current view", icon: "download", act: download },
       { type: "Actions", label: "Full résumé (reset tailoring)", hint: "", icon: "tailor", act: () => applyRole(null) }
@@ -1377,7 +1555,18 @@ const RESUME = {
     };
     const open = () => { scrim.classList.add("open"); panel.classList.add("open"); input.value = ""; filtered = all.slice(); sel = 0; render(); setTimeout(() => input.focus(), 30); };
     const close = () => { scrim.classList.remove("open"); panel.classList.remove("open"); };
-    const filter = () => { const q = input.value.toLowerCase().trim(); filtered = !q ? all.slice() : all.filter(it => (it.label + " " + it.hint + " " + it.type).toLowerCase().includes(q)); sel = 0; render(); };
+    const filter = () => {
+      const q = input.value.toLowerCase().trim();
+      filtered = !q ? all.slice() : all.filter(it => (it.label + " " + it.hint + " " + it.type).toLowerCase().includes(q));
+      if (q) {
+        const c = T.searchContent(RESUME, q, 3);
+        for (const sec of ["skills", "projects", "research", "experience", "certifications"]) for (const hit of c[sec]) {
+          filtered.push({ type: "On the résumé", label: hit.name, hint: KIND_LABEL[sec] + (hit.sub ? " · " + hit.sub : ""), icon: "arrow", act: () => reveal(hit) });
+        }
+        if (!filtered.some(it => it.type === "Curate for a role" && it.label.toLowerCase() === q)) filtered.push({ type: "Curate for any role", label: `Curate for “${input.value.trim()}”`, hint: "job title", icon: "tailor", act: () => applyRole(input.value.trim()) });
+      }
+      sel = 0; render();
+    };
     btn.addEventListener("click", open);
     scrim.addEventListener("click", close);
     input.addEventListener("input", filter);
@@ -1394,9 +1583,18 @@ const RESUME = {
   })();
 
   /* ---- boot: role from the URL (?role=front-end-developer or free text) ---- */
-  const initial = new URLSearchParams(location.search).get("role");
-  applyRole(initial || null, { pushUrl: false, announce: false });
-  window.addEventListener("popstate", () => applyRole(new URLSearchParams(location.search).get("role") || null, { pushUrl: false, announce: false }));
+  function queryFromUrl() {
+    const r = new URLSearchParams(location.search).get("role");
+    if (!r) return null;
+    if (r.startsWith("jd:")) {                       // a pasted job description lives in sessionStorage, the URL only carries its hash
+      let text = null; try { text = sessionStorage.getItem("tailor-jd"); } catch (e) {}
+      if (text && T.resolveRole(RESUME, { jd: text }).id === r) return { jd: text };
+      return null;
+    }
+    return r;
+  }
+  applyRole(queryFromUrl(), { pushUrl: false, announce: false });
+  window.addEventListener("popstate", () => applyRole(queryFromUrl(), { pushUrl: false, announce: false }));
 
   /* exposed for tests / console */
   window.__resume = { state, applyRole, recompute, RESUME };

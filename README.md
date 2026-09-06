@@ -5,9 +5,10 @@
 
 A hand-built résumé site with no framework and no build step. All content lives in one place, the `const RESUME = {...}` object in `index.html`, and everything else derives from it:
 
-- the **site** itself (a typeset, document-style page),
+- the **site** itself (a typeset, document-style page; light and dark),
 - the **full PDF**, built by CI with Typst from the same data,
-- **role-tailored résumés**: pick a role on the site (or type one), the page filters itself to what matters for that role, you add back or hide anything, and a PDF for that role is generated in the browser and downloaded.
+- **curated résumés**: type any job title into the search bar, pick a preset role, or paste a job description; the page filters itself to what matters for that role, you add back or hide anything, and a PDF for that role is generated in the browser and downloaded,
+- **search**: the same bar finds any skill, project, paper, experience or certification and scrolls to it (adding it back if the current curation hid it).
 
 ---
 
@@ -28,11 +29,12 @@ The site and the PDFs are different documents from the same source. Nothing is a
 
 ### How tailoring works (`tailor.js`)
 
-1. **Resolve the role.** The query from the dropdown or search box is matched against `RESUME.roleProfiles` (title, id, aliases, then word-level matching). If nothing matches, a synthetic profile is built from the domain lexicon (`DOMAINS` in `tailor.js`: front-end, back-end, security, pentest, ML, data, mobile, research, automation, LLM). A query that matches no domain at all falls back to the full résumé with the closest matches first, and says so.
+1. **Resolve the role.** The query is matched against `RESUME.roleProfiles` (title, id, aliases, then word-level matching). Anything else becomes a synthetic profile built from the domain lexicon (`DOMAINS` in `tailor.js`: software, front-end, back-end, security, pentest, ML, data, mobile, research, automation, LLM, cloud, QA, networking, forensics, systems, product, writing) plus `WORD_KEYWORDS` for title words that are not domains on their own ("threat", "quant", "healthcare", …). Fourteen or more words, or the "paste a job description" box, switch to description mode: domains are ranked by how often their terms occur (the title line counts extra), the description's words that exist in the résumé's own vocabulary become keywords, and skills named verbatim are pulled in. A query that matches nothing at all falls back to the full résumé with the closest matches first, and says so.
 2. **Score everything.** Each item's text (name, tagline, stack, bullets, notes) is scored against the profile's weighted keyword set: role-specific keywords weigh 3, primary-domain keywords 2, secondary-domain keywords 1. Only distinct hits count, so one repeated word cannot dominate.
 3. **Select.** Projects and papers are kept when they score above an absolute floor and at least 35% of the best item in their section; pinned projects are always kept and a minimum of two projects is guaranteed. Skills are kept when they belong to the role's domains, appear in the stack of a selected project, or match a role keyword. Experience, certifications, awards and leadership are never dropped, only re-ordered; a profile can cap experience bullets (`maxHighlights`) to the most relevant ones.
 4. **Overrides.** Every item can be added back or hidden on the page. Edits are stored per role in `sessionStorage` and applied on top of the automatic selection, and the PDF reflects exactly what the page shows.
 5. **Document.** `buildDocument()` produces a RESUME-shaped object holding only the selection; `resume-pdf.js` lays it out.
+6. **Search.** `searchContent()` ranks skills, projects, papers, experience and certifications by name, prefix and body-text match; the page scrolls to the hit and flashes it. Both the sidebar bar and the ⌘K palette use it.
 
 ### The in-browser PDF (`resume-pdf.js`)
 

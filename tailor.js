@@ -34,7 +34,7 @@
   const DOMAINS = {
     software: {
       label: "Software engineering",
-      terms: ["software", "developer", "engineer", "programmer", "sde", "swe", "coding", "development"],
+      terms: ["software", "developer", "engineer", "programmer", "sde", "swe", "coding", "development", "computer science", "technologist", "technical"],
       keywords: ["api", "backend", "frontend", "full-stack", "cli", "deploy", "postgresql", "typescript",
                  "python", "fastapi", "express", "react", "schema", "github", "render", "service",
                  "web app", "rest", "endpoint", "pipeline", "automation", "open-source", "correctness"],
@@ -62,7 +62,7 @@
     security: {
       label: "Security",
       terms: ["security", "cybersecurity", "cyber", "infosec", "soc", "analyst", "zero trust", "appsec",
-              "application security", "grc", "blue team", "defensive"],
+              "application security", "grc", "blue team", "defensive", "iam", "vulnerability", "threat", "risk", "compliance"],
       keywords: ["security", "cybersecurity", "zero-trust", "zero trust", "nist", "cisa", "threat", "vulnerab",
                  "pentest", "attack", "injection", "cve", "tls", "dns", "owasp", "idor", "auth", "intrusion",
                  "malware", "ddos", "dos", "deepfake", "risk", "maturity", "breach", "exposed", "audit",
@@ -96,7 +96,7 @@
     },
     data: {
       label: "Data & databases",
-      terms: ["data", "database", "dba", "sql developer", "analytics", "data engineer", "data analyst", "etl"],
+      terms: ["data", "database", "dba", "sql developer", "analytics", "data engineer", "data analyst", "etl", "business intelligence", "bi"],
       keywords: ["postgresql", "sql", "schema", "bcnf", "normalis", "database", "jsonb", "openpyxl",
                  "pipeline", "data", "excel", "rows", "column", "relational", "logging", "spreadsheet", "dbms"],
       skills: ["Python", "SQL", "Bash", "openpyxl", "Google Apps Script", "Git", "GitHub"],
@@ -113,7 +113,7 @@
     research: {
       label: "Research",
       terms: ["research", "researcher", "phd", "academic", "publication", "scientist", "research intern",
-              "research assistant", "graduate"],
+              "research assistant", "graduate", "fellowship", "fellow", "masters", "thesis", "lab"],
       keywords: ["research", "paper", "manuscript", "survey", "framework", "published", "latex",
                  "validated", "case stud", "co-author", "author", "standards", "study", "review",
                  "simulation", "baseline", "methodolog", "literature"],
@@ -138,7 +138,99 @@
       skills: ["Python", "TypeScript", "FastAPI", "React", "Git", "GitHub"],
       groups: ["AI — LLM Assistants", "AI — Voice / Audio", "AI — Agentic / Automation",
                "AI — Security Research", "AI — Agent Frameworks"]
+    },
+    cloud: {
+      label: "Cloud & infrastructure",
+      terms: ["cloud", "aws", "azure", "gcp", "infrastructure", "cloud engineer", "cloud security", "solutions architect", "systems administrator", "sysadmin"],
+      keywords: ["deploy", "render", "cloudflare", "tls", "dns", "neon", "hosting", "domain", "infrastructure",
+                 "server", "eas build", "auto-deploy", "let's encrypt", "github actions", "network"],
+      skills: ["Bash", "Git", "GitHub", "GitHub Actions", "nmap", "Wireshark"],
+      groups: []
+    },
+    qa: {
+      label: "Testing & QA",
+      terms: ["qa", "quality", "tester", "test engineer", "sdet", "quality assurance", "test automation", "validation"],
+      keywords: ["test", "validated", "test cases", "hoppscotch", "functional", "findings", "correctness",
+                 "validating", "regression", "assessment", "audit", "review"],
+      skills: ["Python", "Bash", "Hoppscotch", "Burp Suite CE", "OWASP ZAP", "Git", "GitHub", "GitHub Actions"],
+      groups: []
+    },
+    network: {
+      label: "Networking",
+      terms: ["network", "networking", "network engineer", "network security", "noc", "wireless", "wi-fi", "wifi"],
+      keywords: ["network", "dns", "wi-fi", "hotspot", "gateway", "ssid", "tls", "http", "ports", "wireshark",
+                 "nmap", "cloudflare", "cors", "ddos", "computer networks", "packet", "protocol"],
+      skills: ["Wireshark", "nmap", "Kali Linux", "nuclei", "subfinder", "gobuster", "Bash", "Python"],
+      groups: []
+    },
+    forensics: {
+      label: "Forensics & incident response",
+      terms: ["forensic", "forensics", "incident response", "dfir", "incident responder", "incident", "investigate", "investigator", "threat hunter", "threat intelligence", "malware analyst", "osint"],
+      keywords: ["autopsy", "spiderfoot", "wireshark", "recon", "whois", "findings", "malware", "attack", "threat",
+                 "intrusion", "detection", "logging", "deepfake", "analysis", "evidence", "investigat"],
+      skills: ["Autopsy", "SpiderFoot", "Wireshark", "nmap", "Kali Linux", "Python", "Bash"],
+      groups: ["Pentesting Toolkit"]
+    },
+    systems: {
+      label: "Systems & low-level",
+      terms: ["systems", "embedded", "firmware", "low-level", "kernel", "c developer", "systems programmer", "iot", "hardware"],
+      keywords: ["c ", "cli", "python", "bash", "linux", "kernel", "device", "iot", "iomt", "protocol", "network", "memory"],
+      skills: ["C", "Python", "Bash", "Kali Linux", "Git", "GitHub"],
+      groups: []
+    },
+    product: {
+      label: "Product & delivery",
+      terms: ["product", "product manager", "project manager", "program manager", "founder", "startup", "technical lead", "team lead", "consultant", "business analyst"],
+      keywords: ["deployed", "live", "users", "delegates", "custom domain", "shipped", "owned", "president",
+                 "led", "organis", "coordinat", "reports", "documentation", "platform", "client"],
+      skills: ["Git", "GitHub", "Google Apps Script", "Claude", "ChatGPT", "Perplexity", "Typst"],
+      groups: ["AI — LLM Assistants"]
+    },
+    writing: {
+      label: "Writing & communication",
+      terms: ["writer", "technical writer", "documentation", "communication", "editor", "content", "policy", "debate", "speaker", "advocacy", "law", "legal", "diplomacy"],
+      keywords: ["documentation", "manuscript", "wrote", "paper", "report", "latex", "argument", "debate",
+                 "mun", "delegate", "commendation", "president", "policy", "ethical", "legal", "writing"],
+      skills: ["LaTeX", "Typst", "Claude", "ChatGPT", "Perplexity", "Gemini"],
+      groups: []
     }
+  };
+
+  /* words that appear in job titles but are not domain terms — mapped to
+     keywords so that e.g. "Threat Analyst" or "Quant Developer" still find
+     something concrete to score against                                    */
+  const WORD_KEYWORDS = {
+    threat: ["threat", "attack", "malware", "intrusion", "detection", "risk"],
+    risk: ["risk", "maturity", "assessment", "audit", "findings", "breach"],
+    compliance: ["nist", "cisa", "standards", "maturity", "audit", "framework", "policy"],
+    governance: ["nist", "cisa", "standards", "maturity", "framework", "policy"],
+    privacy: ["privacy", "federated", "data", "auth", "identity"],
+    identity: ["auth", "jwt", "otp", "identity", "zero trust", "escalation"],
+    quant: ["python", "model", "metrics", "accuracy", "dataset", "sql"],
+    finance: ["python", "sql", "data", "excel", "openpyxl", "reports"],
+    fintech: ["api", "auth", "jwt", "postgresql", "otp", "security"],
+    health: ["iomt", "healthcare", "medical", "privacy"],
+    healthcare: ["iomt", "healthcare", "medical", "privacy"],
+    medical: ["iomt", "healthcare", "medical"],
+    game: ["typescript", "react", "python", "ui"],
+    graphics: ["ui", "react", "frontend", "css"],
+    robotics: ["python", "c", "device", "sensor", "model"],
+    blockchain: ["python", "typescript", "security", "auth", "api"],
+    web3: ["typescript", "security", "auth", "api"],
+    education: ["mun", "delegate", "society", "president", "teaching"],
+    teaching: ["mun", "delegate", "society", "president", "documentation"],
+    leadership: ["president", "director", "secretary", "society", "led", "organis"],
+    open: ["open-source", "github"],
+    source: ["open-source", "github"],
+    analytics: ["data", "sql", "metrics", "dataset", "excel", "reports"],
+    support: ["documentation", "users", "test", "findings", "reports"],
+    typescript: ["typescript", "react", "express", "zod"],
+    python: ["python", "fastapi", "scikit", "xgboost", "openpyxl", "cli"],
+    javascript: ["typescript", "react", "express", "javascript"],
+    react: ["react", "react native", "expo", "typescript"],
+    sql: ["sql", "postgresql", "mysql", "schema", "bcnf"],
+    linux: ["linux", "kali", "bash", "cli"],
+    api: ["api", "rest", "endpoint", "openapi", "fastapi", "express"]
   };
 
   /* ── helpers ───────────────────────────────────────────────────────── */
@@ -239,6 +331,7 @@
    */
   function resolveRole(resume, query) {
     const profiles = (resume && resume.roleProfiles) || [];
+    if (query && typeof query === "object" && query.jd) return profileFromText(resume, query.jd);   // pasted job description
     if (query && typeof query === "object" && query.id) {           // already a profile
       return profiles.find(p => p.id === query.id) || query;
     }
@@ -252,6 +345,7 @@
     if (exact) return exact;
 
     const qw = words(q).filter(w => !STOP.has(w));
+    if (qw.length >= JD_MIN_WORDS) return profileFromText(resume, query);   // a pasted job description, however it starts
     if (qw.length) {
       const scored = profiles.map(p => {
         const names = profileNames(p);
@@ -272,13 +366,74 @@
 
     const domains = domainsForQuery(q);
     const title = titleCase(q);
-    if (domains.length) {
+    const extra = wordKeywords(qw);
+    const keywords = Array.from(new Set([...qw, ...extra]));
+    if (domains.length || extra.length) {
       return { id: "custom:" + q.replace(/ /g, "-"), title, synthetic: true,
-               domains: domains.slice(0, 2), secondary: domains.slice(2), keywords: qw, query: q };
+               domains: domains.slice(0, 2), secondary: domains.slice(2), keywords, query: q };
     }
     return { id: "custom:" + q.replace(/ /g, "-"), title, synthetic: true, adhoc: true,
              domains: [], secondary: [], keywords: qw, query: q };
   }
+
+  /** keywords implied by individual title words (see WORD_KEYWORDS) */
+  function wordKeywords(ws) {
+    const out = [];
+    for (const w of ws) for (const k of WORD_KEYWORDS[w] || []) if (!out.includes(k)) out.push(k);
+    return out;
+  }
+
+  const JD_MIN_WORDS = 14;
+
+  /** every term the résumé itself can be matched on: skill names, their words, domain keywords */
+  function vocabulary(resume) {
+    const v = new Set();
+    for (const g of (resume && resume.skills) || []) for (const it of g.items) { v.add(it.toLowerCase()); for (const w of words(it)) if (w.length > 2) v.add(w); }
+    for (const d of Object.values(DOMAINS)) for (const k of d.keywords) v.add(k.toLowerCase());
+    for (const arr of Object.values(WORD_KEYWORDS)) for (const k of arr) v.add(k);
+    return v;
+  }
+
+  /**
+   * Build a profile from free text such as a pasted job description:
+   * domains by how often their terms occur, keywords = the text's words that
+   * the résumé can actually match, skills named verbatim are pulled in.
+   */
+  function profileFromText(resume, text) {
+    const raw = String(text || "");
+    const lower = " " + norm(raw).replace(/[-/]/g, " ") + " ";
+    const counts = {};
+    const headLine = raw.split(/\r?\n/).map(l => l.trim()).find(Boolean) || "";
+    const headDomains = domainsForQuery(headLine);                 // the title line names the job: weigh it heavily
+    for (const [id, d] of Object.entries(DOMAINS)) {
+      let n = headDomains.includes(id) ? 4 : 0;
+      for (const t of d.terms) {
+        const term = " " + norm(t).replace(/[-/]/g, " ") + " ";
+        let i = lower.indexOf(term); while (i >= 0) { n++; i = lower.indexOf(term, i + 1); }
+      }
+      if (n) counts[id] = n;
+    }
+    const ranked = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([id]) => id);
+    const vocab = vocabulary(resume);
+    const ws = words(raw).filter(w => w.length > 2 && !STOP.has(w));
+    const keywords = [];
+    for (const w of ws) if (vocab.has(w) && !keywords.includes(w)) keywords.push(w);
+    // multi-word skills / keywords named verbatim
+    const include = [];
+    for (const g of (resume && resume.skills) || []) for (const it of g.items) {
+      if (hasKeyword(lower, it.toLowerCase())) { include.push(it); if (!keywords.includes(it.toLowerCase())) keywords.push(it.toLowerCase()); }
+    }
+    for (const d of Object.values(DOMAINS)) for (const k of d.keywords) if (k.includes(" ") && hasKeyword(lower, k) && !keywords.includes(k)) keywords.push(k);
+    for (const k of wordKeywords(ws)) if (!keywords.includes(k)) keywords.push(k);
+    const firstLine = raw.split(/\r?\n/).map(l => l.trim()).find(Boolean) || "";
+    const title = words(firstLine).length <= 8 && firstLine.length <= 60 ? firstLine.replace(/[:.]+$/, "") : "Job description";
+    return {
+      id: "jd:" + hashText(raw), title, synthetic: true, jd: true, adhoc: ranked.length === 0 && keywords.length === 0,
+      domains: ranked.slice(0, 2), secondary: ranked.slice(2, 4), keywords,
+      skills: { include }, query: raw.length > 80 ? raw.slice(0, 77) + "…" : raw, text: raw
+    };
+  }
+  function hashText(t) { let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
 
   /** Ranked suggestions for a combobox. Always returns profiles; never throws. */
   function searchRoles(resume, query) {
@@ -504,7 +659,7 @@
     for (const k of ov.exclude) if (allKeys.has(k)) edits.removed++;
 
     const role = full ? null : {
-      id: profile.id, title: profile.title, synthetic: !!profile.synthetic, adhoc: !!profile.adhoc,
+      id: profile.id, title: profile.title, synthetic: !!profile.synthetic, adhoc: !!profile.adhoc, jd: !!profile.jd,
       headline: profile.headline || profile.title,
       summary: profile.summary || null,
       domains: profile.domains || [], secondary: profile.secondary || [],
@@ -558,6 +713,52 @@
     return `${base}_Resume${role}.pdf`;
   }
 
-  return { DOMAINS, resolveRole, searchRoles, domainsForQuery, tailor, buildDocument, pdfFilename,
+  /* ── content search (skills, projects, papers, experience, certifications) ── */
+  function matchScore(q, qwords, name, body) {
+    const n = norm(name), b = norm(body);
+    if (!q) return 0;
+    if (n === q) return 100;
+    if (n.startsWith(q)) return 80;
+    if (n.includes(q)) return 60;
+    const nw = words(n);
+    if (qwords.length && qwords.every(w => nw.some(x => x.startsWith(w)))) return 50;
+    if (b.includes(q)) return 30;
+    const bw = words(b);
+    if (qwords.length && qwords.every(w => bw.some(x => x.startsWith(w)))) return 20;
+    return 0;
+  }
+
+  /**
+   * searchContent(resume, query, limit) → { skills, projects, research, experience, certifications, interests }
+   * Each hit: { key, name, sub, section, index, score }. Keys match tailor() keys, so the UI can reveal
+   * or add-back the matching item.
+   */
+  function searchContent(resume, query, limit) {
+    limit = limit || 5;
+    const q = norm(query);
+    const qw = words(q).filter(Boolean);
+    const out = { skills: [], projects: [], research: [], experience: [], certifications: [], interests: [], total: 0 };
+    if (!q) return out;
+    for (const g of resume.skills || []) for (const it of g.items) {
+      const sc = matchScore(q, qw, it, g.group);
+      if (sc) out.skills.push({ key: skillKey(g.group, it), name: it, sub: g.group, section: "skills", score: sc });
+    }
+    const list = (sec, items, nameOf, subOf, bodyOf) => {
+      (items || []).forEach((it, index) => {
+        const sc = matchScore(q, qw, nameOf(it), bodyOf(it));
+        if (sc) out[sec].push({ key: key(sec, index), name: nameOf(it), sub: subOf(it), section: sec, index, score: sc });
+      });
+    };
+    list("projects", resume.projects, p => p.name, p => p.tagline, p => [p.tagline, ...(p.stack || []), ...(p.highlights || [])].join(" "));
+    list("research", resume.research, r => r.title, r => r.role, r => r.note || "");
+    list("experience", resume.experience, e => e.role, e => e.org, e => [e.org, ...(e.highlights || [])].join(" "));
+    list("certifications", resume.certifications, c => c.name, c => c.issuer, c => c.issuer || "");
+    list("interests", resume.interests, i => i, () => "", () => "");
+    for (const k of Object.keys(out)) if (Array.isArray(out[k])) out[k] = out[k].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name)).slice(0, limit);
+    out.total = Object.keys(out).reduce((n, k) => n + (Array.isArray(out[k]) ? out[k].length : 0), 0);
+    return out;
+  }
+
+  return { DOMAINS, WORD_KEYWORDS, resolveRole, searchRoles, searchContent, profileFromText, domainsForQuery, tailor, buildDocument, pdfFilename,
            key, skillKey, hasKeyword, norm, words, itemText, scoreText, weightedKeywords };
 });

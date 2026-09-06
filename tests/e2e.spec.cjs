@@ -100,7 +100,7 @@ test.describe("tailoring", () => {
     await page.goto("index.html");
     const input = page.locator("#roleInput");
     await input.fill("pentest");
-    await expect(page.locator("#roleList .combo-opt").first()).toContainText("Penetration Tester");
+    await expect(page.locator("#roleList .combo-opt").first()).toContainText("Penetration Tester");   // strong alias match ranks above the free-text row
     await input.press("Enter");
     await expect(page.locator("#headline")).toHaveText("Penetration Tester");
     await expect(page.locator('#skillset .tag:not(.ghost)[data-name="Burp Suite CE"]')).toHaveCount(1);
@@ -264,5 +264,139 @@ test.describe("command palette & navigation", () => {
     if (isMobile(info)) await expect(page.locator("#topnav")).toBeHidden();
     else await expect(page.locator("#topnav a")).toHaveCount(8);
     await expect(page.locator("#menuBtn")).toBeVisible();
+  });
+});
+
+test.describe("universal search bar", () => {
+  test("empty query lists every role under a group header", async ({ page }) => {
+    await page.goto("index.html");
+    await page.locator("#roleInput").click();
+    await expect(page.locator("#roleList .combo-group")).toHaveCount(1);
+    await expect(page.locator("#roleList .combo-opt")).toHaveCount(RESUME.roleProfiles.length);
+  });
+
+  test("finds a skill, a project and a paper and scrolls to them", async ({ page }) => {
+    await page.goto("index.html");
+    const input = page.locator("#roleInput");
+    await input.fill("burp");
+    await expect(page.locator("#roleList .combo-group", { hasText: "On the résumé" })).toBeVisible();
+    const hit = page.locator("#roleList .combo-opt:not(.free)", { hasText: "Burp Suite CE" });
+    await expect(hit).toContainText("Skill");
+    await hit.click();
+    await expect(page.locator('#skillset .tag[data-name="Burp Suite CE"]')).toHaveClass(/flash/);
+    await expect(page.locator("#toast")).toContainText("Burp Suite CE");
+    await expect.poll(() => page.locator('#skillset .tag[data-name="Burp Suite CE"]').evaluate(el => el.getBoundingClientRect().top), { timeout: 5000 })
+      .toBeLessThan(900);
+
+    await input.fill("promptguard");
+    await expect(page.locator("#roleList .combo-opt").first()).toContainText("PromptGuard");   // a name match outranks the free-text row
+    await page.locator("#roleList .combo-opt:not(.free)", { hasText: "PromptGuard" }).click();
+    await expect(page.locator('#projects .entry[data-key="projects:0"]')).toHaveClass(/flash/);
+
+    await input.fill("deepfake");
+    const paper = page.locator("#roleList .combo-opt:not(.free)", { hasText: "Deepfake Media Analysis" });
+    await expect(paper).toContainText("Paper");
+    await paper.click();
+    await expect(page.locator('#papers .paper[data-key="research:2"]')).toHaveClass(/flash/);
+  });
+
+  test("searching for a hidden skill while curated adds it back (Eg2 via search)", async ({ page }) => {
+    await page.goto("index.html?role=front-end-developer");
+    await expect(page.locator('#skillset .tag.ghost[data-name="Kali Linux"]')).toHaveCount(1);
+    await page.locator("#roleInput").fill("kali");
+    await page.locator("#roleList .combo-opt:not(.free)", { hasText: "Kali Linux" }).click();
+    await expect(page.locator('#skillset .tag:not(.ghost)[data-name="Kali Linux"]')).toHaveCount(1);
+    await expect(page.locator("#edits")).toContainText("1 added");
+    await expect(page.locator("#headline")).toHaveText("Front End Developer");
+  });
+
+  test("curates for any job title, not only the preset roles", async ({ page }) => {
+    await page.goto("index.html");
+    const input = page.locator("#roleInput");
+    await input.fill("Cloud Security Engineer");
+    await expect(page.locator("#roleList .combo-opt.free")).toContainText("Cloud Security Engineer");
+    await input.press("Enter");
+    await expect(page.locator("#headline")).toHaveText("Cloud Security Engineer");
+    await expect(page.locator("#tailorNotice")).toContainText("Custom role");
+    await expect(page.locator("#tailorNotice")).not.toContainText("No role profile");
+    const shown = await page.locator("#skillset .tag:not(.ghost)").count();
+    expect(shown).toBeGreaterThan(4);
+    expect(shown).toBeLessThan(ALL_SKILLS);
+    await expect(page).toHaveURL(/role=Cloud\+Security\+Engineer/i);
+    await expect(page.locator("#dlLabel")).toContainText("Cloud Security Engineer");
+
+    await input.fill("Technical Writer");
+    await input.press("Enter");
+    await expect(page.locator("#headline")).toHaveText("Technical Writer");
+    await expect(page.locator('#skillset .tag:not(.ghost)[data-name="LaTeX"]')).toHaveCount(1);
+  });
+
+  test("curates from a pasted job description and keeps it across a reload", async ({ page }) => {
+    await page.goto("index.html");
+    await page.click("#jdToggle");
+    await expect(page.locator("#jdBox")).toBeVisible();
+    await page.fill("#jdText", "Security Analyst (SOC)\nMonitor alerts, investigate incidents, tune detections, work with Wireshark and nmap, write incident reports, understand OWASP and NIST frameworks, and support vulnerability management and threat intelligence.");
+    await page.click("#jdCurate");
+    await expect(page.locator("#headline")).toHaveText("Security Analyst (SOC)");
+    await expect(page.locator("#tailorState")).toContainText("from a job description");
+    await expect(page.locator('#skillset .tag:not(.ghost)[data-name="Wireshark"]')).toHaveCount(1);
+    await expect(page.locator('#skillset .tag:not(.ghost)[data-name="nmap"]')).toHaveCount(1);
+    await expect(page.locator('#skillset .tag.ghost[data-name="Expo"]')).toHaveCount(1);
+    await expect(page.locator("#jdBox")).toBeHidden();
+    await expect(page).toHaveURL(/role=jd%3A|role=jd:/);
+    await page.reload();
+    await expect(page.locator("#headline")).toHaveText("Security Analyst (SOC)");
+    await expect(page.locator("#jdText")).toHaveValue(/Security Analyst/);
+    const [download] = await Promise.all([page.waitForEvent("download"), page.click("#dlBtn")]);
+    expect(download.suggestedFilename()).toBe("Aditya_Bidappa_M_V_Resume_Security_Analyst_SOC.pdf");
+    const r = await pdfText(fs.readFileSync(await download.path()));
+    expect(r.text).toContain("Security Analyst (SOC)");
+    expect(r.text).toContain("Wireshark");
+  });
+
+  test("too-short description is rejected with a message", async ({ page }) => {
+    await page.goto("index.html");
+    await page.click("#jdToggle");
+    await page.fill("#jdText", "SOC analyst");
+    await page.click("#jdCurate");
+    await expect(page.locator("#toast")).toContainText("fuller description");
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+  });
+
+  test("⌘K also finds résumé items and curates for free text", async ({ page }) => {
+    await page.goto("index.html");
+    await page.click("#menuBtn");
+    await page.fill("#cmdkInput", "nutrilog");
+    await expect(page.locator("#cmdkList .cmdk-item", { hasText: "NutriLog" }).first()).toContainText("Project");
+    await page.keyboard.press("Enter");
+    await expect(page.locator('#projects .entry[data-key="projects:4"]')).toHaveClass(/flash/);
+    await page.click("#menuBtn");
+    await page.fill("#cmdkInput", "Game Developer");
+    await page.locator("#cmdkList .cmdk-item", { hasText: "Curate for" }).click();
+    await expect(page.locator("#headline")).toHaveText("Game Developer");
+  });
+});
+
+test.describe("colour theme", () => {
+  test("toggle switches to dark, persists, and the page repaints", async ({ page }) => {
+    await page.goto("index.html");
+    const bgBefore = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    await page.click("#themeBtn");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    const bgAfter = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(bgAfter).not.toBe(bgBefore);
+    await page.reload();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await page.click("#themeBtn");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  });
+  test("follows the system preference when no choice is stored", async ({ browser }) => {
+    const ctx = await browser.newContext({ colorScheme: "dark", baseURL: "http://127.0.0.1:8317/" });
+    const page = await ctx.newPage();
+    await page.route("https://fonts.googleapis.com/**", r => r.fulfill({ status: 200, contentType: "text/css", body: "" }));
+    await page.goto("index.html");
+    const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(bg).toBe("rgb(15, 27, 42)");
+    await ctx.close();
   });
 });

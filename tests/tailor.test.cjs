@@ -245,3 +245,87 @@ describe("document builder", () => {
     assert.match(T.pdfFilename(RESUME, T.tailor(RESUME, "DevOps / Automation Engineer", {})), /^[A-Za-z0-9_]+\.pdf$/);
   });
 });
+
+describe("open-ended curation (any job title, job descriptions)", () => {
+  test("arbitrary job titles resolve to synthetic profiles with domains and keywords", () => {
+    const cases = {
+      "Cloud Security Engineer": ["cloud"], "Threat Intelligence Analyst": ["forensics", "security"], "QA Engineer": ["qa"],
+      "Network Engineer": ["network"], "Technical Writer": ["writing"], "Product Manager": ["product"],
+      "Embedded Systems Engineer": ["systems"], "DFIR analyst": ["forensics"]
+    };
+    for (const [q, doms] of Object.entries(cases)) {
+      const r = T.resolveRole(RESUME, q);
+      assert.equal(r.synthetic, true, q);
+      assert.equal(r.adhoc, undefined, q + " should not be ad-hoc");
+      for (const d of doms) assert.ok([...r.domains, ...r.secondary].includes(d), `${q}: expected domain ${d}, got ${r.domains}`);
+      const sel = T.tailor(RESUME, q, {});
+      assert.equal(sel.fallback, false, q);
+      assert.ok(sel.counts.skills.shown >= 4 && sel.counts.skills.shown < sel.counts.skills.total, `${q}: skills ${sel.counts.skills.shown}`);
+      assert.ok(sel.counts.projects.shown >= 2, q);
+    }
+  });
+  test("title words without a domain still contribute keywords (WORD_KEYWORDS)", () => {
+    const r = T.resolveRole(RESUME, "Quant Developer");
+    assert.ok(r.keywords.includes("python") && r.keywords.includes("model"));
+    const r2 = T.resolveRole(RESUME, "Healthcare Data Analyst");
+    assert.ok(r2.keywords.includes("iomt"));
+  });
+  test("a pasted job description becomes a profile: title from the first line, domains by frequency, verbatim skills pulled in", () => {
+    const jd = "Security Analyst (SOC)\nMonitor alerts, investigate incidents, tune detections, work with Wireshark and nmap, write incident reports, understand OWASP and NIST frameworks, and support vulnerability management and threat intelligence.";
+    const r = T.resolveRole(RESUME, { jd });
+    assert.equal(r.jd, true);
+    assert.equal(r.title, "Security Analyst (SOC)");
+    assert.equal(r.domains[0], "security");
+    assert.ok(r.skills.include.includes("Wireshark") && r.skills.include.includes("nmap"));
+    assert.ok(r.keywords.includes("owasp") && r.keywords.includes("nist"));
+    assert.ok(r.id.startsWith("jd:"));
+    assert.equal(T.resolveRole(RESUME, { jd }).id, r.id, "id is stable for the same text");
+    const sel = T.tailor(RESUME, { jd }, {});
+    assert.equal(sel.role.jd, true);
+    assert.ok(sel.skills.flatMap(g => g.items).find(i => i.name === "Wireshark").included);
+    assert.ok(sel.counts.skills.shown < sel.counts.skills.total);
+  });
+  test("a long free-text string is treated as a job description too", () => {
+    const text = "Software Engineer Intern. We are looking for an intern to join our platform team. You will build REST APIs with Python and FastAPI, work with PostgreSQL databases, write TypeScript for our React dashboard, and help automate deployments with GitHub Actions.";
+    const r = T.resolveRole(RESUME, text);
+    assert.equal(r.jd, true);
+    assert.ok(r.domains.includes("software"));
+    assert.ok(r.skills.include.includes("FastAPI") && r.skills.include.includes("PostgreSQL"));
+    const sel = T.tailor(RESUME, text, {});
+    assert.ok(sel.sections.projects.filter(e => e.included).some(e => e.item.name === "PromptGuard"));
+  });
+  test("a description that names nothing the résumé has falls back leniently", () => {
+    const sel = T.tailor(RESUME, { jd: "Head chef for a busy bistro. Menu planning, plating, supplier relations and kitchen hygiene. Evening and weekend shifts with a friendly team." }, {});
+    assert.equal(sel.fallback, true);
+    assert.equal(sel.counts.projects.shown, RESUME.projects.length);
+  });
+});
+
+describe("content search", () => {
+  test("finds skills, projects and papers by name, prefix and body text", () => {
+    const s = T.searchContent(RESUME, "prompt");
+    assert.deepEqual(JSON.parse(JSON.stringify(s.projects.map(p => p.name))), ["PromptGuard", "MUN Argument Builder"]);
+    assert.equal(s.projects[0].key, "projects:0");
+    const z = T.searchContent(RESUME, "zero trust");
+    assert.ok(z.skills.some(k => k.name === "Zero Trust"));
+    assert.ok(z.research.some(r => r.name.startsWith("Zero Trust Maturity")));
+    assert.ok(z.projects.some(p => p.name === "SME-ZT CLI"));
+    const b = T.searchContent(RESUME, "burp");
+    assert.equal(b.skills[0].name, "Burp Suite CE");
+    assert.equal(b.skills[0].key, T.skillKey("Pentesting Toolkit", "Burp Suite CE"));
+    assert.ok(b.experience.length === 1);
+    assert.equal(T.searchContent(RESUME, "deepfake").research.length, 1);
+    assert.equal(T.searchContent(RESUME, "cisco").certifications.length, 2);
+  });
+  test("ranks exact and prefix matches first and respects the limit", () => {
+    const s = T.searchContent(RESUME, "react", 2);
+    assert.equal(s.skills[0].name, "React");
+    assert.ok(s.skills.length <= 2 && s.projects.length <= 2);
+    assert.ok(s.total >= 3);
+  });
+  test("empty and nonsense queries return nothing and never throw", () => {
+    assert.equal(T.searchContent(RESUME, "").total, 0);
+    assert.equal(T.searchContent(RESUME, "qqqqzz").total, 0);
+    assert.doesNotThrow(() => T.searchContent(RESUME, "(((("));
+  });
+});
