@@ -1,0 +1,59 @@
+name: Test site & tailoring
+
+on:
+  push:
+    branches-ignore: [main, master]
+    paths:
+      - "index.html"
+      - "tailor.js"
+      - "resume-pdf.js"
+      - "tests/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/test.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Unit tests (tailoring engine)
+        run: npm run test:unit
+
+      - name: PDF generation tests
+        run: npm run test:pdf
+
+      - name: End-to-end tests (desktop + mobile)
+        run: npm run test:e2e
+        env:
+          CI: "true"
+
+      - name: Verify the RESUME object still extracts for the Typst pipeline
+        run: node pdf-pipeline/extract-resume-json.cjs index.html /tmp/resume.json
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: test-results/
+          retention-days: 7
