@@ -74,7 +74,7 @@ test.describe("tailoring", () => {
 
     await expect(page.locator("#headline")).toHaveText("Front End Developer");
     await expect(page.locator("#tailorState")).toContainText("Front End Developer");
-    await expect(page).toHaveURL(/role=front-end-developer/);
+    await expect(page).not.toHaveURL(/role=/);              // the address bar is never rewritten: a refresh returns to the full résumé
     await expect(page).toHaveTitle(/Front End Developer/);
     const shown = await page.locator("#skillset .tag:not(.ghost)").count();
     const ghosts = await page.locator("#skillset .tag.ghost").count();
@@ -112,7 +112,6 @@ test.describe("tailoring", () => {
     await expect(page.locator("#headline")).toHaveText("Quantum Computing Researcher");
     await expect(page.locator("#tailorNotice")).toBeVisible();
     await expect(page.locator("#tailorNotice")).toContainText("Custom role");
-    await expect(page).toHaveURL(/role=quantum\+computing\+researcher/i);
 
     await input.fill("zzz nothing");
     await input.press("Enter");
@@ -236,9 +235,13 @@ test.describe("PDF download", () => {
 });
 
 test.describe("command palette & navigation", () => {
-  test("⌘K opens the palette; it can navigate, tailor and reset", async ({ page }, info) => {
+  test("the Menu button opens the overlay; it can navigate, curate and reset; no shortcut hints anywhere", async ({ page }) => {
     await page.goto("index.html");
-    if (isMobile(info)) await page.click("#menuBtn"); else await page.keyboard.press("Control+k");
+    await expect(page.locator("kbd")).toHaveCount(0);
+    expect(await page.content()).not.toContain("⌘");
+    await page.keyboard.press("Control+k");
+    await expect(page.locator("#cmdk")).not.toHaveClass(/open/);
+    await page.click("#menuBtn");
     await expect(page.locator("#cmdk")).toHaveClass(/open/);
     await page.fill("#cmdkInput", "penetration");
     await page.keyboard.press("Enter");
@@ -256,7 +259,9 @@ test.describe("command palette & navigation", () => {
     await page.waitForTimeout(700);
     const y = await page.locator("#research").evaluate(el => el.getBoundingClientRect().top);
     expect(y).toBeLessThan(200);
-    await page.keyboard.press("Escape");
+    await page.click("#menuBtn");
+    await page.click("#cmdkClose");
+    await expect(page.locator("#cmdk")).not.toHaveClass(/open/);
   });
 
   test("masthead nav links exist on desktop only", async ({ page }, info) => {
@@ -322,7 +327,6 @@ test.describe("universal search bar", () => {
     const shown = await page.locator("#skillset .tag:not(.ghost)").count();
     expect(shown).toBeGreaterThan(4);
     expect(shown).toBeLessThan(ALL_SKILLS);
-    await expect(page).toHaveURL(/role=Cloud\+Security\+Engineer/i);
     await expect(page.locator("#dlLabel")).toContainText("Cloud Security Engineer");
 
     await input.fill("Technical Writer");
@@ -343,10 +347,13 @@ test.describe("universal search bar", () => {
     await expect(page.locator('#skillset .tag:not(.ghost)[data-name="nmap"]')).toHaveCount(1);
     await expect(page.locator('#skillset .tag.ghost[data-name="Expo"]')).toHaveCount(1);
     await expect(page.locator("#jdBox")).toBeHidden();
-    await expect(page).toHaveURL(/role=jd%3A|role=jd:/);
-    await page.reload();
+    await expect(page.locator("#backBtn")).toBeVisible();
+    await page.reload();                                                  // a refresh always lands on the full résumé…
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    await page.click("#jdToggle");
+    await expect(page.locator("#jdText")).toHaveValue(/Security Analyst/);   // …but the pasted text is kept for re-use
+    await page.click("#jdCurate");
     await expect(page.locator("#headline")).toHaveText("Security Analyst (SOC)");
-    await expect(page.locator("#jdText")).toHaveValue(/Security Analyst/);
     const [download] = await Promise.all([page.waitForEvent("download"), page.click("#dlBtn")]);
     expect(download.suggestedFilename()).toBe("Aditya_Bidappa_M_V_Resume_Security_Analyst_SOC.pdf");
     const r = await pdfText(fs.readFileSync(await download.path()));
@@ -377,18 +384,33 @@ test.describe("universal search bar", () => {
   });
 });
 
-test.describe("colour theme", () => {
-  test("toggle switches to dark, persists, and the page repaints", async ({ page }) => {
+test.describe("appearance & personalisation", () => {
+  test("theme choice persists; accent colour changes the palette and the favicon", async ({ page }) => {
     await page.goto("index.html");
     const bgBefore = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    await page.click("#themeBtn");
+    await page.click("#appearanceBtn");
+    await expect(page.locator("#appearanceMenu")).toBeVisible();
+    await page.click('[data-theme-choice="dark"]');
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     const bgAfter = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     expect(bgAfter).not.toBe(bgBefore);
+    const accentBefore = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim());
+    await page.click('[data-accent-choice="teal"]');
+    await expect(page.locator("html")).toHaveAttribute("data-accent", "teal");
+    const accentAfter = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--accent").trim());
+    expect(accentAfter).not.toBe(accentBefore);
+    const icon = await page.locator("link[rel='icon']").getAttribute("href");
+    expect(icon).toContain("data:image/svg+xml");
+    expect(decodeURIComponent(icon)).toContain(accentAfter);
+    await expect(page.locator("#monogram")).toHaveText("AB");
     await page.reload();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-    await page.click("#themeBtn");
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+    await expect(page.locator("html")).toHaveAttribute("data-accent", "teal");
+    await page.click("#appearanceBtn");
+    await page.click('[data-theme-choice="system"]');
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
+    await page.click('[data-accent-choice="orange"]');
+    await expect(page.locator("html")).not.toHaveAttribute("data-accent", /./);
   });
   test("follows the system preference when no choice is stored", async ({ browser }) => {
     const ctx = await browser.newContext({ colorScheme: "dark", baseURL: "http://127.0.0.1:8317/" });
@@ -398,5 +420,84 @@ test.describe("colour theme", () => {
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     expect(bg).toBe("rgb(15, 27, 42)");
     await ctx.close();
+  });
+  test("the drafting-grid background draws, reacts to the pointer, and can be switched off", async ({ page }, info) => {
+    await page.goto("index.html");
+    const cv = page.locator("#bg");
+    await expect(cv).toBeVisible();
+    const size = await cv.evaluate(el => [el.width, el.height]);
+    expect(size[0]).toBeGreaterThan(100); expect(size[1]).toBeGreaterThan(100);
+    const painted = await cv.evaluate(el => { const d = el.getContext("2d").getImageData(0, 0, el.width, el.height).data; let n = 0; for (let i = 3; i < d.length; i += 4 * 97) if (d[i] > 0) n++; return n; });
+    expect(painted).toBeGreaterThan(0);
+    if (!isMobile(info)) {
+      await page.mouse.move(300, 400); await page.waitForTimeout(400);
+      const near = await cv.evaluate(el => { const d = el.getContext("2d").getImageData(Math.round(300 * devicePixelRatio) - 40, Math.round(400 * devicePixelRatio) - 40, 80, 80).data; let a = 0; for (let i = 3; i < d.length; i += 4) a += d[i]; return a; });
+      await page.mouse.move(1300, 850); await page.waitForTimeout(700);
+      const far = await cv.evaluate(el => { const d = el.getContext("2d").getImageData(Math.round(300 * devicePixelRatio) - 40, Math.round(400 * devicePixelRatio) - 40, 80, 80).data; let a = 0; for (let i = 3; i < d.length; i += 4) a += d[i]; return a; });
+      expect(near).toBeGreaterThan(far);
+    }
+    await page.click("#appearanceBtn");
+    await page.uncheck("#bgToggle");
+    await expect(cv).toBeHidden();
+    await page.reload();
+    await expect(page.locator("#bg")).toBeHidden();
+    await page.click("#appearanceBtn");
+    await page.check("#bgToggle");
+    await expect(page.locator("#bg")).toBeVisible();
+  });
+  test("hero shows a live local time", async ({ page }) => {
+    await page.goto("index.html");
+    await expect(page.locator("#clock")).toHaveText(/\d{2}:\d{2}/);
+  });
+});
+
+test.describe("leaving a curated view", () => {
+  test("back button and masthead pill return to the full résumé; plain visit is always the full résumé", async ({ page }) => {
+    await page.goto("index.html");
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    await expect(page.locator("#backBtn")).toBeHidden();
+    await expect(page.locator("#curatedPill")).toBeHidden();
+    await page.locator("#roleInput").fill("Front End Developer");
+    await page.locator("#roleInput").press("Enter");
+    await expect(page.locator("#headline")).toHaveText("Front End Developer");
+    await expect(page.locator("#backBtn")).toBeVisible();
+    await expect(page.locator("#curatedPill")).toBeVisible();
+    await expect(page.locator("#curatedPillRole")).toHaveText("Front End Developer");
+    await page.click("#backBtn");
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    await expect(page.locator("#skillset .tag")).toHaveCount(ALL_SKILLS);
+    await page.locator("#roleInput").fill("Penetration Tester");
+    await page.locator("#roleInput").press("Enter");
+    await expect(page.locator("#headline")).toHaveText("Penetration Tester");
+    await page.click("#curatedPill");
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    await page.reload();
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    await expect(page).not.toHaveURL(/role=/);
+    // a deep link still works, and resetting it clears the parameter
+    await page.goto("index.html?role=machine-learning-engineer");
+    await expect(page.locator("#headline")).toHaveText("Machine Learning Engineer");
+    await page.click("#backBtn");
+    await expect(page).not.toHaveURL(/role=/);
+    await page.reload();
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+  });
+});
+
+test.describe("touch handling in the search list", () => {
+  test("touch-down does not select (so the list can scroll); a tap does", async ({ page }, info) => {
+    test.skip(!isMobile(info), "touch only");
+    await page.goto("index.html");
+    await page.locator("#roleInput").fill("react");
+    const opt = page.locator("#roleList .combo-opt").first();
+    await expect(opt).toContainText("React");                      // exact skill name outranks the "react developer" alias
+    await opt.dispatchEvent("pointerdown", { pointerType: "touch", isPrimary: true, bubbles: true });
+    await page.waitForTimeout(300);
+    await expect(page.locator("#roleList")).toBeVisible();        // still open: nothing was chosen
+    await expect(page.locator("#tailorState")).toContainText("full résumé");
+    const box = await opt.boundingBox();
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+    await expect(page.locator('#skillset .tag[data-name="React"]')).toHaveClass(/flash/);
+    await expect(page.locator("#roleList")).toBeHidden();
   });
 });

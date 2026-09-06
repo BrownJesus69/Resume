@@ -10,6 +10,8 @@ A hand-built résumé site with no framework and no build step. All content live
 - **curated résumés**: type any job title into the search bar, pick a preset role, or paste a job description; the page filters itself to what matters for that role, you add back or hide anything, and a PDF for that role is generated in the browser and downloaded,
 - **search**: the same bar finds any skill, project, paper, experience or certification and scrolls to it (adding it back if the current curation hid it).
 
+A plain visit, or a refresh, always shows the full résumé; a curated view is left with the "Back to the full résumé" button or the pill in the masthead. Deep links such as `?role=front-end-developer` still open curated. The appearance menu (top right) offers system/light/dark, four accent colours and the reactive drafting-grid background; choices are remembered per browser.
+
 ---
 
 ## Architecture
