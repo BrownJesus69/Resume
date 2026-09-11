@@ -27,7 +27,7 @@ test.describe("full résumé (no tailoring)", () => {
     await page.goto("index.html");
     await expect(page.locator("h1")).toHaveText(RESUME.profile.name);
     await expect(page.locator("#headline")).toContainText(RESUME.profile.roles[0]);
-    for (const id of ["about", "skills", "work", "experience", "research", "recognition", "education", "contact"]) await expect(page.locator("#" + id)).toBeVisible();
+    for (const id of ["about", "profile", "skills", "work", "experience", "research", "recognition", "education", "contact"]) await expect(page.locator("#" + id)).toBeVisible();
     await expect(page.locator("#skillset .tag")).toHaveCount(ALL_SKILLS);
     await expect(page.locator("#projects .entry")).toHaveCount(RESUME.projects.length);
     await expect(page.locator("#experienceList .entry")).toHaveCount(RESUME.experience.length);
@@ -36,6 +36,7 @@ test.describe("full résumé (no tailoring)", () => {
     await expect(page.locator("#awards .row")).toHaveCount(RESUME.awards.length);
     await expect(page.locator("#certs .cert")).toHaveCount(RESUME.certifications.length);
     await expect(page.locator("#interests .tag")).toHaveCount(RESUME.interests.length);
+    await expect(page.locator("#otcGrid .otc-tile")).toHaveCount(RESUME.offTheClock.length);
     await expect(page.locator("#tailorState")).toContainText("full résumé");
     await expect(page.locator("#skillset .tag.ghost")).toHaveCount(0);
     await expect(page.locator(".hide-btn")).toHaveCount(0);
@@ -267,7 +268,7 @@ test.describe("command palette & navigation", () => {
   test("masthead nav links exist on desktop only", async ({ page }, info) => {
     await page.goto("index.html");
     if (isMobile(info)) await expect(page.locator("#topnav")).toBeHidden();
-    else await expect(page.locator("#topnav a")).toHaveCount(8);
+    else await expect(page.locator("#topnav a")).toHaveCount(9);
     await expect(page.locator("#menuBtn")).toBeVisible();
   });
 });

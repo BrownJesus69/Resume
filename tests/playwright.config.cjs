@@ -18,7 +18,7 @@ module.exports = {
     ...(process.env.PW_CHROMIUM_PATH ? { launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH } } : {})
   },
   webServer: {
-    command: `node ${path.join(__dirname, "serve.cjs")} ${PORT}`,
+    command: `node ${JSON.stringify(path.join(__dirname, "serve.cjs"))} ${PORT}`,
     url: `http://127.0.0.1:${PORT}/index.html`,
     reuseExistingServer: !process.env.CI,
     timeout: 20_000

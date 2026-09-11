@@ -68,6 +68,36 @@
       "val": "Open to research & security roles"
     }
   ],
+  "profileNote": {
+    "quote": "I treat research and engineering as one discipline: read the standard, then <em>make it run</em>.",
+    "note": "Off the standards track, I'm chasing a chess line, a race start, or the next agent I'm wiring together — and reading more papers than I probably should."
+  },
+  "offTheClock": [
+    {
+      "mono": "CH",
+      "label": "Chess"
+    },
+    {
+      "mono": "F1",
+      "label": "F1"
+    },
+    {
+      "mono": "AG",
+      "label": "Agent building"
+    },
+    {
+      "mono": "BK",
+      "label": "Biking"
+    },
+    {
+      "mono": "MU",
+      "label": "Music"
+    },
+    {
+      "mono": "RP",
+      "label": "Research papers"
+    }
+  ],
   "skills": [
     {
       "group": "Languages",

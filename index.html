@@ -342,6 +342,23 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .facts dt{ color:var(--ink-3); }
 .facts dd{ margin:0; color:var(--ink); }
 
+/* ---------- profile ---------- */
+.profile-quote{
+  font-family:var(--f-display); font-weight:600; letter-spacing:-.02em;
+  font-size:clamp(1.35rem, 3vw, 1.9rem); line-height:1.25; color:var(--ink);
+  margin:0 0 var(--s4); max-width:56ch; font-style:normal;
+}
+.profile-quote em{ color:var(--accent-ink); font-style:normal; }
+.profile-note{ color:var(--ink-2); max-width:62ch; margin-bottom:var(--s6); }
+.otc-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.6rem; }
+@media (min-width:640px){ .otc-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+.otc-tile{
+  display:flex; align-items:center; gap:.6rem; border:1px solid var(--rule-2); border-radius:var(--radius);
+  background:var(--paper-2); padding:.65rem .75rem;
+}
+.otc-tile b{ font-family:var(--f-mono); font-weight:500; font-size:.82rem; color:var(--accent-ink); flex:none; }
+.otc-tile span{ font-family:var(--f-display); font-size:.86rem; color:var(--ink); }
+
 /* ---------- skills ---------- */
 .skillset{ display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s5) var(--s6); }
 @media (min-width:640px){ .skillset{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
@@ -668,6 +685,14 @@ button.tag:not(.ghost):hover .x{ color:var(--accent-ink); }
       </div>
     </section>
 
+    <section id="profile">
+      <div class="sec-head"><h2>Profile</h2></div>
+      <blockquote class="profile-quote" id="profileQuote"></blockquote>
+      <p class="profile-note" id="profileNote"></p>
+      <p class="lab">Off the clock</p>
+      <div class="otc-grid" id="otcGrid"></div>
+    </section>
+
     <section id="skills">
       <div class="sec-head"><h2>Skills</h2><span class="count" id="skillsCount"></span></div>
       <div class="skillset" id="skillset"></div>
@@ -808,6 +833,23 @@ const RESUME = {
     { lab: "Studying",  val: "B.Tech Cybersecurity, DSU" },
     { lab: "Writing",   val: "Research papers in LaTeX" },
     { lab: "Status",    val: "Open to research & security roles" }
+  ],
+
+  /* ── PROFILE (personal note + off-the-clock) ────────────────────────
+     quote = one-line personal statement (use <em>…</em> for the accent word).
+     note  = a short paragraph on what fills the time outside the standards track.
+     offTheClock[] = interest tiles: mono = a short 2-letter tag, label = the interest. */
+  profileNote: {
+    quote: "I treat research and engineering as one discipline: read the standard, then <em>make it run</em>.",
+    note: "Off the standards track, I'm chasing a chess line, a race start, or the next agent I'm wiring together — and reading more papers than I probably should."
+  },
+  offTheClock: [
+    { mono: "CH", label: "Chess" },
+    { mono: "F1", label: "F1" },
+    { mono: "AG", label: "Agent building" },
+    { mono: "BK", label: "Biking" },
+    { mono: "MU", label: "Music" },
+    { mono: "RP", label: "Research papers" }
   ],
 
   /* ── SKILLS (grouped) ─────────────────────────────────────────────────
@@ -1249,7 +1291,7 @@ const RESUME = {
   $("#contactSub").textContent = cc.sub;
 
   const SECTIONS = [
-    ["about","About"],["skills","Skills"],["work","Projects"],["experience","Experience"],
+    ["about","About"],["profile","Profile"],["skills","Skills"],["work","Projects"],["experience","Experience"],
     ["research","Research"],["recognition","Recognition"],["education","Education"],["contact","Contact"]
   ].filter(([id]) => document.getElementById(id));
   $("#topnav").innerHTML = SECTIONS.map(([id, label]) => `<a href="#${id}" data-sec="${id}">${label}</a>`).join("");
@@ -1302,6 +1344,11 @@ const RESUME = {
 
     /* about */
     $("#aboutBody").innerHTML = RESUME.aboutParagraphs.map(p => `<p>${p}</p>`).join("");
+
+    /* profile */
+    $("#profileQuote").innerHTML = RESUME.profileNote.quote;
+    $("#profileNote").textContent = RESUME.profileNote.note;
+    $("#otcGrid").innerHTML = RESUME.offTheClock.map(o => `<div class="otc-tile"><b>${esc(o.mono)}</b><span>${esc(o.label)}</span></div>`).join("");
 
     /* skills */
     $("#skillsCount").innerHTML = countHTML(sel.counts.skills);
