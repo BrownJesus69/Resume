@@ -343,6 +343,24 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 .facts dd{ margin:0; color:var(--ink); }
 
 /* ---------- profile ---------- */
+.idcard{
+  border:1.5px solid var(--ink); border-radius:var(--radius); background:var(--paper-2);
+  box-shadow:5px 5px 0 var(--ink); margin-bottom:var(--s6);
+}
+.idcard-head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--s3);
+  padding:.55rem .9rem; border-bottom:1.5px solid var(--ink);
+}
+.idcard-tag{ font-family:var(--f-mono); font-size:.74rem; letter-spacing:.04em; color:var(--ink-3); text-transform:uppercase; }
+.idcard-body{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s5); align-items:start; padding:var(--s5); }
+.idcard-mono{
+  display:grid; place-items:center; width:4rem; height:4rem; flex:none;
+  border-radius:var(--radius); background:var(--accent); color:var(--on-accent);
+  font-family:var(--f-mono); font-weight:700; font-size:1.4rem; letter-spacing:.02em;
+}
+.idcard-body .facts{ margin:0; }
+@media (max-width:460px){ .idcard-body{ grid-template-columns:1fr; } .idcard-mono{ width:3rem; height:3rem; font-size:1.1rem; } }
+
 .profile-quote{
   font-family:var(--f-display); font-weight:600; letter-spacing:-.02em;
   font-size:clamp(1.35rem, 3vw, 1.9rem); line-height:1.25; color:var(--ink);
@@ -350,14 +368,23 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 }
 .profile-quote em{ color:var(--accent-ink); font-style:normal; }
 .profile-note{ color:var(--ink-2); max-width:62ch; margin-bottom:var(--s6); }
-.otc-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.6rem; }
-@media (min-width:640px){ .otc-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+
+.otc-head{ display:flex; align-items:baseline; gap:.6rem; margin-bottom:var(--s4); flex-wrap:wrap; }
+.otc-title{ font-family:var(--f-body); font-style:italic; font-weight:600; font-size:clamp(1.2rem, 2.4vw, 1.5rem); color:var(--ink); }
+.otc-sub{ font-family:var(--f-mono); font-size:.72rem; color:var(--ink-3); letter-spacing:.02em; }
+.otc-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--s4); }
+@media (min-width:560px){ .otc-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
 .otc-tile{
-  display:flex; align-items:center; gap:.6rem; border:1px solid var(--rule-2); border-radius:var(--radius);
-  background:var(--paper-2); padding:.65rem .75rem;
+  margin:0; border:1.5px solid var(--ink); border-radius:var(--radius); background:var(--paper-2);
+  padding:.5rem; box-shadow:5px 5px 0 var(--ink); transition:transform .15s var(--ease), box-shadow .15s var(--ease);
 }
-.otc-tile b{ font-family:var(--f-mono); font-weight:500; font-size:.82rem; color:var(--accent-ink); flex:none; }
-.otc-tile span{ font-family:var(--f-display); font-size:.86rem; color:var(--ink); }
+.otc-tile:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
+.otc-art{
+  aspect-ratio:3/4; border:1px solid var(--rule-2); border-radius:calc(var(--radius) - 1px);
+  display:grid; place-items:center; background:var(--paper);
+}
+.otc-art svg{ width:36%; height:36%; stroke:var(--accent-ink); }
+.otc-tile figcaption{ font-family:var(--f-mono); font-size:.72rem; letter-spacing:.03em; color:var(--ink-3); padding-top:.5rem; }
 
 /* ---------- skills ---------- */
 .skillset{ display:grid; grid-template-columns:minmax(0,1fr); gap:var(--s5) var(--s6); }
@@ -687,9 +714,22 @@ button.tag:not(.ghost):hover .x{ color:var(--accent-ink); }
 
     <section id="profile">
       <div class="sec-head"><h2>Profile</h2></div>
+
+      <div class="idcard">
+        <div class="idcard-head">
+          <span class="idcard-tag">Profile card</span>
+          <span class="live">Active</span>
+        </div>
+        <div class="idcard-body">
+          <div class="idcard-mono" id="idcardMono" aria-hidden="true"></div>
+          <dl class="facts" id="idcardFacts"></dl>
+        </div>
+      </div>
+
       <blockquote class="profile-quote" id="profileQuote"></blockquote>
       <p class="profile-note" id="profileNote"></p>
-      <p class="lab">Off the clock</p>
+
+      <div class="otc-head"><span class="otc-title">Off the clock</span><span class="otc-sub">— things I love</span></div>
       <div class="otc-grid" id="otcGrid"></div>
     </section>
 
@@ -835,21 +875,21 @@ const RESUME = {
     { lab: "Status",    val: "Open to research & security roles" }
   ],
 
-  /* ── PROFILE (personal note + off-the-clock) ────────────────────────
+  /* ── PROFILE (ID card + personal note + off-the-clock) ───────────────
      quote = one-line personal statement (use <em>…</em> for the accent word).
      note  = a short paragraph on what fills the time outside the standards track.
-     offTheClock[] = interest tiles: mono = a short 2-letter tag, label = the interest. */
+     offTheClock[] = interest tiles: icon = a key in the ICONS map below, label = the interest. */
   profileNote: {
     quote: "I treat research and engineering as one discipline: read the standard, then <em>make it run</em>.",
     note: "Off the standards track, I'm chasing a chess line, a race start, or the next agent I'm wiring together — and reading more papers than I probably should."
   },
   offTheClock: [
-    { mono: "CH", label: "Chess" },
-    { mono: "F1", label: "F1" },
-    { mono: "AG", label: "Agent building" },
-    { mono: "BK", label: "Biking" },
-    { mono: "MU", label: "Music" },
-    { mono: "RP", label: "Research papers" }
+    { icon: "chess",    label: "Chess" },
+    { icon: "f1",       label: "F1" },
+    { icon: "agent",    label: "Agent building" },
+    { icon: "bike",     label: "Biking" },
+    { icon: "music",    label: "Music" },
+    { icon: "research", label: "Research papers" }
   ],
 
   /* ── SKILLS (grouped) ─────────────────────────────────────────────────
@@ -1209,7 +1249,13 @@ const RESUME = {
     globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
     arrow:'<path d="M7 17 17 7M9 7h8v8"/>',
     download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
-    tailor:'<path d="M4 6h16M7 12h10M10 18h4"/>'
+    tailor:'<path d="M4 6h16M7 12h10M10 18h4"/>',
+    chess:'<circle cx="12" cy="6.5" r="2.5"/><path d="M9.5 11h5l1.5 6h-8z"/><path d="M7 20h10"/>',
+    f1:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M12 4v6M6.5 15.5 10 13M17.5 15.5 14 13"/>',
+    agent:'<rect x="5" y="9" width="14" height="10" rx="2"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/><path d="M12 9V5M9 5h6"/>',
+    bike:'<circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="M6 17 10 9h5l3 8M10 9l3 4h5"/>',
+    music:'<path d="M9 18V5l10-2v13"/><circle cx="7" cy="18" r="2.2"/><circle cx="17" cy="16" r="2.2"/>',
+    research:'<rect x="5" y="3" width="11" height="14" rx="1"/><path d="M8 7h5M8 10h5M8 13h3"/><circle cx="16.5" cy="16.5" r="3"/><path d="m19 19 2 2"/>'
   };
   const svg = (n) => ICONS[n] ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>` : "";
 
@@ -1285,7 +1331,10 @@ const RESUME = {
   const chip = (c) => `<a class="btn" href="${esc(c.href)}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : ""}>${svg(c.icon)}<span>${esc(c.value)}</span></a>`;
   $("#sideContact").innerHTML = RESUME.contact.map(c => `<a href="${esc(c.href)}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : ""}>${svg(c.icon)}<span>${esc(c.value)}</span></a>`).join("");
   $("#footerChips").innerHTML = RESUME.contact.map(chip).join("");
-  $("#facts").innerHTML = RESUME.facts.map(f => `<div><dt>${esc(f.lab)}</dt><dd>${f.href ? `<a href="${esc(f.href)}">${esc(f.val)}</a>` : esc(f.val)}</dd></div>`).join("");
+  const factsHTML = RESUME.facts.map(f => `<div><dt>${esc(f.lab)}</dt><dd>${f.href ? `<a href="${esc(f.href)}">${esc(f.val)}</a>` : esc(f.val)}</dd></div>`).join("");
+  $("#facts").innerHTML = factsHTML;
+  $("#idcardFacts").innerHTML = factsHTML;
+  $("#idcardMono").textContent = P.name.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase();
   const cc = RESUME.contactCopy;
   $("#contactLead").innerHTML = `${esc(cc.lead)}<br><a href="mailto:${esc(cc.emailLine)}">${esc(cc.emailLine)}</a>`;
   $("#contactSub").textContent = cc.sub;
@@ -1348,7 +1397,7 @@ const RESUME = {
     /* profile */
     $("#profileQuote").innerHTML = RESUME.profileNote.quote;
     $("#profileNote").textContent = RESUME.profileNote.note;
-    $("#otcGrid").innerHTML = RESUME.offTheClock.map(o => `<div class="otc-tile"><b>${esc(o.mono)}</b><span>${esc(o.label)}</span></div>`).join("");
+    $("#otcGrid").innerHTML = RESUME.offTheClock.map((o, i) => `<figure class="otc-tile"><div class="otc-art">${svg(o.icon)}</div><figcaption>${String(i + 1).padStart(2, "0")} · ${esc(o.label.toUpperCase())}</figcaption></figure>`).join("");
 
     /* skills */
     $("#skillsCount").innerHTML = countHTML(sel.counts.skills);

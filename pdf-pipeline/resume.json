@@ -74,27 +74,27 @@
   },
   "offTheClock": [
     {
-      "mono": "CH",
+      "icon": "chess",
       "label": "Chess"
     },
     {
-      "mono": "F1",
+      "icon": "f1",
       "label": "F1"
     },
     {
-      "mono": "AG",
+      "icon": "agent",
       "label": "Agent building"
     },
     {
-      "mono": "BK",
+      "icon": "bike",
       "label": "Biking"
     },
     {
-      "mono": "MU",
+      "icon": "music",
       "label": "Music"
     },
     {
-      "mono": "RP",
+      "icon": "research",
       "label": "Research papers"
     }
   ],
