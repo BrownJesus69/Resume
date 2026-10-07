@@ -18,11 +18,11 @@ A plain visit, or a refresh, always shows the full résumé; a curated view is l
 
 ```mermaid
 flowchart TD
-    A["index.html<br/>RESUME data object<br/>(content + roleProfiles)"] -->|"extract-resume-json.cjs"| B["resume.json"]
-    B -->|"typst compile (CI)"| C["resume.pdf — full résumé"]
-    A -->|"tailor.js"| D["role-tailored selection<br/>(skills · projects · experience · research …)"]
-    D -->|"rendered on the page"| E["Tailored view + add-back / hide controls"]
-    D -->|"resume-pdf.js, in the browser"| F["Aditya_Bidappa_M_V_Resume_&lt;Role&gt;.pdf"]
+    A["index.html<br/>RESUME data object<br/>content + roleProfiles"] -->|"extract-resume-json.cjs"| B["resume.json"]
+    B -->|"typst compile in CI"| C["resume.pdf<br/>full resume"]
+    A -->|"tailor.js"| D["role-tailored selection<br/>skills, projects, experience, research"]
+    D -->|"rendered on the page"| E["Tailored view<br/>with add-back and hide controls"]
+    D -->|"resume-pdf.js in the browser"| F["Aditya_Bidappa_M_V_Resume_#lt;Role#gt;.pdf"]
     C --> G["Netlify"]
     A --> G
 ```
