@@ -847,7 +847,7 @@ const RESUME = {
     summary: "I build and study security systems end to end — from <strong>zero-trust maturity frameworks</strong> and <strong>prompt-injection detection</strong> to IoMT threat modelling, deepfake analysis, and deployed apps. Research depth paired with shipping real tools.",
     focus: "security-research",           // shown in the hero meta line
     location: "Bengaluru, IN",            // shown in the hero meta line
-    lastUpdated: "Jul 2026",              // shown in the footer
+    lastUpdated: "Oct 2026",              // shown in the footer
     website: "adityabidappa.netlify.app"  // printed in the tailored PDFs
   },
 
@@ -893,21 +893,32 @@ const RESUME = {
   ],
 
   /* ── SKILLS (grouped) ─────────────────────────────────────────────────
-     Add a group: { group: "Name", items: ["a","b","c"] } */
+     Add a group: { group: "Name", items: ["a","b","c"] }
+     `pdf: false` on a group (or on a project below) keeps it on the website
+     but out of the two-page master PDF, which only has room for ~80 chips. */
   skills: [
-    { group: "Languages",             items: ["Python", "C", "SQL", "Bash", "TypeScript", "HTML", "LaTeX"] },
-    { group: "Frameworks",            items: ["FastAPI", "Express", "React", "React Native", "Expo"] },
-    { group: "Data",                  items: ["PostgreSQL", "MySQL", "JSONB", "MongoDB"] },
-    { group: "Security & Standards",  items: ["Zero Trust", "NIST SP 800-207", "CISA ZTMM v2", "OWASP Testing Guide v4", "IDOR & Auth-Bypass Testing", "Blind & Error-Based SQLi"] },
-    { group: "Pentesting Toolkit",    items: ["Burp Suite CE", "OWASP ZAP", "Hoppscotch", "gobuster", "nuclei", "subfinder", "nmap", "Wireshark", "SpiderFoot", "Autopsy", "Kali Linux"] },
-    { group: "Machine Learning",      items: ["XGBoost", "scikit-learn", "Random Forest", "Isolation Forest", "Multi-Transformer Ensembles"] },
-    { group: "Automation & Reporting",items: ["openpyxl", "Google Apps Script", "GitHub Actions", "Typst"] },
+    { group: "Languages",             items: ["Python", "C", "SQL", "Bash", "PowerShell", "TypeScript", "HTML", "LaTeX"] },
+    { group: "Frameworks",            items: ["FastAPI", "Express", "React", "React Native", "Expo", "Telegram Bot API"] },
+    { group: "Software Development",  pdf: false, items: ["Full-Stack Development", "REST API Design", "Python CLI Development", "Mobile App Development", "Secure Software Design", "Technical Documentation"] },
+    { group: "Data",                  items: ["PostgreSQL", "MySQL", "JSONB", "MongoDB", "Qdrant", "BCNF Schema Design", "Data Preprocessing"] },
+    { group: "Security & Standards",  items: ["Zero Trust", "NIST SP 800-207", "CISA ZTMM v2", "CSA SMB Guidance", "OWASP Testing Guide v4", "IDOR & Auth-Bypass Testing", "Blind & Error-Based SQLi", "Risk-Aware PKI Authentication", "Security Maturity Assessment", "IoMT Security", "DDoS & Attack Classification", "Anomaly Detection"] },
+    { group: "Security Practice",     pdf: false, items: ["Ethical Web Pentesting", "API Security Testing", "Vulnerability Validation", "Threat Modelling", "Attack-Surface Analysis", "Network Security Assessment", "Port & Service Enumeration", "Security Hardening", "Defensive Security Analysis", "Security Risk Analysis", "Digital Forensics", "OSINT", "Security Reporting", "Stress & Resilience Testing"] },
+    { group: "Pentesting Toolkit",    items: ["Burp Suite CE", "OWASP ZAP", "Hoppscotch", "gobuster", "nuclei", "subfinder", "nmap", "Wireshark", "SpiderFoot", "Autopsy", "Kali Linux", "Parrot OS", "Termux"] },
+    { group: "Machine Learning",      items: ["XGBoost", "scikit-learn", "Random Forest", "Isolation Forest", "Multi-Transformer Ensembles", "Model Calibration", "Model Evaluation", "Explainable AI", "Preregistered Experiments"] },
+    { group: "Quant Systems",         pdf: false, items: ["Backtesting & Walk-Forward Validation", "Event-Driven Simulation", "Cost-Aware Evaluation", "Paper Trading", "Binance & Hyperliquid Testnets"] },
+    { group: "DevOps & Infrastructure", pdf: false, items: ["Docker", "Docker Compose", "WSL2", "Linux Administration", "macOS", "Windows", "systemd", "Windows Services (NSSM)", "SSH Tunnelling", "CI/CD", "GitHub Pages", "GHCR", "Netlify", "Render", "Trivy"] },
+    { group: "Testing & Quality",     pdf: false, items: ["pytest", "Playwright", "ruff", "mypy", "Regression Testing", "Coverage Gating"] },
+    { group: "Automation & Reporting",items: ["openpyxl", "Google Apps Script", "GitHub Actions", "Typst", "Overleaf"] },
     { group: "Tooling",               items: ["Git", "GitHub"] },
-    { group: "AI — LLM Assistants",       items: ["Claude", "ChatGPT", "Gemini", "DeepSeek", "Perplexity"] },
+    { group: "Research & Writing",    pdf: false, items: ["Cybersecurity & ML Research", "Literature Review", "Research Methodology", "Reproducible Experimentation", "Statistical Analysis", "Citation Management", "Springer LNCS", "Research Presentations"] },
+    { group: "Leadership & Communication", pdf: false, items: ["Public Speaking", "Debate", "Model UN", "Event Leadership", "Team Leadership", "Treasury Coordination", "Project Planning", "Technical Writing"] },
+    { group: "AI — LLM Assistants",       items: ["Claude", "Claude Code", "ChatGPT", "Gemini", "DeepSeek", "Perplexity"] },
     { group: "AI — Voice / Audio",        items: ["Whisper"] },
-    { group: "AI — Agentic / Automation", items: ["n8n", "OpenRouter"] },
-    { group: "AI — Security Research",    items: ["HexStrike AI", "MCP Server Orchestration"] },
-    { group: "AI — Agent Frameworks",     items: ["Z.AI", "Hermes AI", "OpenClaw"] }
+    { group: "AI — Agentic / Automation", items: ["n8n", "OpenRouter", "Groq", "Claude in Chrome"] },
+    { group: "AI — Security Research",    items: ["HexStrike AI", "MCP Server Orchestration", "LLM-Driven Threat Simulation"] },
+    { group: "AI — Agent Frameworks",     items: ["Z.AI", "Hermes AI", "OpenClaw"] },
+    { group: "AI — Local LLM Stack",      pdf: false, items: ["Ollama", "llama.cpp", "GGUF Quantisation", "VRAM Budgeting", "Open WebUI", "SearXNG", "mcpo", "RAG & Vector Search"] },
+    { group: "AI — LLM Engineering",      pdf: false, items: ["Prompt Engineering", "LLM Evaluation & Red-Teaming", "Model Routing & Fallback", "AI-Agent Development", "Agent Orchestration"] }
   ],
 
   /* ── PROJECTS ─────────────────────────────────────────────────────────
@@ -980,6 +991,57 @@ const RESUME = {
         "Correctness-oriented design grounded in a BCNF-normalised schema."
       ],
       links: [ { label: "GitHub", href: "https://github.com/sampratigaurav/nutrilog", icon: "github" } ]
+    },
+    {
+      name: "Risk-Aware PKI Zero Trust",
+      tagline: "AI-driven, risk-aware PKI authentication for Zero Trust cloud access",
+      stack: ["Python", "Zero Trust", "PKI", "Calibrated ML"],
+      highlights: [
+        "Research prototype that outputs calibrated Low / Medium / High authentication-risk probabilities from certificate-validation evidence and causal behavioural history.",
+        "Trained and evaluated on nine public security datasets."
+      ]
+    },
+    {
+      name: "Telegram Food Agent",
+      tagline: "Telegram food-ordering bot where an LLM interprets requests and deterministic code enforces the rules",
+      stack: ["Python", "aiogram", "Docker", "GitHub Actions", "Telegram Mini App", "Leaflet"],
+      highlights: [
+        "Natural-language ordering with an address book, reorder and split flows, photo input, and a Telegram Mini App map picker hosted on GitHub Pages with no backend.",
+        "Primary model with a fallback; evaluated on dev, held-out and red-team sets, with held-out full-pipeline accuracy rising from 91.7% to 93.8% and zero red-team failures.",
+        "Released as v0.5.0: ruff, mypy, an 85% coverage gate, Trivy scanning and GHCR image publishing in CI."
+      ],
+      metrics: [
+        { value: "93.8%", label: "held-out accuracy" },
+        { value: "438",   label: "tests" },
+        { value: "90%",   label: "coverage" }
+      ],
+      links: [ { label: "GitHub", href: "https://github.com/BrownJesus69/telegram-food-agent", icon: "github" } ]
+    },
+    {
+      name: "Trading Research Platform",
+      pdf: false,
+      tagline: "Preregistered evaluation harness for algorithmic-trading agents",
+      stack: ["Python", "pytest", "Walk-forward validation", "Event-driven simulation", "Binance & Hyperliquid testnets"],
+      highlights: [
+        "Twelve-phase research program run under frozen, preregistered protocols, with a script that verifies the frozen files are unchanged and every phase tagged and reproducible.",
+        "Net-of-cost walk-forward and event-driven evaluation showed the edge disappeared after costs, so nothing was promoted: the point of the harness is to reach honest negative results.",
+        "Testnet and paper-trading execution with a forward-season monitor and a regression suite of 1,400+ tests."
+      ],
+      metrics: [
+        { value: "12",     label: "preregistered phases" },
+        { value: "1,415",  label: "tests passing" }
+      ]
+    },
+    {
+      name: "LocalAI Lab",
+      pdf: false,
+      tagline: "Self-hosted local-LLM and security-agent stack on a single workstation",
+      stack: ["Ollama", "Open WebUI", "Qdrant", "SearXNG", "mcpo", "Docker Compose", "WSL2", "Parrot OS", "FastAPI"],
+      highlights: [
+        "Local LLMs served through Ollama and Open WebUI with Qdrant vector search, SearXNG web search and eight MCP tool servers served through mcpo.",
+        "HexStrike and Parrot OS in WSL2 reached over SSH tunnels, with a manual-only policy for offensive tooling and an API-key-protected FastAPI control service for starting and stopping model workers.",
+        "One-click launchers, an environment template and a migration runbook so the whole stack can be rebuilt on a new machine."
+      ]
     }
   ],
 
@@ -1029,12 +1091,14 @@ const RESUME = {
   /* ── ROLES / LEADERSHIP ───────────────────────────────────────────────
      { role, org } */
   leadership: [
-    { role: "President",       org: "DSU MUN Society" },
-    { role: "Joint Treasurer", org: "Cybersecurity Club" },
-    { role: "Special Advisor", org: "Debate Society" },
+    { role: "President",         org: "Cybersecurity Club (2026–27)" },
+    { role: "Joint Treasurer",   org: "Cybersecurity Club (2025–26)" },
+    { role: "President",         org: "DSU MUN Society" },
+    { role: "Special Advisor",   org: "Debate Society" },
+    { role: "Secretary General", org: "DSU Intra MUN 2026" },
     { role: "Secretary General", org: "TNT MUN" },
-    { role: "Director General", org: "COPE II" },
-    { role: "Rapporteur",      org: "DSUMUN II" }
+    { role: "Director General",  org: "COPE II" },
+    { role: "Rapporteur",        org: "DSUMUN II" }
   ],
 
   /* ── AWARDS ───────────────────────────────────────────────────────────

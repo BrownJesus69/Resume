@@ -235,7 +235,7 @@ describe("document builder", () => {
     const doc = T.buildDocument(RESUME, T.tailor(RESUME, null, {}));
     const same = (a, b) => assert.equal(JSON.stringify(a), JSON.stringify(b));   // RESUME comes from a vm realm: compare by value
     same(doc.projects, RESUME.projects);
-    same(doc.skills, RESUME.skills);
+    same(doc.skills, RESUME.skills.map(g => ({ group: g.group, items: g.items })));   // `pdf: false` only affects the CI master PDF, not the in-browser one
     same(doc.aboutParagraphs, RESUME.aboutParagraphs);
     same(doc.profile.roles, RESUME.profile.roles);
   });

@@ -45,6 +45,12 @@ try {
   process.exit(1);
 }
 
+// Items flagged `pdf: false` (skill groups, projects) stay on the website but are
+// left out of the two-page master PDF; the left column only holds ~80 skill chips.
+const inPdf = (x) => x.pdf !== false;
+resume.skills   = (resume.skills   || []).filter(inPdf);
+resume.projects = (resume.projects || []).filter(inPdf);
+
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, JSON.stringify(resume, null, 2) + "\n", "utf8");
 console.log("Wrote", output);
