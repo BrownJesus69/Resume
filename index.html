@@ -21,7 +21,7 @@
       inside the matching list and edit the text. Keep the commas between blocks.
     • Any field marked "optional" can be deleted — the page adapts and won't break.
     • Order in the arrays = order on the page. Move things by reordering blocks.
-    • Setting a project's `status.live = true` shows a "Live" badge.
+    • Setting a project's `status.live = true` marks it Live: the PDFs and the tests key off that flag.
 
   TAILORING (the "Tailor for a role" panel):
     • Roles live in RESUME.roleProfiles. Each role names the domains it draws
@@ -927,7 +927,8 @@ const RESUME = {
        highlights[] = bullet points
        metrics[]    = { value:"87.08%", label:"accuracy" }  → shown as a stat
                       (and printed in an amber strip in the PDF)
-       status       = { text:"Live", live:true, href:"https://…" } (optional badge)
+       status       = { text:"Live", live:true, href:"https://…" } (optional badge; `live` drives the PDF marker)
+       pdf          = false keeps the project out of the two-page master PDF (still on the site)
        links[]      = { label:"GitHub", href:"…", icon:"github"|"globe" } */
   projects: [
     {
