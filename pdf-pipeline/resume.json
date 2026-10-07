@@ -13,7 +13,7 @@
     "summary": "I build and study security systems end to end — from <strong>zero-trust maturity frameworks</strong> and <strong>prompt-injection detection</strong> to IoMT threat modelling, deepfake analysis, and deployed apps. Research depth paired with shipping real tools.",
     "focus": "security-research",
     "location": "Bengaluru, IN",
-    "lastUpdated": "Jul 2026",
+    "lastUpdated": "Oct 2026",
     "website": "adityabidappa.netlify.app"
   },
   "contact": [
@@ -106,6 +106,7 @@
         "C",
         "SQL",
         "Bash",
+        "PowerShell",
         "TypeScript",
         "HTML",
         "LaTeX"
@@ -118,7 +119,8 @@
         "Express",
         "React",
         "React Native",
-        "Expo"
+        "Expo",
+        "Telegram Bot API"
       ]
     },
     {
@@ -127,7 +129,10 @@
         "PostgreSQL",
         "MySQL",
         "JSONB",
-        "MongoDB"
+        "MongoDB",
+        "Qdrant",
+        "BCNF Schema Design",
+        "Data Preprocessing"
       ]
     },
     {
@@ -136,9 +141,15 @@
         "Zero Trust",
         "NIST SP 800-207",
         "CISA ZTMM v2",
+        "CSA SMB Guidance",
         "OWASP Testing Guide v4",
         "IDOR & Auth-Bypass Testing",
-        "Blind & Error-Based SQLi"
+        "Blind & Error-Based SQLi",
+        "Risk-Aware PKI Authentication",
+        "Security Maturity Assessment",
+        "IoMT Security",
+        "DDoS & Attack Classification",
+        "Anomaly Detection"
       ]
     },
     {
@@ -154,7 +165,9 @@
         "Wireshark",
         "SpiderFoot",
         "Autopsy",
-        "Kali Linux"
+        "Kali Linux",
+        "Parrot OS",
+        "Termux"
       ]
     },
     {
@@ -164,7 +177,11 @@
         "scikit-learn",
         "Random Forest",
         "Isolation Forest",
-        "Multi-Transformer Ensembles"
+        "Multi-Transformer Ensembles",
+        "Model Calibration",
+        "Model Evaluation",
+        "Explainable AI",
+        "Preregistered Experiments"
       ]
     },
     {
@@ -173,7 +190,8 @@
         "openpyxl",
         "Google Apps Script",
         "GitHub Actions",
-        "Typst"
+        "Typst",
+        "Overleaf"
       ]
     },
     {
@@ -187,6 +205,7 @@
       "group": "AI — LLM Assistants",
       "items": [
         "Claude",
+        "Claude Code",
         "ChatGPT",
         "Gemini",
         "DeepSeek",
@@ -203,14 +222,17 @@
       "group": "AI — Agentic / Automation",
       "items": [
         "n8n",
-        "OpenRouter"
+        "OpenRouter",
+        "Groq",
+        "Claude in Chrome"
       ]
     },
     {
       "group": "AI — Security Research",
       "items": [
         "HexStrike AI",
-        "MCP Server Orchestration"
+        "MCP Server Orchestration",
+        "LLM-Driven Threat Simulation"
       ]
     },
     {
@@ -357,6 +379,58 @@
           "icon": "github"
         }
       ]
+    },
+    {
+      "name": "Risk-Aware PKI Zero Trust",
+      "tagline": "AI-driven, risk-aware PKI authentication for Zero Trust cloud access",
+      "stack": [
+        "Python",
+        "Zero Trust",
+        "PKI",
+        "Calibrated ML"
+      ],
+      "highlights": [
+        "Research prototype that outputs calibrated Low / Medium / High authentication-risk probabilities from certificate-validation evidence and causal behavioural history.",
+        "Trained and evaluated on nine public security datasets."
+      ]
+    },
+    {
+      "name": "Telegram Food Agent",
+      "tagline": "Telegram food-ordering bot where an LLM interprets requests and deterministic code enforces the rules",
+      "stack": [
+        "Python",
+        "aiogram",
+        "Docker",
+        "GitHub Actions",
+        "Telegram Mini App",
+        "Leaflet"
+      ],
+      "highlights": [
+        "Natural-language ordering with an address book, reorder and split flows, photo input, and a Telegram Mini App map picker hosted on GitHub Pages with no backend.",
+        "Primary model with a fallback; evaluated on dev, held-out and red-team sets, with held-out full-pipeline accuracy rising from 91.7% to 93.8% and zero red-team failures.",
+        "Released as v0.5.0: ruff, mypy, an 85% coverage gate, Trivy scanning and GHCR image publishing in CI."
+      ],
+      "metrics": [
+        {
+          "value": "93.8%",
+          "label": "held-out accuracy"
+        },
+        {
+          "value": "438",
+          "label": "tests"
+        },
+        {
+          "value": "90%",
+          "label": "coverage"
+        }
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/BrownJesus69/telegram-food-agent",
+          "icon": "github"
+        }
+      ]
     }
   ],
   "experience": [
@@ -399,15 +473,23 @@
   "leadership": [
     {
       "role": "President",
-      "org": "DSU MUN Society"
+      "org": "Cybersecurity Club (2026–27)"
     },
     {
       "role": "Joint Treasurer",
-      "org": "Cybersecurity Club"
+      "org": "Cybersecurity Club (2025–26)"
+    },
+    {
+      "role": "President",
+      "org": "DSU MUN Society"
     },
     {
       "role": "Special Advisor",
       "org": "Debate Society"
+    },
+    {
+      "role": "Secretary General",
+      "org": "DSU Intra MUN 2026"
     },
     {
       "role": "Secretary General",
