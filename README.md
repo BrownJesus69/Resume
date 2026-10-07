@@ -36,7 +36,7 @@ The site and the PDFs are different documents from the same source. Nothing is a
 3. **Select.** Projects and papers are kept when they score above an absolute floor and at least 35% of the best item in their section; pinned projects are always kept and a minimum of two projects is guaranteed. Skills are kept when they belong to the role's domains, appear in the stack of a selected project, or match a role keyword. Experience, certifications, awards and leadership are never dropped, only re-ordered; a profile can cap experience bullets (`maxHighlights`) to the most relevant ones.
 4. **Overrides.** Every item can be added back or hidden on the page. Edits are stored per role in `sessionStorage` and applied on top of the automatic selection, and the PDF reflects exactly what the page shows.
 5. **Document.** `buildDocument()` produces a RESUME-shaped object holding only the selection; `resume-pdf.js` lays it out.
-6. **Search.** `searchContent()` ranks skills, projects, papers, experience and certifications by name, prefix and body-text match; the page scrolls to the hit and flashes it. Both the sidebar bar and the ⌘K palette use it.
+6. **Search.** `searchContent()` ranks skills, projects, papers, experience and certifications by name, prefix and body-text match; the page scrolls to the hit and flashes it. Both the sidebar bar and the command palette (the **Menu** button, top right) use it.
 
 ### The in-browser PDF (`resume-pdf.js`)
 
@@ -75,11 +75,13 @@ A small, dependency-free PDF writer: PDF 1.4, the core Helvetica fonts (nothing 
 │   ├── serve.cjs                       # Tiny static server for the tests
 │   └── helpers.cjs
 ├── .github/workflows/
-│   ├── build-resume-pdf.yml            # Runs extractor + Typst on every push to main
+│   ├── build-resume-pdf.yml            # Rebuilds resume.pdf when index.html or pdf-pipeline/ change on main
 │   └── test.yml                        # Runs the three test-suites on branches and PRs
 ├── scripts/
-│   └── pre-commit-check.sh             # Install to .git/hooks/pre-commit
+│   └── pre-commit-check.sh             # Optional hook: blocks AI-attribution text in commits
 ├── package.json                        # Dev dependencies for the tests only
+├── package-lock.json
+├── .gitignore
 └── README.md
 ```
 
@@ -88,6 +90,17 @@ A small, dependency-free PDF writer: PDF 1.4, the core Helvetica fonts (nothing 
 ## Updating content
 
 Edit the `RESUME` object inside `index.html`, commit, and push. The GitHub Action runs automatically and commits the regenerated `resume.pdf` back to the repo, which triggers a Netlify redeploy. Tailored PDFs need no build at all; they are generated from the same object when a visitor clicks download.
+
+### Keeping the master PDF to two pages
+
+The master PDF has a narrow skills column that holds roughly 80 skill chips and about seven projects before it spills onto a third page. Anything the website should show but the master PDF should skip carries `pdf: false`:
+
+```js
+{ group: "DevOps & Infrastructure", pdf: false, items: ["Docker", "…"] },   // a skill group
+{ name: "LocalAI Lab", pdf: false, tagline: "…" },                          // a project
+```
+
+`pdf-pipeline/extract-resume-json.cjs` drops flagged skill groups and projects before Typst runs. Everything else is unaffected: the website shows them, and role-tailored PDFs include them whenever the role selects them. After adding skills or projects, run `npm run pdf` (or push and let CI build it) and check the page count.
 
 ### Adding or tuning a role
 
@@ -104,6 +117,7 @@ Roles are data, in `RESUME.roleProfiles`:
   summary: "…",                         // optional: replaces the hero summary / PDF summary
   skills: { include: ["Git"], exclude: [] },   // optional manual adjustments
   pin: { projects: ["PromptGuard"] },   // optional: always keep these
+  hide: ["research"],                   // optional: drop whole sections
   maxHighlights: { experience: 3 }      // optional: keep the n most relevant bullets
 }
 ```
@@ -118,7 +132,8 @@ To change what a domain means (which keywords and skills count as "front-end", "
 # run the site
 npm run serve            # http://127.0.0.1:8080
 
-# tests (needs `npm install` once; Playwright downloads Chromium with `npx playwright install chromium`)
+# tests (needs `npm install` once; Playwright downloads Chromium with `npx playwright install chromium`,
+# or set PW_CHROMIUM_PATH to an existing Chromium binary to use that instead)
 npm test                 # unit + PDF + end-to-end
 npm run test:unit
 npm run test:pdf
@@ -128,13 +143,13 @@ npm run test:e2e
 npm run pdf
 ```
 
-The site itself has no dependencies; `package.json` exists only for the test-suite.
+The site itself has no JavaScript dependencies and no build step (its fonts load from Google Fonts); `package.json` exists only for the test-suite.
 
 ---
 
 ## Pre-commit hook
 
-The `scripts/pre-commit-check.sh` hook blocks commits that accidentally contain secrets or unwanted text. Install it once per clone:
+The optional `scripts/pre-commit-check.sh` hook blocks any commit whose staged changes contain AI or tool attribution text, such as co-author trailers and tool-credit footers (the exact patterns are in the script). It does not scan for secrets. Install it once per clone:
 
 ```bash
 cp scripts/pre-commit-check.sh .git/hooks/pre-commit

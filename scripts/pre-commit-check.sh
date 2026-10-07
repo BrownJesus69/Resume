@@ -1,6 +1,7 @@
 #!/bin/sh
 # Blocks any commit whose staged diff contains AI/tool attribution
-# text or common secret-like patterns. Portable POSIX sh, no deps.
+# text (co-author trailers, "generated with/by AI", noreply@anthropic.com).
+# It does not scan for secrets. Portable POSIX sh, no deps.
 # Self-excluded: this file's own content is intentionally skipped.
 if git diff --cached -U0 -- . ':(exclude)scripts/pre-commit-check.sh' \
     | grep -iE \
