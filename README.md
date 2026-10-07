@@ -16,18 +16,11 @@ A plain visit, or a refresh, always shows the full résumé; a curated view is l
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    A["index.html<br/>RESUME data object<br/>content + roleProfiles"] -->|"extract-resume-json.cjs"| B["resume.json"]
-    B -->|"typst compile in CI"| C["resume.pdf<br/>full resume"]
-    A -->|"tailor.js"| D["role-tailored selection<br/>skills, projects, experience, research"]
-    D -->|"rendered on the page"| E["Tailored view<br/>with add-back and hide controls"]
-    D -->|"resume-pdf.js in the browser"| F["Aditya_Bidappa_M_V_Resume_#lt;Role#gt;.pdf"]
-    C --> G["Netlify"]
-    A --> G
-```
+![Architecture diagram. index.html holds the RESUME data object. In CI, extract-resume-json.cjs turns it into resume.json, typst compile builds resume.pdf, and Netlify serves it. In the browser, tailor.js selects what matters for a role, which drives the tailored page view and the PDF that resume-pdf.js builds.](docs/architecture.png)
 
-The site and the PDFs are different documents from the same source. Nothing is a screenshot of anything else; both PDF paths emit real, selectable, ATS-parsable text.
+The diagram is an image on purpose: GitHub's mobile app does not render Mermaid and shows its source as code, while an image renders everywhere. Its source is `docs/architecture.html`; after editing it, run `npm run diagram` to re-render `docs/architecture.png`.
+
+The site and the PDFs are different documents from the same source. Neither PDF is a screenshot of anything; both PDF paths emit real, selectable, ATS-parsable text.
 
 ### How tailoring works (`tailor.js`)
 
@@ -77,8 +70,12 @@ A small, dependency-free PDF writer: PDF 1.4, the core Helvetica fonts (nothing 
 ├── .github/workflows/
 │   ├── build-resume-pdf.yml            # Rebuilds resume.pdf when index.html or pdf-pipeline/ change on main
 │   └── test.yml                        # Runs the three test-suites on branches and PRs
+├── docs/
+│   ├── architecture.html               # Source of the README diagram
+│   └── architecture.png                # The diagram, rendered by `npm run diagram`
 ├── scripts/
-│   └── pre-commit-check.sh             # Optional hook: blocks AI-attribution text in commits
+│   ├── pre-commit-check.sh             # Optional hook: blocks AI-attribution text in commits
+│   └── render-architecture.cjs         # Renders docs/architecture.html to the PNG
 ├── package.json                        # Dev dependencies for the tests only
 ├── package-lock.json
 ├── .gitignore
@@ -141,6 +138,9 @@ npm run test:e2e
 
 # regenerate the full PDF without waiting for CI (needs typst on PATH)
 npm run pdf
+
+# re-render the README diagram after editing docs/architecture.html
+npm run diagram
 ```
 
 The site itself has no JavaScript dependencies and no build step (its fonts load from Google Fonts); `package.json` exists only for the test-suite.
