@@ -83,7 +83,7 @@ test.describe("tailoring", () => {
     expect(shown).toBeLessThan(ALL_SKILLS / 2);
     await expect(page.locator('#skillset .tag:not(.ghost)[data-name="React"]')).toHaveCount(1);
     await expect(page.locator('#skillset .tag.ghost[data-name="Burp Suite CE"]')).toHaveCount(1);
-    await expect(page.locator("#projects .entry")).toHaveCount(4);
+    await expect(page.locator("#projects .entry")).toHaveCount(5);   // the four pinned/strong matches plus Telegram Food Agent (Mini App front end)
     await expect(page.locator("#projects .entry h3", { hasText: "SME-ZT CLI" })).toHaveCount(0);
     await expect(page.locator("#papers .paper")).toHaveCount(0);
     await expect(page.locator("#researchHidden .hidden-box summary")).toContainText("4");

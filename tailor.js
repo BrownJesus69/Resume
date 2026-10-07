@@ -39,15 +39,17 @@
                  "python", "fastapi", "express", "react", "schema", "github", "render", "service",
                  "web app", "rest", "endpoint", "pipeline", "automation", "open-source", "correctness"],
       skills: ["Python", "C", "SQL", "Bash", "TypeScript", "HTML", "FastAPI", "Express", "React",
-               "PostgreSQL", "MySQL", "JSONB", "MongoDB", "Git", "GitHub", "GitHub Actions"],
-      groups: ["Tooling"]
+               "PostgreSQL", "MySQL", "JSONB", "MongoDB", "Git", "GitHub", "GitHub Actions",
+               "PowerShell", "Telegram Bot API", "Docker", "pytest"],
+      groups: ["Tooling", "Software Development", "Testing & Quality"]
     },
     frontend: {
       label: "Front-end",
       terms: ["frontend", "front-end", "front end", "ui", "ux", "web developer", "react developer", "web", "javascript developer"],
       keywords: ["react", "typescript", "frontend", "ui", "web app", "html", "css", "expo", "react native",
                  "javascript", "client", "custom domain", "deployed", "mobile", "user", "responsive"],
-      skills: ["TypeScript", "HTML", "React", "React Native", "Expo", "Git", "GitHub"],
+      skills: ["TypeScript", "HTML", "React", "React Native", "Expo", "Git", "GitHub",
+               "Full-Stack Development", "Mobile App Development", "Playwright"],
       groups: []
     },
     backend: {
@@ -56,7 +58,8 @@
       keywords: ["api", "fastapi", "express", "postgresql", "sql", "schema", "bcnf", "jwt", "endpoint",
                  "rest", "zod", "backend", "openapi", "server", "neon", "database", "auth", "cors", "service"],
       skills: ["Python", "SQL", "TypeScript", "Bash", "FastAPI", "Express", "PostgreSQL", "MySQL", "JSONB",
-               "MongoDB", "Git", "GitHub", "GitHub Actions"],
+               "MongoDB", "Git", "GitHub", "GitHub Actions", "Full-Stack Development", "REST API Design",
+               "Python CLI Development", "Secure Software Design", "Docker", "pytest"],
       groups: ["Data"]
     },
     security: {
@@ -69,8 +72,9 @@
                  "recon", "network", "wireshark", "nmap", "kali", "burp", "findings", "hacker", "trust"],
       skills: ["Python", "Bash", "SQL", "Zero Trust", "NIST SP 800-207", "CISA ZTMM v2", "OWASP Testing Guide v4",
                "IDOR & Auth-Bypass Testing", "Blind & Error-Based SQLi", "Wireshark", "nmap", "Kali Linux",
-               "Burp Suite CE", "OWASP ZAP", "Git", "GitHub", "HexStrike AI"],
-      groups: ["Security & Standards", "Pentesting Toolkit"]
+               "Burp Suite CE", "OWASP ZAP", "Git", "GitHub", "HexStrike AI", "Trivy", "Secure Software Design",
+               "LLM-Driven Threat Simulation"],
+      groups: ["Security & Standards", "Pentesting Toolkit", "Security Practice"]
     },
     pentest: {
       label: "Penetration testing",
@@ -80,8 +84,8 @@
                  "endpoint", "cors", "jwt", "otp", "escalation", "findings", "exploit", "nmap", "nuclei",
                  "subfinder", "zap", "reverse-engineering", "hacker", "authenticated", "unauthenticated",
                  "vulnerab", "critical", "whois", "header", "open ports", "attack"],
-      skills: ["Python", "Bash", "SQL", "Kali Linux", "HexStrike AI", "Hoppscotch"],
-      groups: ["Pentesting Toolkit", "Security & Standards"]
+      skills: ["Python", "Bash", "SQL", "Kali Linux", "HexStrike AI", "Hoppscotch", "PowerShell"],
+      groups: ["Pentesting Toolkit", "Security & Standards", "Security Practice"]
     },
     ml: {
       label: "Machine learning",
@@ -90,16 +94,19 @@
       keywords: ["xgboost", "scikit", "random forest", "isolation forest", "transformer", "trained",
                  "dataset", "accuracy", "precision", "recall", "classifier", "model", "ml", "machine learning",
                  "federated", "adversarial", "llm", "prompt", "synthetic", "hugging face", "ollama",
-                 "detection", "separability", "metrics", "graph neural"],
-      skills: ["Python", "SQL", "Whisper", "Claude", "OpenRouter", "Git", "GitHub"],
-      groups: ["Machine Learning"]
+                 "detection", "separability", "metrics", "graph neural", "calibrat", "backtest",
+                 "walk-forward", "evaluation", "preregist", "explainab", "red-team"],
+      skills: ["Python", "SQL", "Whisper", "Claude", "OpenRouter", "Git", "GitHub", "Statistical Analysis",
+               "Reproducible Experimentation", "Ollama", "GGUF Quantisation", "VRAM Budgeting", "pytest"],
+      groups: ["Machine Learning", "Quant Systems"]
     },
     data: {
       label: "Data & databases",
       terms: ["data", "database", "dba", "sql developer", "analytics", "data engineer", "data analyst", "etl", "business intelligence", "bi"],
       keywords: ["postgresql", "sql", "schema", "bcnf", "normalis", "database", "jsonb", "openpyxl",
                  "pipeline", "data", "excel", "rows", "column", "relational", "logging", "spreadsheet", "dbms"],
-      skills: ["Python", "SQL", "Bash", "openpyxl", "Google Apps Script", "Git", "GitHub"],
+      skills: ["Python", "SQL", "Bash", "openpyxl", "Google Apps Script", "Git", "GitHub", "Statistical Analysis",
+               "RAG & Vector Search"],
       groups: ["Data"]
     },
     mobile: {
@@ -116,51 +123,59 @@
               "research assistant", "graduate", "fellowship", "fellow", "masters", "thesis", "lab"],
       keywords: ["research", "paper", "manuscript", "survey", "framework", "published", "latex",
                  "validated", "case stud", "co-author", "author", "standards", "study", "review",
-                 "simulation", "baseline", "methodolog", "literature"],
-      skills: ["Python", "LaTeX", "Typst", "Git", "GitHub"],
-      groups: []
+                 "simulation", "baseline", "methodolog", "literature", "preregist", "reproducib",
+                 "calibrat", "evaluation", "negative result"],
+      skills: ["Python", "LaTeX", "Typst", "Git", "GitHub", "Preregistered Experiments", "Model Calibration",
+               "Model Evaluation", "Explainable AI", "Anomaly Detection"],
+      groups: ["Research & Writing"]
     },
     automation: {
       label: "Automation & DevOps",
       terms: ["devops", "automation", "sre", "platform", "ci/cd", "cloud", "infrastructure", "release engineer"],
       keywords: ["github actions", "deploy", "render", "ci", "automation", "apps script", "pipeline",
                  "typst", "cloudflare", "tls", "let's encrypt", "domain", "bash", "workflow", "bulk",
-                 "eas build", "auto-deploy"],
-      skills: ["Bash", "Git", "GitHub", "GitHub Actions", "n8n", "openpyxl", "Google Apps Script", "Typst"],
-      groups: ["Automation & Reporting", "Tooling", "AI — Agentic / Automation"]
+                 "eas build", "auto-deploy", "docker", "ghcr", "trivy", "systemd", "powershell"],
+      skills: ["Bash", "Git", "GitHub", "GitHub Actions", "n8n", "openpyxl", "Google Apps Script", "Typst",
+               "PowerShell", "pytest", "ruff", "mypy"],
+      groups: ["Automation & Reporting", "Tooling", "AI — Agentic / Automation", "DevOps & Infrastructure"]
     },
     llm: {
       label: "LLM & AI applications",
       terms: ["llm", "ai", "genai", "generative", "prompt engineer", "agent", "agentic", "ai developer",
               "ai application", "chatbot"],
       keywords: ["llm", "prompt", "groq", "llama", "openrouter", "agent", "mcp", "ollama", "deepseek",
-                 "claude", "chatgpt", "synthetic", "argument", "generat", "ai", "injection", "assistant"],
-      skills: ["Python", "TypeScript", "FastAPI", "React", "Git", "GitHub"],
+                 "claude", "chatgpt", "synthetic", "argument", "generat", "ai", "injection", "assistant",
+                 "local llm", "rag", "gguf", "vram", "mcpo", "qdrant", "red-team", "telegram", "fallback"],
+      skills: ["Python", "TypeScript", "FastAPI", "React", "Git", "GitHub", "Telegram Bot API", "Docker",
+               "Qdrant", "Model Evaluation"],
       groups: ["AI — LLM Assistants", "AI — Voice / Audio", "AI — Agentic / Automation",
-               "AI — Security Research", "AI — Agent Frameworks"]
+               "AI — Security Research", "AI — Agent Frameworks", "AI — Local LLM Stack", "AI — LLM Engineering"]
     },
     cloud: {
       label: "Cloud & infrastructure",
       terms: ["cloud", "aws", "azure", "gcp", "infrastructure", "cloud engineer", "cloud security", "solutions architect", "systems administrator", "sysadmin"],
       keywords: ["deploy", "render", "cloudflare", "tls", "dns", "neon", "hosting", "domain", "infrastructure",
-                 "server", "eas build", "auto-deploy", "let's encrypt", "github actions", "network"],
+                 "server", "eas build", "auto-deploy", "let's encrypt", "github actions", "network",
+                 "docker", "ghcr", "netlify", "ssh", "wsl"],
       skills: ["Bash", "Git", "GitHub", "GitHub Actions", "nmap", "Wireshark"],
-      groups: []
+      groups: ["DevOps & Infrastructure"]
     },
     qa: {
       label: "Testing & QA",
       terms: ["qa", "quality", "tester", "test engineer", "sdet", "quality assurance", "test automation", "validation"],
       keywords: ["test", "validated", "test cases", "hoppscotch", "functional", "findings", "correctness",
-                 "validating", "regression", "assessment", "audit", "review"],
-      skills: ["Python", "Bash", "Hoppscotch", "Burp Suite CE", "OWASP ZAP", "Git", "GitHub", "GitHub Actions"],
-      groups: []
+                 "validating", "regression", "assessment", "audit", "review", "pytest", "coverage", "playwright"],
+      skills: ["Python", "Bash", "Hoppscotch", "Burp Suite CE", "OWASP ZAP", "Git", "GitHub", "GitHub Actions",
+               "Stress & Resilience Testing", "Vulnerability Validation", "API Security Testing"],
+      groups: ["Testing & Quality"]
     },
     network: {
       label: "Networking",
       terms: ["network", "networking", "network engineer", "network security", "noc", "wireless", "wi-fi", "wifi"],
       keywords: ["network", "dns", "wi-fi", "hotspot", "gateway", "ssid", "tls", "http", "ports", "wireshark",
                  "nmap", "cloudflare", "cors", "ddos", "computer networks", "packet", "protocol"],
-      skills: ["Wireshark", "nmap", "Kali Linux", "nuclei", "subfinder", "gobuster", "Bash", "Python"],
+      skills: ["Wireshark", "nmap", "Kali Linux", "nuclei", "subfinder", "gobuster", "Bash", "Python",
+               "Network Security Assessment", "Port & Service Enumeration", "Attack-Surface Analysis", "SSH Tunnelling"],
       groups: []
     },
     forensics: {
@@ -168,14 +183,16 @@
       terms: ["forensic", "forensics", "incident response", "dfir", "incident responder", "incident", "investigate", "investigator", "threat hunter", "threat intelligence", "malware analyst", "osint"],
       keywords: ["autopsy", "spiderfoot", "wireshark", "recon", "whois", "findings", "malware", "attack", "threat",
                  "intrusion", "detection", "logging", "deepfake", "analysis", "evidence", "investigat"],
-      skills: ["Autopsy", "SpiderFoot", "Wireshark", "nmap", "Kali Linux", "Python", "Bash"],
+      skills: ["Autopsy", "SpiderFoot", "Wireshark", "nmap", "Kali Linux", "Python", "Bash",
+               "Digital Forensics", "OSINT", "Security Reporting"],
       groups: ["Pentesting Toolkit"]
     },
     systems: {
       label: "Systems & low-level",
       terms: ["systems", "embedded", "firmware", "low-level", "kernel", "c developer", "systems programmer", "iot", "hardware"],
       keywords: ["c ", "cli", "python", "bash", "linux", "kernel", "device", "iot", "iomt", "protocol", "network", "memory"],
-      skills: ["C", "Python", "Bash", "Kali Linux", "Git", "GitHub"],
+      skills: ["C", "Python", "Bash", "Kali Linux", "Git", "GitHub", "PowerShell", "Linux Administration",
+               "WSL2", "systemd", "Termux"],
       groups: []
     },
     product: {
@@ -183,8 +200,8 @@
       terms: ["product", "product manager", "project manager", "program manager", "founder", "startup", "technical lead", "team lead", "consultant", "business analyst"],
       keywords: ["deployed", "live", "users", "delegates", "custom domain", "shipped", "owned", "president",
                  "led", "organis", "coordinat", "reports", "documentation", "platform", "client"],
-      skills: ["Git", "GitHub", "Google Apps Script", "Claude", "ChatGPT", "Perplexity", "Typst"],
-      groups: ["AI — LLM Assistants"]
+      skills: ["Git", "GitHub", "Google Apps Script", "Claude", "ChatGPT", "Perplexity", "Typst", "Project Planning"],
+      groups: ["AI — LLM Assistants", "Leadership & Communication"]
     },
     writing: {
       label: "Writing & communication",
@@ -192,7 +209,7 @@
       keywords: ["documentation", "manuscript", "wrote", "paper", "report", "latex", "argument", "debate",
                  "mun", "delegate", "commendation", "president", "policy", "ethical", "legal", "writing"],
       skills: ["LaTeX", "Typst", "Claude", "ChatGPT", "Perplexity", "Gemini"],
-      groups: []
+      groups: ["Leadership & Communication", "Research & Writing"]
     }
   };
 
@@ -385,10 +402,17 @@
 
   const JD_MIN_WORDS = 14;
 
+  /* generic words that appear inside multi-word skill names ("Team Leadership",
+     "Project Planning"). They stay matchable as part of the full phrase, but on
+     their own they would make any job description look like a résumé match. */
+  const GENERIC_SKILL_WORDS = new Set(["team", "planning", "project", "event", "public", "speaking", "technical",
+    "writing", "leadership", "treasury", "coordination", "literature", "review", "citation", "presentations",
+    "methodology", "statistical", "analysis", "reporting", "windows", "practice"]);
+
   /** every term the résumé itself can be matched on: skill names, their words, domain keywords */
   function vocabulary(resume) {
     const v = new Set();
-    for (const g of (resume && resume.skills) || []) for (const it of g.items) { v.add(it.toLowerCase()); for (const w of words(it)) if (w.length > 2) v.add(w); }
+    for (const g of (resume && resume.skills) || []) for (const it of g.items) { v.add(it.toLowerCase()); for (const w of words(it)) if (w.length > 2 && !GENERIC_SKILL_WORDS.has(w)) v.add(w); }
     for (const d of Object.values(DOMAINS)) for (const k of d.keywords) v.add(k.toLowerCase());
     for (const arr of Object.values(WORD_KEYWORDS)) for (const k of arr) v.add(k);
     return v;
