@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- Source of docs/architecture.png, the diagram in the README.
+     Self-contained: no scripts, no external fonts, no network.
+     Edit this file, then run `npm run diagram` to re-render the PNG.
+     It is a PNG on purpose: GitHub's mobile app does not render Mermaid and
+     shows the source as plain code, while an image renders everywhere.
+     The PNG has a solid white background so it reads in light and dark mode. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Résumé site architecture</title>
+<style>
+  :root { --ink:#0c1a2b; --ink-2:#2f4459; --ink-3:#587089; --box:#e9eff5; --line:#91a7be; --accent:#c2440a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; }
+  .diagram {
+    width: 480px; padding: 20px 18px 22px; background: #fff; color: var(--ink);
+    font: 15px/1.3 system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .box { background: var(--box); border: 1.5px solid var(--line); border-radius: 6px; padding: 8px 10px; text-align: center; }
+  .box b { display: block; font-weight: 650; }
+  .box small { display: block; margin-top: 2px; font-size: 12.5px; color: var(--ink-2); }
+  .mono { font-family: ui-monospace, Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 13px; overflow-wrap: anywhere; }
+  .root { border-color: var(--ink); border-width: 2px; }
+  .arrow { text-align: center; color: var(--ink-3); font-size: 18px; line-height: 1; padding: 5px 0; }
+  .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .lane { border: 1.5px dashed var(--line); border-radius: 8px; padding: 8px; }
+  .lane h3 { margin: 0 0 8px; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); text-align: center; }
+  .lane .arrow { padding: 4px 0; }
+  .arrows { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .caption { text-align: center; color: var(--ink-3); font-size: 12.5px; padding: 6px 0 5px; }
+  .file { font-size: 12px; overflow-wrap: normal; }
+  .outs { display: grid; gap: 6px; }
+  .note { margin-top: 8px; font-size: 12px; color: var(--ink-3); text-align: center; }
+  .deploy { border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="diagram" id="diagram">
+  <div class="box root"><b class="mono">index.html</b><small>RESUME data object<br />content + roleProfiles</small></div>
+  <div class="arrows"><div class="arrow">↓</div><div class="arrow">↓</div></div>
+
+  <div class="lanes">
+    <div class="lane">
+      <h3>Full résumé · built in CI</h3>
+      <div class="box"><b class="mono">extract-resume-json.cjs</b></div>
+      <div class="arrow">↓</div>
+      <div class="box"><b class="mono">resume.json</b></div>
+      <div class="arrow">↓</div>
+      <div class="box"><b>typst compile</b><small>GitHub Action</small></div>
+      <div class="arrow">↓</div>
+      <div class="box"><b class="mono">resume.pdf</b><small>the full résumé</small></div>
+    </div>
+
+    <div class="lane">
+      <h3>Tailored résumé · in the browser</h3>
+      <div class="box"><b class="mono">tailor.js</b><small>scores every item against the chosen role</small></div>
+      <div class="arrow">↓</div>
+      <div class="outs">
+        <div class="box"><b>Page view</b><small>with add-back and hide controls</small></div>
+        <div class="box"><b class="mono">resume-pdf.js</b><small>builds the PDF in the browser</small></div>
+        <div class="box mono file">Aditya_Bidappa_M_V_<wbr />Resume_&lt;Role&gt;.pdf</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption">↓ deployed from main</div>
+  <div class="box deploy"><b>Netlify</b><small>serves index.html (with tailor.js and resume-pdf.js)<br />and the full resume.pdf</small></div>
+</div>
+</body>
+</html>

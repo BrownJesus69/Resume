@@ -9,7 +9,8 @@
     "test:pdf": "node --test tests/pdf.test.cjs",
     "test:e2e": "playwright test --config tests/playwright.config.cjs",
     "serve": "node tests/serve.cjs 8080",
-    "pdf": "node pdf-pipeline/extract-resume-json.cjs index.html pdf-pipeline/resume.json && typst compile pdf-pipeline/resume.typ resume.pdf --font-path pdf-pipeline/fonts"
+    "pdf": "node pdf-pipeline/extract-resume-json.cjs index.html pdf-pipeline/resume.json && typst compile pdf-pipeline/resume.typ resume.pdf --font-path pdf-pipeline/fonts",
+    "diagram": "node scripts/render-architecture.cjs"
   },
   "devDependencies": {
     "pdfjs-dist": "^4.10.38",
